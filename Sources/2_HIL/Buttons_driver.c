@@ -10,14 +10,18 @@
 #define INITIAL_ID			(0x00u)
 #define LIMIT_PINx			(0x19u)
 
-#define TIME_1S			100000
-#define TIME_500MS		50000
-#define TIME_250MS		25000
-#define TIME_100MS		10000
-#define TIME_50MS		5000
-#define TIME_25MS		2500
-#define TIME_10MS		1000
-#define TIME_5MS		500
+#define TIME_1S			1800000
+#define TIME_500MS		900000
+#define TIME_250MS		450000
+#define TIME_100MS		180000
+#define TIME_50MS		90000
+#define TIME_25MS		45000
+#define TIME_10MS		18000
+#define TIME_5MS		9000
+#define TIME_3MS		4500
+#define TIME_1MS		1000
+#define TIME_500US		500
+#define TIME_250US		250
 
 static uint8_t u8CounterID = 0;
 
@@ -25,12 +29,31 @@ void vfdelay_Button(uint32_t u32Time)
 {
 	uint32_t u32Value = 0;
 	
-	for(u32Value = u32Time * 10; 0 < u32Value; u32Value--)
+	for(u32Value = u32Time; 0 < u32Value; u32Value--)
 	{
 		/*Do nothing*/
 	}
 	
 }
+
+uint8_t u8fReadButton(sButton_t *psButton)
+{
+	uint8_t u8Result = eFALSE;
+	uint8_t u8StateReadButton = eSTATE_READ_1;
+	
+	if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
+	{
+		vfdelay_Button(TIME_100MS);
+		if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
+		{
+			u8Result = eTRUE;
+		}else u8Result = eFALSE;
+		
+	}else u8Result = eFALSE;
+	
+	return u8Result;
+}
+
 
 uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx)
 {
@@ -111,22 +134,4 @@ uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx)
 	
 	return u8Result;
 }
-
-uint8_t u8fReadButton(sButton_t *psButton)
-{
-	uint8_t u8Result = eFALSE;
-	
-	if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
-	{
-		vfdelay_Button(TIME_100MS);
-		if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
-		{
-			u8Result = eTRUE;
-		}else u8Result = eFALSE;
-		
-	}else u8Result = eFALSE;
-	
-	return u8Result;
-}
-
 

@@ -50,6 +50,13 @@ typedef enum
 	eTRUE
 }eVALUEx_t;
 
+typedef enum
+{
+	eSTATE_RED_1,
+	eSTATE_WAIT,
+	eSTATE_READ_2
+}eDebouncerx_t;
+
 uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx);
 uint8_t u8fReadButton  (sButton_t *psButton);
 
