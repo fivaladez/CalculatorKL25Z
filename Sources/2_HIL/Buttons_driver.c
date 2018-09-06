@@ -10,14 +10,22 @@
 #define INITIAL_ID			(0x00u)
 #define LIMIT_PINx			(0x19u)
 
+#define TIME_1S			100000
+#define TIME_500MS		50000
+#define TIME_250MS		25000
+#define TIME_100MS		10000
+#define TIME_50MS		5000
+#define TIME_25MS		2500
+#define TIME_10MS		1000
+#define TIME_5MS		500
 
 static uint8_t u8CounterID = 0;
 
-void vfdelay_Button(uint16_t u16Time)
+void vfdelay_Button(uint32_t u32Time)
 {
 	uint32_t u32Value = 0;
 	
-	for(u32Value = u16Time * 10; 0 < u32Value; u32Value--)
+	for(u32Value = u32Time * 10; 0 < u32Value; u32Value--)
 	{
 		/*Do nothing*/
 	}
@@ -30,65 +38,70 @@ uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx)
 	u8Result = eFALSE;
 	
 	switch(u8PORTx){
-		case ePORTA: if(u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_4 || u8PINx == ePIN_5 || u8PINx == ePIN_12 || u8PINx == ePIN_13)
-					 {
-						psButton -> u8ID   = INITIAL_ID + u8CounterID;
-						psButton -> u8Port = u8PORTx;
-						psButton -> u8Pin  = u8PINx;
-						if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
-						{
-							u8Result = eTRUE;
-						}else u8Result = eFALSE;
+		case ePORTA:
+			if(u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_4 || u8PINx == ePIN_5 || u8PINx == ePIN_12 || u8PINx == ePIN_13)
+			{
+				psButton -> u8ID   = INITIAL_ID + u8CounterID;
+				psButton -> u8Port = u8PORTx;
+				psButton -> u8Pin  = u8PINx;
+				if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
+				{
+					u8Result = eTRUE;
+				}else u8Result = eFALSE;
 						
-					 }else u8Result = eFALSE;
+			}else u8Result = eFALSE;
 			break;
-		case ePORTB: if(u8PINx == ePIN_0 || u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_3 || u8PINx == ePIN_8 || u8PINx == ePIN_9)
-					 {
-						psButton -> u8ID   = INITIAL_ID + u8CounterID;
-						psButton -> u8Port = u8PORTx;
-						psButton -> u8Pin  = u8PINx;
-						if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
-						{
-							u8Result = eTRUE;
-						}else u8Result = eFALSE;
-					 }else u8Result = eFALSE;
-				break;
-		case ePORTC: if(u8PINx == ePIN_0 || u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_3 || u8PINx == ePIN_4 || u8PINx == ePIN_5 
-		|| u8PINx == ePIN_6 || u8PINx == ePIN_7 || u8PINx == ePIN_8 || u8PINx == ePIN_9 || u8PINx == ePIN_10 || u8PINx == ePIN_11 || u8PINx == ePIN_12 
-		|| u8PINx == ePIN_13 || u8PINx == ePIN_16 || ePIN_17)
-		 	 	 	 {
-						psButton -> u8ID   = INITIAL_ID + u8CounterID;
-						psButton -> u8Port = u8PORTx;
-						psButton -> u8Pin  = u8PINx;
-						if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
-						{
-							u8Result = eTRUE;
-						}else u8Result = eFALSE;
-		 	 	 	 }else u8Result = eFALSE;  
+		case ePORTB: 
+			if(u8PINx == ePIN_0 || u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_3 || u8PINx == ePIN_8 || u8PINx == ePIN_9)
+			{
+				psButton -> u8ID   = INITIAL_ID + u8CounterID;
+				psButton -> u8Port = u8PORTx;
+				psButton -> u8Pin  = u8PINx;
+				if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
+				{
+					u8Result = eTRUE;
+				}else u8Result = eFALSE;
+			}else u8Result = eFALSE;
 			break;
-		case ePORTD: if(u8PINx == ePIN_0 || u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_3 || u8PINx == ePIN_4 || u8PINx == ePIN_5 
-		|| u8PINx == ePIN_6 || u8PINx == ePIN_7)
-					 {
-						psButton -> u8ID   = INITIAL_ID + u8CounterID;
-						psButton -> u8Port = u8PORTx;
-						psButton -> u8Pin  = u8PINx;
-						if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
-						{
-							u8Result = eTRUE;
-						}else u8Result = eFALSE;
-					 }else u8Result = eFALSE;
+		case ePORTC: 
+			if(u8PINx == ePIN_0 || u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_3 || u8PINx == ePIN_4 || u8PINx == ePIN_5 
+			|| u8PINx == ePIN_6 || u8PINx == ePIN_7 || u8PINx == ePIN_8 || u8PINx == ePIN_9 || u8PINx == ePIN_10 || u8PINx == ePIN_11 
+			|| u8PINx == ePIN_12 || u8PINx == ePIN_13 || u8PINx == ePIN_16 || ePIN_17)
+		 	{
+				psButton -> u8ID   = INITIAL_ID + u8CounterID;
+				psButton -> u8Port = u8PORTx;
+				psButton -> u8Pin  = u8PINx;
+				if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
+				{
+					u8Result = eTRUE;
+				}else u8Result = eFALSE;
+		 	 }else u8Result = eFALSE;  
 			break;
-		case ePORTE: if(u8PINx == ePIN_0 || u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_3 || u8PINx == ePIN_4 || u8PINx == ePIN_5 
-		|| u8PINx == ePIN_20 || u8PINx == ePIN_21 || u8PINx == ePIN_22 || u8PINx == ePIN_23 || u8PINx == ePIN_29 || u8PINx == ePIN_30)
-					 {
-						psButton -> u8ID   = INITIAL_ID + u8CounterID;
-						psButton -> u8Port = u8PORTx;
-						psButton -> u8Pin  = u8PINx;
-						if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
-						{
-							u8Result = eTRUE;
-						}else u8Result = eFALSE;
-					 }else u8Result = eFALSE;  
+		case ePORTD: 
+			if(u8PINx == ePIN_0 || u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_3 || u8PINx == ePIN_4 || u8PINx == ePIN_5 
+			|| u8PINx == ePIN_6 || u8PINx == ePIN_7)
+			{
+				psButton -> u8ID   = INITIAL_ID + u8CounterID;
+				psButton -> u8Port = u8PORTx;
+				psButton -> u8Pin  = u8PINx;
+				if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
+				{
+					u8Result = eTRUE;
+				}else u8Result = eFALSE;
+			}else u8Result = eFALSE;
+			break;
+		case ePORTE: 
+			if(u8PINx == ePIN_0 || u8PINx == ePIN_1 || u8PINx == ePIN_2 || u8PINx == ePIN_3 || u8PINx == ePIN_4 || u8PINx == ePIN_5 
+		    || u8PINx == ePIN_20 || u8PINx == ePIN_21 || u8PINx == ePIN_22 || u8PINx == ePIN_23 || u8PINx == ePIN_29 || u8PINx == ePIN_30)
+			{
+				psButton -> u8ID   = INITIAL_ID + u8CounterID;
+				psButton -> u8Port = u8PORTx;
+				psButton -> u8Pin  = u8PINx;
+				if(eTRUE == u8fInit_GPIO(psButton -> u8Port, psButton -> u8Pin, eIN))
+				{
+					u8Result = eTRUE;
+				}else u8Result = eFALSE;
+			}else u8Result = eFALSE;  
 			break;
 		default:     u8Result = eFALSE;
 			break;
@@ -105,7 +118,7 @@ uint8_t u8fReadButton(sButton_t *psButton)
 	
 	if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
 	{
-		vfdelay_Button(1000);
+		vfdelay_Button(TIME_100MS);
 		if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
 		{
 			u8Result = eTRUE;
