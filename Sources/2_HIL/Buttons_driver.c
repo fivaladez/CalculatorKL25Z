@@ -41,6 +41,40 @@ uint8_t u8fReadButton(sButton_t *psButton)
 	uint8_t u8Result = eFALSE;
 	uint8_t u8StateReadButton = eSTATE_READ_1;
 	
+	switch(u8StateReadButton)
+	{
+	case eSTATE_READ_1: 
+		if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
+		{
+			u8Result = eFALSE;
+			u8StateReadButton = eSTATE_WAIT_2;
+		}else
+			{
+				u8Result = eFALSE;
+				u8StateReadButton = eSTATE_READ_1;
+			}
+		break;
+	case eSTATE_WAIT_2:
+		
+		break;
+	case eSTATE_READ_3:
+		if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
+		{
+			u8Result = eTRUE;
+			u8StateReadButton = eSTATE_READ_1;
+		}else
+			{
+				u8Result = eFALSE;
+				u8StateReadButton = eSTATE_READ_3;
+			}
+		break;
+	default: 
+		u8Result = eFALSE;
+		u8StateReadButton = eSTATE_READ_1;
+		break;
+	
+	}//End of switch
+	/*
 	if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
 	{
 		vfdelay_Button(TIME_100MS);
@@ -50,7 +84,7 @@ uint8_t u8fReadButton(sButton_t *psButton)
 		}else u8Result = eFALSE;
 		
 	}else u8Result = eFALSE;
-	
+	*/
 	return u8Result;
 }
 

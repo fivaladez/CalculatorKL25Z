@@ -52,9 +52,9 @@ typedef enum
 
 typedef enum
 {
-	eSTATE_RED_1,
-	eSTATE_WAIT,
-	eSTATE_READ_2
+	eSTATE_READ_1,
+	eSTATE_WAIT_2,
+	eSTATE_READ_3
 }eDebouncerx_t;
 
 uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx);
