@@ -1,0 +1,39 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+-include ../../makefile.local
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS_QUOTED += \
+"../Sources/3_HAL/GPIO_driver.c" \
+
+C_SRCS += \
+../Sources/3_HAL/GPIO_driver.c \
+
+OBJS += \
+./Sources/3_HAL/GPIO_driver.o \
+
+C_DEPS += \
+./Sources/3_HAL/GPIO_driver.d \
+
+OBJS_QUOTED += \
+"./Sources/3_HAL/GPIO_driver.o" \
+
+C_DEPS_QUOTED += \
+"./Sources/3_HAL/GPIO_driver.d" \
+
+OBJS_OS_FORMAT += \
+./Sources/3_HAL/GPIO_driver.o \
+
+
+# Each subdirectory must supply rules for building sources it contributes
+Sources/3_HAL/GPIO_driver.o: ../Sources/3_HAL/GPIO_driver.c
+	@echo 'Building file: $<'
+	@echo 'Executing target #1 $<'
+	@echo 'Invoking: ARM Ltd Windows GCC C Compiler'
+	"$(ARMSourceryDirEnv)/arm-none-eabi-gcc" "$<" @"Sources/3_HAL/GPIO_driver.args" -MMD -MP -MF"$(@:%.o=%.d)" -o"Sources/3_HAL/GPIO_driver.o"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+
