@@ -39,8 +39,14 @@ int main(void)
 	   	counter++;
 	   	if(eTRUE == u8fReadButton(&sButton1))
 	   	{
+	   		vfSetPort_GPIO(ePORTB ,ePIN_18);//Turn off led red
 	   		vfClearPort_GPIO(ePORTB ,ePIN_19);//Turn on Led Green
-	   	}else vfSetPort_GPIO(ePORTB ,ePIN_19);
+	   		vfdelay(TIME_1S);
+	   	}else 
+	   		{
+	   			vfSetPort_GPIO(ePORTB ,ePIN_19);//Turn off led green
+	   			vfClearPort_GPIO(ePORTB ,ePIN_18);//Turn on Led Red
+	   		}
 	   	//vfdelay(TIME_1S);
 	   	
 	}

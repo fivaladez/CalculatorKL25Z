@@ -109,7 +109,7 @@ uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx)
 {
 	uint8_t u8Result = eFALSE;
 	
-	if(eREADY_PIT == u8fInit_PIT(LDVAL_100MS, eCHANNEL_0_PIT, &svsPITx))
+	if(eREADY_PIT == u8fInit_PIT(LDVAL_1S, eCHANNEL_0_PIT, &svsPITx))
 	{
 	
 	switch(u8PORTx){

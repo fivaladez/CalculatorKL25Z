@@ -27,6 +27,9 @@ uint8_t u8fInit_PIT(uint32_t u32Time, uint8_t u8PitChannel, sPITx_t *sPitx)
 		
 		u8Return = eREADY_PIT;
 		
+		sPitx -> u32Time = u32Time;
+		sPitx -> u8Channel = u8PitChannel;
+		
 	}else if(eCHANNEL_1_PIT == u8PitChannel)
 		{
 			PIT_TCTRL1 &= ~PIT_TCTRL_TEN_MASK;//Disable PIT
@@ -37,10 +40,10 @@ uint8_t u8fInit_PIT(uint32_t u32Time, uint8_t u8PitChannel, sPITx_t *sPitx)
 			
 			u8Return = eREADY_PIT;
 			
+			sPitx -> u32Time = u32Time;
+			sPitx -> u8Channel = u8PitChannel;
+			
 		}else {u8Return = eNOTREADY_PIT;}
-	
-	sPitx -> u32Time = u32Time;
-	sPitx -> u8Channel = u8PitChannel;
 	
 	return u8Return;
 }
@@ -62,10 +65,10 @@ uint8_t u8fRead_PIT(sPITx_t *sPitx)
 		
 	}else if(eCHANNEL_1_PIT == (sPitx -> u8Channel))
 		{
-			if( (PIT_TFLG0 & PIT_TFLG_TIF_MASK) == PIT_TFLG_TIF_MASK)//Check the Timer Interrupt Flag
+			if( (PIT_TFLG1 & PIT_TFLG_TIF_MASK) == PIT_TFLG_TIF_MASK)//Check the Timer Interrupt Flag
 			{
 				u8Return = eREADY_PIT;
-				PIT_TFLG0 |= PIT_TFLG_TIF_MASK;//Clean flag writing a 1
+				PIT_TFLG1 |= PIT_TFLG_TIF_MASK;//Clean flag writing a 1
 			}else
 				{
 					u8Return = eNOTREADY_PIT;
