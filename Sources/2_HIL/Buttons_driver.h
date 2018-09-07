@@ -18,6 +18,24 @@ typedef struct
 	
 }sButton_t;
 
+typedef struct 
+{
+	uint8_t u8ID;
+	uint8_t u8Port;
+	uint8_t u8Pin;
+	uint8_t u8State;
+	
+}sButtonNonBlocking0_t;
+
+typedef struct 
+{
+	uint8_t u8ID;
+	uint8_t u8Port;
+	uint8_t u8Pin;
+	uint8_t u8State;
+	
+}sButtonNonBlocking1_t;
+
 typedef enum 
 {
 	ePORTA,
@@ -59,5 +77,11 @@ typedef enum
 
 uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx);
 uint8_t u8fReadButton  (sButton_t *psButton);
+
+uint8_t u8fCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, uint8_t u8PORTx,uint8_t u8PINx);
+uint8_t u8fReadButtonNonBlocking0  (sButtonNonBlocking0_t *psButton);
+
+uint8_t u8fCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, uint8_t u8PORTx,uint8_t u8PINx);
+uint8_t u8fReadButtonNonBlocking1  (sButtonNonBlocking1_t *psButton);
 
 #endif /* BUTTONS_DRIVER_H_ */

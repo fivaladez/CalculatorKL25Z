@@ -41,13 +41,13 @@ int main(void)
 	   	{
 	   		vfSetPort_GPIO(ePORTB ,ePIN_18);//Turn off led red
 	   		vfClearPort_GPIO(ePORTB ,ePIN_19);//Turn on Led Green
-	   		vfdelay(TIME_1S);
+	   		//vfdelay(TIME_1S);
 	   	}else 
 	   		{
 	   			vfSetPort_GPIO(ePORTB ,ePIN_19);//Turn off led green
 	   			vfClearPort_GPIO(ePORTB ,ePIN_18);//Turn on Led Red
+	   			//vfdelay(TIME_1S);
 	   		}
-	   	//vfdelay(TIME_1S);
 	   	
 	}
 	
