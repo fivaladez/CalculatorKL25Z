@@ -10,10 +10,12 @@
 
 uint8_t u8fInit_PIT(uint32_t u32Time, uint8_t u8PitChannel, sPITx_t *sPitx)
 {
-	uint8_t u8Return;
-	u8Return = eNOTREADY_PIT;
+	uint8_t u8Return = eNOTREADY_PIT;
 	
 	SIM_SCGC6 |= SIM_SCGC6_PIT_MASK; /*Initialize both PIT channels*/
+	
+	PIT_MCR &= ~PIT_MCR_FRZ_MASK;//Enable debug function
+	PIT_MCR &= ~PIT_MCR_MDIS_MASK;//Enable current clock
 	
 	if(eCHANNEL_0_PIT == u8PitChannel)
 	{
@@ -45,8 +47,7 @@ uint8_t u8fInit_PIT(uint32_t u32Time, uint8_t u8PitChannel, sPITx_t *sPitx)
 
 uint8_t u8fRead_PIT(sPITx_t *sPitx)
 {
-	uint8_t u8Return;
-	u8Return = eNOTREADY_PIT;
+	static uint8_t u8Return = eNOTREADY_PIT;
 	
 	if(eCHANNEL_0_PIT == (sPitx -> u8Channel))
 	{

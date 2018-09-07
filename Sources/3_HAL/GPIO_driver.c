@@ -95,8 +95,7 @@ uint8_t u8fReadPort_GPIO(uint8_t u8PORTx,uint8_t u8PINx)
 
 uint8_t u8fInit_GPIO(uint8_t u8PORTx,uint8_t u8PINx,uint8_t u8InOut)
 {
-	uint8_t u8Result;
-	u8Result = eFALSE_GPIO;
+	uint8_t u8Result = eFALSE_GPIO;
 	
 	switch(u8PORTx){
 		case ePORTA_GPIO:

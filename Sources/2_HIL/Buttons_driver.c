@@ -6,6 +6,7 @@
  */
 #include "derivative.h"
 #include "Buttons_driver.h"
+#include "PIT_driver.h"
 
 #define INITIAL_ID			(0x00u)
 #define LIMIT_PINx			(0x19u)
@@ -36,10 +37,12 @@ void vfdelay_Button(uint32_t u32Time)
 	
 }
 
+sPITx_t svsPITx;
+
 uint8_t u8fReadButton(sButton_t *psButton)
 {
 	uint8_t u8Result = eFALSE;
-	uint8_t u8StateReadButton = eSTATE_READ_1;
+	static uint8_t u8StateReadButton = eSTATE_READ_1;
 	
 	switch(u8StateReadButton)
 	{
@@ -48,13 +51,26 @@ uint8_t u8fReadButton(sButton_t *psButton)
 		{
 			u8Result = eFALSE;
 			u8StateReadButton = eSTATE_WAIT_2;
+			vfDisable_PIT(&svsPITx);
+			vfEnable_PIT(&svsPITx);
 		}else
 			{
 				u8Result = eFALSE;
 				u8StateReadButton = eSTATE_READ_1;
+				vfDisable_PIT(&svsPITx);
 			}
 		break;
 	case eSTATE_WAIT_2:
+		if( eREADY_PIT == u8fRead_PIT(&svsPITx) )
+		{
+			u8Result = eFALSE;
+			u8StateReadButton = eSTATE_READ_3;
+			vfDisable_PIT(&svsPITx);
+		}else 
+			{
+				u8Result = eFALSE;
+				u8StateReadButton = eSTATE_WAIT_2;
+			}
 		
 		break;
 	case eSTATE_READ_3:
@@ -65,7 +81,7 @@ uint8_t u8fReadButton(sButton_t *psButton)
 		}else
 			{
 				u8Result = eFALSE;
-				u8StateReadButton = eSTATE_READ_3;
+				u8StateReadButton = eSTATE_READ_1;
 			}
 		break;
 	default: 
@@ -91,8 +107,10 @@ uint8_t u8fReadButton(sButton_t *psButton)
 
 uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx)
 {
-	uint8_t u8Result;
-	u8Result = eFALSE;
+	uint8_t u8Result = eFALSE;
+	
+	if(eREADY_PIT == u8fInit_PIT(LDVAL_100MS, eCHANNEL_0_PIT, &svsPITx))
+	{
 	
 	switch(u8PORTx){
 		case ePORTA:
@@ -165,6 +183,7 @@ uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx)
 		}//End switch	
 	
 	u8CounterID++;
+	}//End if pit_init
 	
 	return u8Result;
 }
