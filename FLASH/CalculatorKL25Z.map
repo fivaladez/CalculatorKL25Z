@@ -40,7 +40,6 @@ C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
 Allocating common symbols
 Common symbol       size              file
 
-u8PinsPort          0x10              ./Sources/2_HIL/LCD_driver.o
 svsPITx             0x8               ./Sources/2_HIL/Buttons_driver.o
 
 Discarded input sections
@@ -107,8 +106,10 @@ Discarded input sections
  .data.u8Port_7
                 0x00000000        0x1 ./Sources/2_HIL/LCD_driver.o
  .data.u8Pin_7  0x00000000        0x1 ./Sources/2_HIL/LCD_driver.o
+ .data.u8aInitInstructions_LCD
+                0x00000000        0x8 ./Sources/2_HIL/LCD_driver.o
  .text.vfDelay_LCD
-                0x00000000       0x24 ./Sources/2_HIL/LCD_driver.o
+                0x00000000       0x40 ./Sources/2_HIL/LCD_driver.o
  .text.vfRsLow_LCD
                 0x00000000       0x20 ./Sources/2_HIL/LCD_driver.o
  .text.vfRsHigh_LCD
@@ -119,24 +120,33 @@ Discarded input sections
                 0x00000000       0x20 ./Sources/2_HIL/LCD_driver.o
  .text.vfDataAssign
                 0x00000000      0x1ec ./Sources/2_HIL/LCD_driver.o
- .text.vfInitOuts_LCD
-                0x00000000      0x104 ./Sources/2_HIL/LCD_driver.o
+ .text.u8InitOuts_LCD
+                0x00000000      0x160 ./Sources/2_HIL/LCD_driver.o
+ .text.vfSendDataInit_LCD
+                0x00000000       0x78 ./Sources/2_HIL/LCD_driver.o
+ .text.u8fSendData_LCD
+                0x00000000      0x124 ./Sources/2_HIL/LCD_driver.o
  .text.u8fInit_LCD
-                0x00000000       0x38 ./Sources/2_HIL/LCD_driver.o
- .debug_info    0x00000000      0x47c ./Sources/2_HIL/LCD_driver.o
- .debug_abbrev  0x00000000       0xf6 ./Sources/2_HIL/LCD_driver.o
- .debug_loc     0x00000000      0x184 ./Sources/2_HIL/LCD_driver.o
+                0x00000000       0x4c ./Sources/2_HIL/LCD_driver.o
+ .text.vfClear_LCD
+                0x00000000       0x34 ./Sources/2_HIL/LCD_driver.o
+ .bss.u8State.4769
+                0x00000000        0x1 ./Sources/2_HIL/LCD_driver.o
+ .bss.u8Index.4770
+                0x00000000        0x1 ./Sources/2_HIL/LCD_driver.o
+ .debug_info    0x00000000      0x52a ./Sources/2_HIL/LCD_driver.o
+ .debug_abbrev  0x00000000      0x117 ./Sources/2_HIL/LCD_driver.o
+ .debug_loc     0x00000000      0x22c ./Sources/2_HIL/LCD_driver.o
  .debug_aranges
-                0x00000000       0x58 ./Sources/2_HIL/LCD_driver.o
+                0x00000000       0x70 ./Sources/2_HIL/LCD_driver.o
  .debug_macinfo
-                0x00000000    0x26601 ./Sources/2_HIL/LCD_driver.o
- .debug_line    0x00000000      0x2d3 ./Sources/2_HIL/LCD_driver.o
- .debug_str     0x00000000      0x458 ./Sources/2_HIL/LCD_driver.o
+                0x00000000    0x26666 ./Sources/2_HIL/LCD_driver.o
+ .debug_line    0x00000000      0x357 ./Sources/2_HIL/LCD_driver.o
+ .debug_str     0x00000000      0x4d7 ./Sources/2_HIL/LCD_driver.o
  .comment       0x00000000       0x7a ./Sources/2_HIL/LCD_driver.o
  .ARM.attributes
                 0x00000000       0x31 ./Sources/2_HIL/LCD_driver.o
- .debug_frame   0x00000000       0xfc ./Sources/2_HIL/LCD_driver.o
- COMMON         0x00000000       0x10 ./Sources/2_HIL/LCD_driver.o
+ .debug_frame   0x00000000      0x15c ./Sources/2_HIL/LCD_driver.o
  .text          0x00000000        0x0 ./Sources/2_HIL/Buttons_driver.o
  .data          0x00000000        0x0 ./Sources/2_HIL/Buttons_driver.o
  .bss           0x00000000        0x0 ./Sources/2_HIL/Buttons_driver.o
@@ -774,7 +784,7 @@ OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
  .debug_aranges
                 0x00000390       0x30 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
 
-.debug_macinfo  0x00000000    0xa09a7
+.debug_macinfo  0x00000000    0xa09fb
  .debug_macinfo
                 0x00000000    0x264f0 ./Project_Settings/Startup_Code/kinetis_sysinit.o
  .debug_macinfo
@@ -784,9 +794,9 @@ OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
  .debug_macinfo
                 0x0002d7b3    0x26605 ./Sources/1_App/main.o
  .debug_macinfo
-                0x00053db8    0x266d9 ./Sources/2_HIL/Buttons_driver.o
+                0x00053db8    0x2672d ./Sources/2_HIL/Buttons_driver.o
  .debug_macinfo
-                0x0007a491    0x26516 ./Sources/3_HAL/GPIO_driver.o
+                0x0007a4e5    0x26516 ./Sources/3_HAL/GPIO_driver.o
 
 .debug_line     0x00000000     0x1fe0
  .debug_line    0x00000000      0x216 ./Project_Settings/Startup_Code/kinetis_sysinit.o

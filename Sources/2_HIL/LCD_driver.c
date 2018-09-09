@@ -7,22 +7,31 @@
 #include "derivative.h"
 #include "LCD_driver.h"
 #include "GPIO_driver.h"
+/*====================================DEFINES======================================*/
 
-#define TIME_1S			1800000
-#define TIME_500MS		900000
-#define TIME_250MS		450000
-#define TIME_100MS		180000
-#define TIME_50MS		90000
-#define TIME_25MS		45000
-#define TIME_10MS		18000
-#define TIME_5MS		9000
-#define TIME_3MS		4500
-#define TIME_1MS		1000
-#define TIME_500US		500
-#define TIME_250US		250
-#define TIME_100US		100
-#define TIME_10US		10
-#define TIME_5US		5
+#define TIME_LCD_10MS		18000
+#define TIME_LCD_5MS		9000
+#define TIME_LCD_3MS		4500
+#define TIME_LCD_1MS		1000
+#define TIME_LCD_500US		500
+#define TIME_LCD_250US		250
+#define TIME_LCD_40US		40
+#define TIME_LCD_10US		10
+#define TIME_LCD_5US		5
+
+#define INIT_INST_LENGTH	5
+
+#define CLEAR_LCD_CODE		(0x01u)
+
+/*====================================ENUMS======================================*/
+
+typedef enum
+{
+	eSTATE_INSTRUCTION_LCD,
+	eSTATE_DATA_LCD
+}eStates_LCD_t;
+
+/*====================================Global variables======================================*/
 
 uint8_t u8RsPort = ePORTB_GPIO;
 uint8_t u8RsPin  = ePIN_0_GPIO;
@@ -54,27 +63,29 @@ uint8_t u8Pin_6  = ePIN_6_GPIO;
 uint8_t u8Port_7 = ePORTD_GPIO;
 uint8_t u8Pin_7  = ePIN_7_GPIO;
 
-#define INIT_INST_LENGTH	5
-
 uint8_t u8aInitInstructions_LCD[INIT_INST_LENGTH] = {0x38, 0x38, 0x38, 0x0C, 0x01};
 
+/*====================================PROTOTYPES======================================*/
+
 void vfRsLow_LCD (void);
-void vfRsHigh_LCD (void);
+void vfRsHigh_LCD(void);
 void vfEnLow_LCD (void);
 void vfEnHigh_LCD(void);
 
-void vfDataAssign(uint8_t u8aData);
-
 void vfInitOuts_LCD(void);
 
-void vfDelay_LCD(uint32_t u32Time);
+void vfDataAssign(uint8_t u8aData);
 
-/*==========================================================================*/
+void vfSendDataInit_LCD( uint8_t *u8aDataLCD , uint8_t u8LenghtArray);
 
-void vfDelay_LCD(uint32_t u32Time)
+void vfDelay_LCD(uint16_t u16Time);
+
+/*====================================INTERNAL FUNCTIONS======================================*/
+
+void vfDelay_LCD(uint16_t u16Time)
 {
-	uint32_t u32Value = 0;
-	for(u32Value = u32Time; 0 < u32Value; u32Value--){/*Do nothing*/}
+	uint16_t u16Value = 0;
+	for(u16Value = u16Time; 0 < u16Value; u16Value--){/*Do nothing*/}
 }
 
 void vfRsLow_LCD (void)
@@ -82,7 +93,7 @@ void vfRsLow_LCD (void)
 	vfClearPort_GPIO(u8RsPort,u8RsPin);
 }
 
-void vfRsHigh_LCD (void)
+void vfRsHigh_LCD(void)
 {
 	vfSetPort_GPIO(u8RsPort,u8RsPin);
 }
@@ -96,8 +107,6 @@ void vfEnHigh_LCD(void)
 {
 	vfSetPort_GPIO(u8EnPort,u8EnPin);
 }
-
-/*==========================================================================*/
 
 void vfDataAssign(uint8_t u8Data)
 {
@@ -155,29 +164,103 @@ uint8_t u8InitOuts_LCD(void)
 	return u8Return;
 }
 
-/*NOTE: The length must the the number of components of the array o use sizeof but allways checking the variable is uint8_t*/
+/*NOTE: The length must the the number of components of the array o use sizeof but always checking the variable is uint8_t*/
 void vfSendDataInit_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray )
 {
 	uint8_t u8Index  = 0;
 	
 	for(u8Index = 0; u8Index < u8LengthArray ; u8Index++)
 	{
+		
 		vfRsLow_LCD ();
 		vfEnLow_LCD ();
-			
+		
 		vfDataAssign( u8aDataLCD[u8Index] );
 		
 		vfRsLow_LCD ();
 		vfEnHigh_LCD();
 		
-		vfDelay_LCD(TIME_5US);
+		vfDelay_LCD(TIME_LCD_5MS);/*Time to let execute LCD execute commands*/
 		
 		vfRsLow_LCD ();
 		vfEnLow_LCD ();	
 	}
-	
 }
 
+/*====================================GLOBAL FUNCTIONS======================================*/
+
+uint8_t u8fSendData_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray , uint8_t u8StartPossition)
+{
+	uint8_t u8Return = eNOTREADY_LCD;
+	static uint8_t u8State  = eSTATE_INSTRUCTION_LCD;
+	static uint8_t u8Index  = 0;
+	
+	switch(u8State)
+	{
+	case eSTATE_INSTRUCTION_LCD:
+		if( ((u8StartPossition >= BEGINING_RAW_1) && (u8StartPossition <= END_RAW_1) ) || /*Corroboarate the value of possition is in range*/
+			((u8StartPossition >= BEGINING_RAW_2) && (u8StartPossition <= END_RAW_2) ) )
+		{
+			/*These instructions set are for positioning the cursor in LCD -> Assign Data, RS = 0 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/
+							
+			vfRsLow_LCD ();
+			vfEnLow_LCD ();
+			
+			vfDataAssign( BEGINING_RAW_1 );
+								
+			vfRsLow_LCD ();
+			vfEnHigh_LCD();
+									
+			vfDelay_LCD(TIME_LCD_40US);/*Time to let execute LCD write*/
+									
+			vfRsLow_LCD ();
+			vfEnLow_LCD ();
+			
+			u8State  = eSTATE_DATA_LCD;
+			u8Return = eNOTREADY_LCD;
+				
+		}else 
+			{
+				u8State  = eSTATE_INSTRUCTION_LCD;
+				u8Return = eNOTREADY_LCD;
+			}	
+		break;
+	case eSTATE_DATA_LCD:
+		if(u8Index < u8LengthArray)
+		{
+			/*These instruction sets are for write in LCD -> Assign Data, RS = 1 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/
+			vfRsLow_LCD ();
+			vfEnLow_LCD ();
+								
+			vfDataAssign( u8aDataLCD[u8Index] );
+							
+			vfRsHigh_LCD ();
+			vfEnHigh_LCD();
+							
+			vfDelay_LCD(TIME_LCD_40US);
+							
+			vfRsLow_LCD ();
+			vfEnLow_LCD ();	
+			
+			u8Index++;
+			u8State  = eSTATE_DATA_LCD;
+			u8Return = eNOTREADY_LCD;
+		}else 
+			{
+				u8Index = 0;
+				u8State  = eSTATE_INSTRUCTION_LCD;
+				u8Return = eREADY_LCD;
+			}
+		break;
+	default:
+		u8Index = 0;
+		u8State  = eSTATE_INSTRUCTION_LCD;
+		u8Return = eNOTREADY_LCD;
+		break;
+	}//End of switch
+	
+	return u8Return;
+}
 
 uint8_t u8fInit_LCD( void )
 {
@@ -185,7 +268,7 @@ uint8_t u8fInit_LCD( void )
 	
 	if(eREADY_LCD == u8InitOuts_LCD())
 	{
-		vfDelay_LCD(TIME_10MS);
+		vfDelay_LCD(TIME_LCD_10MS);
 			
 		vfSendDataInit_LCD( &u8aInitInstructions_LCD[0] , sizeof(u8aInitInstructions_LCD));
 			
@@ -194,4 +277,20 @@ uint8_t u8fInit_LCD( void )
 	}else u8Return = eNOTREADY_LCD;
 	
 	return u8Return;
+}
+
+void vfClear_LCD(void)
+{
+	vfRsLow_LCD ();
+	vfEnLow_LCD ();
+			
+	vfDataAssign( CLEAR_LCD_CODE );
+			
+	vfRsLow_LCD ();
+	vfEnHigh_LCD();
+			
+	vfDelay_LCD(TIME_LCD_5MS);/*Time to let execute LCD clear*/
+			
+	vfRsLow_LCD ();
+	vfEnLow_LCD ();	
 }

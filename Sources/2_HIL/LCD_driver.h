@@ -9,9 +9,9 @@
 #define LCD_DRIVER_H_
 
 #define BEGINING_RAW_1	(0x80u)
-#define MIDDLE_RAW_1	(0x87u)
+#define END_RAW_1		(0x8Fu)
 #define BEGINING_RAW_2	(0xC0u)
-#define MIDDLE_RAW_2	(0xC7u)
+#define END_RAW_2		(0xCFu)
 
 typedef enum
 {
@@ -27,9 +27,9 @@ typedef enum
 
 uint8_t u8fInit_LCD( void );
 
-uint8_t u8fSendData_LCD( uint8_t u8Possition, uint8_t *u8aDataLCD );
+uint8_t u8fSendData_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray , uint8_t u8StartPossition);
 
-void vfSendDataInit_LCD( uint8_t *u8aDataLCD , uint8_t u8LenghtArray);
+void vfClear_LCD(void);
 
 
 #endif /* LCD_DRIVER_H_ */

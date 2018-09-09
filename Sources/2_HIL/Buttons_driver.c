@@ -11,18 +11,18 @@
 #define INITIAL_ID			(0x00u)
 #define LIMIT_PINx			(0x19u)
 
-#define TIME_1S			1800000
-#define TIME_500MS		900000
-#define TIME_250MS		450000
-#define TIME_100MS		180000
-#define TIME_50MS		90000
-#define TIME_25MS		45000
-#define TIME_10MS		18000
-#define TIME_5MS		9000
-#define TIME_3MS		4500
-#define TIME_1MS		1000
-#define TIME_500US		500
-#define TIME_250US		250
+#define TIME_Button_1S			1800000
+#define TIME_Button_500MS		900000
+#define TIME_Button_250MS		450000
+#define TIME_Button_100MS		180000
+#define TIME_Button_50MS		90000
+#define TIME_Button_25MS		45000
+#define TIME_Button_10MS		18000
+#define TIME_Button_5MS			9000
+#define TIME_Button_3MS			4500
+#define TIME_Button_1MS			1000
+#define TIME_Button_500US		500
+#define TIME_Button_250US		250
 
 static uint8_t u8CounterID = 0;
 
@@ -65,7 +65,7 @@ uint8_t u8fReadButton(sButton_t *psButton)
 	{
 		if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
 		{
-			vfdelay_Button(TIME_100MS);
+			vfdelay_Button(TIME_Button_100MS);
 			if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
 			{
 				u8Result = eTRUE;
