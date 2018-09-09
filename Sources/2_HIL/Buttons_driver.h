@@ -75,8 +75,9 @@ typedef enum
 	eSTATE_READ_3
 }eDebouncerx_t;
 
-uint8_t u8fCreateButton(sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx);
-uint8_t u8fReadButton  (sButton_t *psButton);
+uint8_t u8fCreateButton  (sButton_t *psButton, uint8_t u8PORTx,uint8_t u8PINx);
+uint8_t u8fReadButton    (sButton_t *psButton);
+uint8_t u8fReadButtonFast(sButton_t *psButton);
 
 uint8_t u8fCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, uint8_t u8PORTx,uint8_t u8PINx);
 uint8_t u8fReadButtonNonBlocking0  (sButtonNonBlocking0_t *psButton);

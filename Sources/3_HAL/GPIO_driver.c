@@ -27,6 +27,7 @@ void vfSetPort_GPIO(uint8_t u8PORTx,uint8_t u8PINx) /*Write a 1*/
 			break;
 	}//End switch
 }
+
 void vfClearPort_GPIO(uint8_t u8PORTx,uint8_t u8PINx)/*Write a 0*/
 {
 	switch(u8PORTx){
@@ -91,6 +92,59 @@ uint8_t u8fReadPort_GPIO(uint8_t u8PORTx,uint8_t u8PINx)
 		}
 	
 	return u8logicValue;
+}
+
+void vfPassValToPort_GPIO(uint8_t u8PORTx,uint8_t u8PINx, uint8_t u8Data) 
+{
+	switch(u8PORTx){
+		case ePORTA_GPIO: 
+			if( 0u == u8Data )
+			{
+				GPIOA_PDOR &= ~(1<<u8PINx);
+			}else if( 1u == u8Data )
+				{
+					GPIOA_PDOR |= (1<<u8PINx);
+				}
+			break;
+		case ePORTB_GPIO: 
+			if( 0u == u8Data )
+			{
+				GPIOB_PDOR &= ~(1<<u8PINx);
+			}else if( 1u == u8Data )
+				{
+					GPIOB_PDOR |= (1<<u8PINx);
+				}
+			break;
+		case ePORTC_GPIO: 
+			if( 0u == u8Data )
+			{
+				GPIOC_PDOR &= ~(1<<u8PINx);
+			}else if( 1u == u8Data )
+				{
+					GPIOC_PDOR |= (1<<u8PINx);
+				}   
+			break;
+		case ePORTD_GPIO: 
+			if( 0u == u8Data )
+			{
+				GPIOD_PDOR &= ~(1<<u8PINx);
+			}else if( 1u == u8Data )
+				{
+					GPIOD_PDOR |= (1<<u8PINx);
+				}
+			break;
+		case ePORTE_GPIO: 
+			if( 0u == u8Data )
+			{
+				GPIOE_PDOR &= ~(1<<u8PINx);
+			}else if( 1u == u8Data )
+				{
+					GPIOE_PDOR |= (1<<u8PINx);
+				}
+			break;
+		default: /**/
+			break;
+	}//End switch
 }
 
 uint8_t u8fInit_GPIO(uint8_t u8PORTx,uint8_t u8PINx,uint8_t u8InOut)

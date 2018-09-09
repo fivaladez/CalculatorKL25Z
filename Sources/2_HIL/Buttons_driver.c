@@ -61,7 +61,7 @@ uint8_t u8fReadButton(sButton_t *psButton)
 {
 	uint8_t u8Result = eFALSE;
 	
-	if( eTRUE  == u8fReadButtonFast(psButton))
+	if( eTRUE  == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
 	{
 		if(eTRUE == u8fReadPort_GPIO(psButton->u8Port,psButton->u8Pin))
 		{

@@ -54,4 +54,6 @@ void vfTogglePort_GPIO(uint8_t bPORTx,uint8_t bPINx);
 
 uint8_t u8fReadPort_GPIO(uint8_t bPORTx,uint8_t bPINx);
 
+void vfPassValToPort_GPIO(uint8_t u8PORTx,uint8_t u8PINx, uint8_t u8Data);
+
 #endif /* GPIO_DRIVER_H_ */
