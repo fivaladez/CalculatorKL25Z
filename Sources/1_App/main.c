@@ -56,11 +56,5 @@ int main(void)
 
 void vfdelay(uint32_t u32Time)
 {
-	uint32_t u32Value = 0;
-	
-	for(u32Value = u32Time; 0 < u32Value; u32Value--)
-	{
-		/*Do nothing*/
-	}
-	
+	while(u32Time--);
 }

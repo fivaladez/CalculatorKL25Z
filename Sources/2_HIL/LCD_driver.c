@@ -84,8 +84,7 @@ void vfDelay_LCD(uint16_t u16Time);
 
 void vfDelay_LCD(uint16_t u16Time)
 {
-	uint16_t u16Value = 0;
-	for(u16Value = u16Time; 0 < u16Value; u16Value--){/*Do nothing*/}
+	while(u16Time--);
 }
 
 void vfRsLow_LCD (void)
@@ -109,25 +108,15 @@ void vfEnHigh_LCD(void)
 }
 
 void vfDataAssign(uint8_t u8Data)
-{
-	uint8_t u8aBit[8] = {0};
-	u8aBit[0] = ( (u8Data &= (1 << 0) ) >> 0);
-	u8aBit[1] = ( (u8Data &= (1 << 1) ) >> 1);
-	u8aBit[2] = ( (u8Data &= (1 << 2) ) >> 2);
-	u8aBit[3] = ( (u8Data &= (1 << 3) ) >> 3);
-	u8aBit[4] = ( (u8Data &= (1 << 4) ) >> 4);
-	u8aBit[5] = ( (u8Data &= (1 << 5) ) >> 5);
-	u8aBit[6] = ( (u8Data &= (1 << 6) ) >> 6);
-	u8aBit[7] = ( (u8Data &= (1 << 7) ) >> 7);
-	
-	vfPassValToPort_GPIO(u8Port_0, u8Pin_0, u8aBit[0] );
-	vfPassValToPort_GPIO(u8Port_1, u8Pin_1, u8aBit[1] );
-	vfPassValToPort_GPIO(u8Port_2, u8Pin_2, u8aBit[2] );
-	vfPassValToPort_GPIO(u8Port_3, u8Pin_3, u8aBit[3] );
-	vfPassValToPort_GPIO(u8Port_4, u8Pin_4, u8aBit[4] );
-	vfPassValToPort_GPIO(u8Port_5, u8Pin_5, u8aBit[5] );
-	vfPassValToPort_GPIO(u8Port_6, u8Pin_6, u8aBit[6] );
-	vfPassValToPort_GPIO(u8Port_7, u8Pin_7, u8aBit[7] );
+{	
+	vfPassValToPort_GPIO(u8Port_0, u8Pin_0, ( (u8Data &= (1 << 0) ) >> 0) );
+	vfPassValToPort_GPIO(u8Port_1, u8Pin_1, ( (u8Data &= (1 << 1) ) >> 1) );
+	vfPassValToPort_GPIO(u8Port_2, u8Pin_2, ( (u8Data &= (1 << 2) ) >> 2) );
+	vfPassValToPort_GPIO(u8Port_3, u8Pin_3, ( (u8Data &= (1 << 3) ) >> 3) );
+	vfPassValToPort_GPIO(u8Port_4, u8Pin_4, ( (u8Data &= (1 << 4) ) >> 4) );
+	vfPassValToPort_GPIO(u8Port_5, u8Pin_5, ( (u8Data &= (1 << 5) ) >> 5) );
+	vfPassValToPort_GPIO(u8Port_6, u8Pin_6, ( (u8Data &= (1 << 6) ) >> 6) );
+	vfPassValToPort_GPIO(u8Port_7, u8Pin_7, ( (u8Data &= (1 << 7) ) >> 7) );
 }
 
 uint8_t u8InitOuts_LCD(void)
@@ -170,8 +159,7 @@ void vfSendDataInit_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray )
 	uint8_t u8Index  = 0;
 	
 	for(u8Index = 0; u8Index < u8LengthArray ; u8Index++)
-	{
-		
+	{		
 		vfRsLow_LCD ();
 		vfEnLow_LCD ();
 		
