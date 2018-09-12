@@ -27,7 +27,7 @@ int main(void)
 	int counter = 0;
 	sButton_t sButton1;
 	
-	if(eTRUE == u8fInit_GPIO(ePORTB ,ePIN_18, eOUT) && eTRUE ==  u8fInit_GPIO(ePORTB ,ePIN_19, eOUT))
+	if(eTRUE == u8fInit_GPIO(ePORTB ,ePIN_18, eOUTPUT) && eTRUE ==  u8fInit_GPIO(ePORTB ,ePIN_19, eOUTPUT))
 	{
 		if(eTRUE == u8fCreateButton(&sButton1, ePORTA, ePIN_1))
 		{

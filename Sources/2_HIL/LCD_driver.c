@@ -33,35 +33,35 @@ typedef enum
 
 /*====================================Global variables======================================*/
 
-uint8_t u8RsPort = ePORTB_GPIO;
-uint8_t u8RsPin  = ePIN_0_GPIO;
+uint8_t u8RsPort = ePORTB;
+uint8_t u8RsPin  = ePIN_0;
 
-uint8_t u8EnPort = ePORTB_GPIO;
-uint8_t u8EnPin  = ePIN_1_GPIO;
+uint8_t u8EnPort = ePORTB;
+uint8_t u8EnPin  = ePIN_1;
 
-uint8_t u8Port_0 = ePORTD_GPIO;
-uint8_t u8Pin_0  = ePIN_0_GPIO;
+uint8_t u8Port_0 = ePORTD;
+uint8_t u8Pin_0  = ePIN_0;
 
-uint8_t u8Port_1 = ePORTD_GPIO;
-uint8_t u8Pin_1  = ePIN_1_GPIO;
+uint8_t u8Port_1 = ePORTD;
+uint8_t u8Pin_1  = ePIN_1;
 
-uint8_t u8Port_2 = ePORTD_GPIO;
-uint8_t u8Pin_2  = ePIN_2_GPIO;
+uint8_t u8Port_2 = ePORTD;
+uint8_t u8Pin_2  = ePIN_2;
 
-uint8_t u8Port_3 = ePORTD_GPIO;
-uint8_t u8Pin_3  = ePIN_3_GPIO;
+uint8_t u8Port_3 = ePORTD;
+uint8_t u8Pin_3  = ePIN_3;
 
-uint8_t u8Port_4 = ePORTD_GPIO;
-uint8_t u8Pin_4  = ePIN_4_GPIO;
+uint8_t u8Port_4 = ePORTD;
+uint8_t u8Pin_4  = ePIN_4;
 
-uint8_t u8Port_5 = ePORTD_GPIO;
-uint8_t u8Pin_5  = ePIN_5_GPIO;
+uint8_t u8Port_5 = ePORTD;
+uint8_t u8Pin_5  = ePIN_5;
 
-uint8_t u8Port_6 = ePORTD_GPIO;
-uint8_t u8Pin_6  = ePIN_6_GPIO;
+uint8_t u8Port_6 = ePORTD;
+uint8_t u8Pin_6  = ePIN_6;
 
-uint8_t u8Port_7 = ePORTD_GPIO;
-uint8_t u8Pin_7  = ePIN_7_GPIO;
+uint8_t u8Port_7 = ePORTD;
+uint8_t u8Pin_7  = ePIN_7;
 
 uint8_t u8aInitInstructions_LCD[INIT_INST_LENGTH] = {0x38, 0x38, 0x38, 0x0C, 0x01};
 
@@ -123,21 +123,21 @@ uint8_t u8InitOuts_LCD(void)
 {
 	uint8_t u8Return = eNOTREADY_LCD;
 	
-	if( eTRUE_GPIO == u8fInit_GPIO( u8Port_0, u8Pin_0, eOUT_GPIO ) )
+	if( eTRUE == u8fInit_GPIO( u8Port_0, u8Pin_0, eOUTPUT ) )
 	{
-		if( eTRUE_GPIO == u8fInit_GPIO( u8Port_1, u8Pin_1, eOUT_GPIO ) )
+		if( eTRUE == u8fInit_GPIO( u8Port_1, u8Pin_1, eOUTPUT ) )
 			{
-			if( eTRUE_GPIO == u8fInit_GPIO( u8Port_2, u8Pin_2, eOUT_GPIO ) )
+			if( eTRUE == u8fInit_GPIO( u8Port_2, u8Pin_2, eOUTPUT ) )
 				{
-				if( eTRUE_GPIO == u8fInit_GPIO( u8Port_3, u8Pin_3, eOUT_GPIO ) )
+				if( eTRUE == u8fInit_GPIO( u8Port_3, u8Pin_3, eOUTPUT ) )
 					{
-					if( eTRUE_GPIO == u8fInit_GPIO( u8Port_4, u8Pin_4, eOUT_GPIO ) )
+					if( eTRUE == u8fInit_GPIO( u8Port_4, u8Pin_4, eOUTPUT ) )
 						{
-						if( eTRUE_GPIO == u8fInit_GPIO( u8Port_5, u8Pin_5, eOUT_GPIO ) )
+						if( eTRUE == u8fInit_GPIO( u8Port_5, u8Pin_5, eOUTPUT ) )
 							{
-							if( eTRUE_GPIO == u8fInit_GPIO( u8Port_6, u8Pin_6, eOUT_GPIO ) )
+							if( eTRUE == u8fInit_GPIO( u8Port_6, u8Pin_6, eOUTPUT ) )
 								{
-								if( eTRUE_GPIO == u8fInit_GPIO( u8Port_7, u8Pin_7, eOUT_GPIO))
+								if( eTRUE == u8fInit_GPIO( u8Port_7, u8Pin_7, eOUTPUT))
 									{
 										u8Return = eREADY_LCD;
 										
@@ -183,11 +183,12 @@ uint8_t u8fSendData_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray , uint8_t u
 	static uint8_t u8State  = eSTATE_INSTRUCTION_LCD;
 	static uint8_t u8Index  = 0;
 	
+	
 	switch(u8State)
 	{
 	case eSTATE_INSTRUCTION_LCD:
-		if( ((u8StartPossition >= BEGINING_RAW_1) && (u8StartPossition <= END_RAW_1) ) || /*Corroboarate the value of possition is in range*/
-			((u8StartPossition >= BEGINING_RAW_2) && (u8StartPossition <= END_RAW_2) ) )
+		if( ((u8StartPossition >= BEGINING_RAW_1) && ((u8StartPossition + u8LengthArray) <= END_RAW_1) ) || /*Corroboarate the value of possition is in range*/
+			((u8StartPossition >= BEGINING_RAW_2) && ((u8StartPossition + u8LengthArray) <= END_RAW_2) ) )
 		{
 			/*These instructions set are for positioning the cursor in LCD -> Assign Data, RS = 0 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/
 							

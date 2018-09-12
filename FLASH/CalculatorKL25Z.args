@@ -3,6 +3,7 @@
 "./Project_Settings/Startup_Code/__arm_end.o"
 "./Sources/1_App/sa_mtb.o"
 "./Sources/1_App/main.o"
+"./Sources/2_HIL/Leds_driver.o"
 "./Sources/2_HIL/LCD_driver.o"
 "./Sources/2_HIL/Buttons_driver.o"
 "./Sources/3_HAL/PIT_driver.o"
