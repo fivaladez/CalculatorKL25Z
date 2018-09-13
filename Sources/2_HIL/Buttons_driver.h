@@ -11,7 +11,7 @@
 #include "derivative.h"
 #include "GPIO_driver.h"
 
-#define NONBLOCKING
+#define NONBLOCKING	(0)
 
 typedef ePINx_GPIO_t   ePINx_Buttons_t;
 typedef ePORTx_GPIO_t  ePORTx_Buttons_t;
@@ -28,8 +28,9 @@ typedef struct
 
 eStatus_Buttons_t efCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,ePINx_Buttons_t ePINx);
 eStatus_Buttons_t efReadButton    (sButton_t *psButton);
+eStatus_Buttons_t efReadButtonNonBlocking(sButton_t *psButton);
 
-#ifndef NONBLOCKING
+#if NONBLOCKING == 1
 
 #include "PIT_driver.h"
 

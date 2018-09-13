@@ -8,7 +8,7 @@
 
 ePORTx_LED_t ePortRed_LED   = ePORTB;		ePINx_LED_t ePinRed_LED     = ePIN_18;
 ePORTx_LED_t ePortGreen_LED = ePORTB;		ePINx_LED_t ePinGreen_LED   = ePIN_19;
-ePORTx_LED_t ePortBlue_LED  = ePORTD;		ePINx_LED_t ePinBlue_LED    = ePIN_3;
+ePORTx_LED_t ePortBlue_LED  = ePORTD;		ePINx_LED_t ePinBlue_LED    = ePIN_1;
 
 eStates_LED_t efInit_LED   (eColors_LED_t eColor)
 {

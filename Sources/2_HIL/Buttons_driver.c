@@ -13,6 +13,8 @@
 #define TIME_Button_250MS		450000
 #define TIME_Button_100MS		180000
 
+#define DEBOUNCING (250000u)/*You must adjust the count inversely proportional to the length of the code*/
+
 static uint8_t u8CounterID = 0;
 
 void vfdelay_Button(uint32_t u32Time);
@@ -121,8 +123,36 @@ void vfdelay_Button(uint32_t u32Time)
 {
 	while(u32Time--);
 }
+eStatus_Buttons_t efReadButtonNonBlocking(sButton_t *psButton)
+{
+	eStatus_Buttons_t eResult = eFALSE;
+	static uint16_t u16Delay = DEBOUNCING;
+	
+	if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+	{
+		if( 0 < u16Delay )
+		{
+			eResult = eFALSE;
+			u16Delay--;
+			
+		}else 
+			{
+				u16Delay = DEBOUNCING;
+				
+				if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+				{
+					eResult = eTRUE;
+					
+				}else eResult = eFALSE;
+			
+			}
+		
+	}else eResult = eFALSE;
+	
+	return eResult;
+}
 
-#ifndef NONBLOCKING
+#if NONBLOCKING == 1
 
 sPITx_t svsPITx;
 

@@ -5,7 +5,6 @@
 
 #include "derivative.h" /* include peripheral declarations */
 #include "Buttons_driver.h"
-//#include "GPIO_driver.h"
 #include "Leds_driver.h"
 
 #define TIME_1S			1800000
@@ -19,12 +18,14 @@ int main(void)
 	int counter = 0;
 	sButton_t sButton1;
 	
-	if(eTRUE == efInit_LED(eRED) && eTRUE ==  efInit_LED(eGREEN))
+	if(eTRUE == efInit_LED(eRED) && eTRUE ==  efInit_LED(eGREEN) && eTRUE ==  efInit_LED(eBLUE))
 	{
+		vfTurnOff_LED(eRED);
+		vfTurnOff_LED(eGREEN);
 		if(eTRUE == efCreateButton(&sButton1, ePORTA, ePIN_1))
 		{
-			vfTurnOn_LED(eRED);
-		}else vfTurnOff_LED(eRED);
+			vfTurnOn_LED(eBLUE);
+		}else vfTurnOff_LED(eBLUE);
 	}
 	
 	for(;;) {	   
