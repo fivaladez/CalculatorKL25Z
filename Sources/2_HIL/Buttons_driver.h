@@ -8,6 +8,7 @@
 #ifndef BUTTONS_DRIVER_H_
 #define BUTTONS_DRIVER_H_
 
+#include "derivative.h"
 #include "GPIO_driver.h"
 
 #define NONBLOCKING
@@ -25,10 +26,12 @@ typedef struct
 	
 }sButton_t;
 
-eStatus_Buttons_t u8fCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,ePINx_Buttons_t ePINx);
-eStatus_Buttons_t u8fReadButton    (sButton_t *psButton);
+eStatus_Buttons_t efCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,ePINx_Buttons_t ePINx);
+eStatus_Buttons_t efReadButton    (sButton_t *psButton);
 
 #ifndef NONBLOCKING
+
+#include "PIT_driver.h"
 
 typedef enum
 {
@@ -56,11 +59,11 @@ typedef struct
 	
 }sButtonNonBlocking1_t;
 
-eStatus_Buttons_t u8fCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, ePORTx_Buttons_t ePORTx,ePINx_Buttons_t ePINx);
-eStatus_Buttons_t u8fReadButtonNonBlocking0  (sButtonNonBlocking0_t *psButton);
+eStatus_Buttons_t efCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, ePORTx_Buttons_t ePORTx,ePINx_Buttons_t ePINx);
+eStatus_Buttons_t efReadButtonNonBlocking0  (sButtonNonBlocking0_t *psButton);
 
-eStatus_Buttons_t u8fCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, ePORTx_Buttons_t ePORTx,ePINx_Buttons_t ePINx);
-eStatus_Buttons_t u8fReadButtonNonBlocking1  (sButtonNonBlocking1_t *psButton);
+eStatus_Buttons_t efCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, ePORTx_Buttons_t ePORTx,ePINx_Buttons_t ePINx);
+eStatus_Buttons_t efReadButtonNonBlocking1  (sButtonNonBlocking1_t *psButton);
 
 #endif
 

@@ -7,7 +7,7 @@
 
 #include "GPIO_driver.h"
 
-eStatus_GPIO_t u8fInit_GPIO  (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx,eInOut_GPIO_t eInOut)
+eStatus_GPIO_t efInit_GPIO  (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx,eInOut_GPIO_t eInOut)
 {
 	eStatus_GPIO_t eResult = eFALSE;
 	
@@ -165,7 +165,7 @@ void vfTogglePort_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
 	}//End switch
 }
 
-eStatus_GPIO_t u8fReadPort_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
+eStatus_GPIO_t efReadPort_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
 {
 	eStatus_GPIO_t eStatus = eFALSE;
 	

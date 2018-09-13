@@ -4,9 +4,7 @@
  *  Created on: Sep 5, 2018
  *      Author: ivan_
  */
-#include "derivative.h"
 #include "LCD_driver.h"
-#include "GPIO_driver.h"
 /*====================================DEFINES======================================*/
 
 #define TIME_LCD_10MS		18000
@@ -24,7 +22,8 @@
 #define CLEAR_LCD_CODE		(0x01u)
 
 /*====================================ENUMS======================================*/
-
+typedef ePORTx_GPIO_t ePORTx_LCD_t;
+typedef ePINx_GPIO_t  ePINx_LCD_t;
 typedef enum
 {
 	eSTATE_INSTRUCTION_LCD,
@@ -33,35 +32,17 @@ typedef enum
 
 /*====================================Global variables======================================*/
 
-uint8_t u8RsPort = ePORTB;
-uint8_t u8RsPin  = ePIN_0;
+ePORTx_LCD_t eRsPort = ePORTB; 	ePINx_LCD_t  eRsPin  = ePIN_0;
+ePORTx_LCD_t eEnPort = ePORTB; 	ePINx_LCD_t  eEnPin  = ePIN_1;
 
-uint8_t u8EnPort = ePORTB;
-uint8_t u8EnPin  = ePIN_1;
-
-uint8_t u8Port_0 = ePORTD;
-uint8_t u8Pin_0  = ePIN_0;
-
-uint8_t u8Port_1 = ePORTD;
-uint8_t u8Pin_1  = ePIN_1;
-
-uint8_t u8Port_2 = ePORTD;
-uint8_t u8Pin_2  = ePIN_2;
-
-uint8_t u8Port_3 = ePORTD;
-uint8_t u8Pin_3  = ePIN_3;
-
-uint8_t u8Port_4 = ePORTD;
-uint8_t u8Pin_4  = ePIN_4;
-
-uint8_t u8Port_5 = ePORTD;
-uint8_t u8Pin_5  = ePIN_5;
-
-uint8_t u8Port_6 = ePORTD;
-uint8_t u8Pin_6  = ePIN_6;
-
-uint8_t u8Port_7 = ePORTD;
-uint8_t u8Pin_7  = ePIN_7;
+ePORTx_LCD_t ePort_0 = ePORTD; 	ePINx_LCD_t  ePin_0  = ePIN_0;
+ePORTx_LCD_t ePort_1 = ePORTD; 	ePINx_LCD_t  ePin_1  = ePIN_1;
+ePORTx_LCD_t ePort_2 = ePORTD; 	ePINx_LCD_t  ePin_2  = ePIN_2;
+ePORTx_LCD_t ePort_3 = ePORTD; 	ePINx_LCD_t  ePin_3  = ePIN_3;
+ePORTx_LCD_t ePort_4 = ePORTD; 	ePINx_LCD_t  ePin_4  = ePIN_4;
+ePORTx_LCD_t ePort_5 = ePORTD; 	ePINx_LCD_t  ePin_5  = ePIN_5;
+ePORTx_LCD_t ePort_6 = ePORTD; 	ePINx_LCD_t  ePin_6  = ePIN_6;
+ePORTx_LCD_t ePort_7 = ePORTD; 	ePINx_LCD_t  ePin_7  = ePIN_7;
 
 uint8_t u8aInitInstructions_LCD[INIT_INST_LENGTH] = {0x38, 0x38, 0x38, 0x0C, 0x01};
 
@@ -71,14 +52,11 @@ void vfRsLow_LCD (void);
 void vfRsHigh_LCD(void);
 void vfEnLow_LCD (void);
 void vfEnHigh_LCD(void);
-
 void vfInitOuts_LCD(void);
-
 void vfDataAssign(uint8_t u8aData);
-
-void vfSendDataInit_LCD( uint8_t *u8aDataLCD , uint8_t u8LenghtArray);
-
+void vfSendDataInit_LCD( uint8_t *u8apDataLCD , uint8_t u8LenghtArray);
 void vfDelay_LCD(uint16_t u16Time);
+eStatus_LCD_t eInitOuts_LCD(void);
 
 /*====================================INTERNAL FUNCTIONS======================================*/
 
@@ -89,72 +67,71 @@ void vfDelay_LCD(uint16_t u16Time)
 
 void vfRsLow_LCD (void)
 {
-	vfClearPort_GPIO(u8RsPort,u8RsPin);
+	vfClearPort_GPIO(eRsPort,eRsPin);
 }
 
 void vfRsHigh_LCD(void)
 {
-	vfSetPort_GPIO(u8RsPort,u8RsPin);
+	vfSetPort_GPIO(eRsPort,eRsPin);
 }
 
 void vfEnLow_LCD (void)
 {
-	vfClearPort_GPIO(u8EnPort,u8EnPin);
+	vfClearPort_GPIO(eEnPort,eEnPin);
 }
 
 void vfEnHigh_LCD(void)
 {
-	vfSetPort_GPIO(u8EnPort,u8EnPin);
+	vfSetPort_GPIO(eEnPort,eEnPin);
 }
 
-void vfDataAssign(uint8_t u8Data)
+void vfDataAssign_LCD(uint8_t u8Data)
 {	
-	vfPassValToPort_GPIO(u8Port_0, u8Pin_0, ( (u8Data &= (1 << 0) ) >> 0) );
-	vfPassValToPort_GPIO(u8Port_1, u8Pin_1, ( (u8Data &= (1 << 1) ) >> 1) );
-	vfPassValToPort_GPIO(u8Port_2, u8Pin_2, ( (u8Data &= (1 << 2) ) >> 2) );
-	vfPassValToPort_GPIO(u8Port_3, u8Pin_3, ( (u8Data &= (1 << 3) ) >> 3) );
-	vfPassValToPort_GPIO(u8Port_4, u8Pin_4, ( (u8Data &= (1 << 4) ) >> 4) );
-	vfPassValToPort_GPIO(u8Port_5, u8Pin_5, ( (u8Data &= (1 << 5) ) >> 5) );
-	vfPassValToPort_GPIO(u8Port_6, u8Pin_6, ( (u8Data &= (1 << 6) ) >> 6) );
-	vfPassValToPort_GPIO(u8Port_7, u8Pin_7, ( (u8Data &= (1 << 7) ) >> 7) );
+	vfPassValToPort_GPIO(ePort_0, ePin_0, ( (u8Data &= (1 << 0) ) >> 0) );
+	vfPassValToPort_GPIO(ePort_1, ePin_1, ( (u8Data &= (1 << 1) ) >> 1) );
+	vfPassValToPort_GPIO(ePort_2, ePin_2, ( (u8Data &= (1 << 2) ) >> 2) );
+	vfPassValToPort_GPIO(ePort_3, ePin_3, ( (u8Data &= (1 << 3) ) >> 3) );
+	vfPassValToPort_GPIO(ePort_4, ePin_4, ( (u8Data &= (1 << 4) ) >> 4) );
+	vfPassValToPort_GPIO(ePort_5, ePin_5, ( (u8Data &= (1 << 5) ) >> 5) );
+	vfPassValToPort_GPIO(ePort_6, ePin_6, ( (u8Data &= (1 << 6) ) >> 6) );
+	vfPassValToPort_GPIO(ePort_7, ePin_7, ( (u8Data &= (1 << 7) ) >> 7) );
 }
 
-uint8_t u8InitOuts_LCD(void)
+eStatus_LCD_t eInitOuts_LCD(void)
 {
-	uint8_t u8Return = eNOTREADY_LCD;
+	eStatus_LCD_t eResult = eFALSE;
 	
-	if( eTRUE == u8fInit_GPIO( u8Port_0, u8Pin_0, eOUTPUT ) )
+	if( eTRUE == efInit_GPIO( ePort_0, ePin_0, eOUTPUT ) )
 	{
-		if( eTRUE == u8fInit_GPIO( u8Port_1, u8Pin_1, eOUTPUT ) )
+		if( eTRUE == efInit_GPIO( ePort_1, ePin_1, eOUTPUT ) )
 			{
-			if( eTRUE == u8fInit_GPIO( u8Port_2, u8Pin_2, eOUTPUT ) )
+			if( eTRUE == efInit_GPIO( ePort_2, ePin_2, eOUTPUT ) )
 				{
-				if( eTRUE == u8fInit_GPIO( u8Port_3, u8Pin_3, eOUTPUT ) )
+				if( eTRUE == efInit_GPIO( ePort_3, ePin_3, eOUTPUT ) )
 					{
-					if( eTRUE == u8fInit_GPIO( u8Port_4, u8Pin_4, eOUTPUT ) )
+					if( eTRUE == efInit_GPIO( ePort_4, ePin_4, eOUTPUT ) )
 						{
-						if( eTRUE == u8fInit_GPIO( u8Port_5, u8Pin_5, eOUTPUT ) )
+						if( eTRUE == efInit_GPIO( ePort_5, ePin_5, eOUTPUT ) )
 							{
-							if( eTRUE == u8fInit_GPIO( u8Port_6, u8Pin_6, eOUTPUT ) )
+							if( eTRUE == efInit_GPIO( ePort_6, ePin_6, eOUTPUT ) )
 								{
-								if( eTRUE == u8fInit_GPIO( u8Port_7, u8Pin_7, eOUTPUT))
+								if( eTRUE == efInit_GPIO( ePort_7, ePin_7, eOUTPUT))
 									{
-										u8Return = eREADY_LCD;
+										eResult = eTRUE;
 										
-									}else u8Return = eNOTREADY_LCD;
-								}else u8Return = eNOTREADY_LCD;
-							}else u8Return = eNOTREADY_LCD;
-						}else u8Return = eNOTREADY_LCD;
-					}else u8Return = eNOTREADY_LCD;
-				}else u8Return = eNOTREADY_LCD;
-			}else u8Return = eNOTREADY_LCD;
-	}else u8Return = eNOTREADY_LCD;
+									}else eResult = eFALSE;
+								}else eResult = eFALSE;
+							}else eResult = eFALSE;
+						}else eResult = eFALSE;
+					}else eResult = eFALSE;
+				}else eResult = eFALSE;
+			}else eResult = eFALSE;
+	}else eResult = eFALSE;
 	
-	return u8Return;
+	return eResult;
 }
-
 /*NOTE: The length must the the number of components of the array o use sizeof but always checking the variable is uint8_t*/
-void vfSendDataInit_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray )
+void vfSendDataInit_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray )
 {
 	uint8_t u8Index  = 0;
 	
@@ -163,7 +140,7 @@ void vfSendDataInit_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray )
 		vfRsLow_LCD ();
 		vfEnLow_LCD ();
 		
-		vfDataAssign( u8aDataLCD[u8Index] );
+		vfDataAssign_LCD( u8apDataLCD[u8Index] );
 		
 		vfRsLow_LCD ();
 		vfEnHigh_LCD();
@@ -177,25 +154,25 @@ void vfSendDataInit_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray )
 
 /*====================================GLOBAL FUNCTIONS======================================*/
 
-uint8_t u8fSendData_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray , uint8_t u8StartPossition)
+eStatus_LCD_t efSendData_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray , ePOSSITIONS_LCD_t ePossition)
 {
-	uint8_t u8Return = eNOTREADY_LCD;
-	static uint8_t u8State  = eSTATE_INSTRUCTION_LCD;
+	static eStatus_LCD_t eResult = eFALSE;
+	static eStates_LCD_t eState  = eSTATE_INSTRUCTION_LCD;
 	static uint8_t u8Index  = 0;
 	
 	
-	switch(u8State)
+	switch(eState)
 	{
 	case eSTATE_INSTRUCTION_LCD:
-		if( ((u8StartPossition >= BEGINING_RAW_1) && ((u8StartPossition + u8LengthArray) <= END_RAW_1) ) || /*Corroboarate the value of possition is in range*/
-			((u8StartPossition >= BEGINING_RAW_2) && ((u8StartPossition + u8LengthArray) <= END_RAW_2) ) )
+		if( ((ePossition >= eFILA_01_0) && ((ePossition + u8LengthArray) <= eFILA_01_15) ) || /*Corroboarate the value of possition is in range*/
+			((ePossition >= eFILA_02_0) && ((ePossition + u8LengthArray) <= eFILA_02_15) ) )
 		{
 			/*These instructions set are for positioning the cursor in LCD -> Assign Data, RS = 0 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/
 							
 			vfRsLow_LCD ();
 			vfEnLow_LCD ();
 			
-			vfDataAssign( BEGINING_RAW_1 );
+			vfDataAssign_LCD( eFILA_01_0 );
 								
 			vfRsLow_LCD ();
 			vfEnHigh_LCD();
@@ -205,13 +182,13 @@ uint8_t u8fSendData_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray , uint8_t u
 			vfRsLow_LCD ();
 			vfEnLow_LCD ();
 			
-			u8State  = eSTATE_DATA_LCD;
-			u8Return = eNOTREADY_LCD;
+			eState  = eSTATE_DATA_LCD;
+			eResult = eFALSE;
 				
 		}else 
 			{
-				u8State  = eSTATE_INSTRUCTION_LCD;
-				u8Return = eNOTREADY_LCD;
+				eState  = eSTATE_INSTRUCTION_LCD;
+				eResult = eFALSE;
 			}	
 		break;
 	case eSTATE_DATA_LCD:
@@ -221,7 +198,7 @@ uint8_t u8fSendData_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray , uint8_t u
 			vfRsLow_LCD ();
 			vfEnLow_LCD ();
 								
-			vfDataAssign( u8aDataLCD[u8Index] );
+			vfDataAssign_LCD( u8apDataLCD[u8Index] );
 							
 			vfRsHigh_LCD ();
 			vfEnHigh_LCD();
@@ -232,40 +209,40 @@ uint8_t u8fSendData_LCD( uint8_t *u8aDataLCD , uint8_t u8LengthArray , uint8_t u
 			vfEnLow_LCD ();	
 			
 			u8Index++;
-			u8State  = eSTATE_DATA_LCD;
-			u8Return = eNOTREADY_LCD;
+			eState  = eSTATE_DATA_LCD;
+			eResult = eFALSE;
 		}else 
 			{
 				u8Index = 0;
-				u8State  = eSTATE_INSTRUCTION_LCD;
-				u8Return = eREADY_LCD;
+				eState  = eSTATE_INSTRUCTION_LCD;
+				eResult = eTRUE;
 			}
 		break;
 	default:
 		u8Index = 0;
-		u8State  = eSTATE_INSTRUCTION_LCD;
-		u8Return = eNOTREADY_LCD;
+		eState  = eSTATE_INSTRUCTION_LCD;
+		eResult = eFALSE;
 		break;
 	}//End of switch
 	
-	return u8Return;
+	return eResult;
 }
 
-uint8_t u8fInit_LCD( void )
+eStatus_LCD_t efInit_LCD( void )
 {
-	uint8_t u8Return = eNOTREADY_LCD;
+	eStatus_LCD_t eResult = eFALSE;
 	
-	if(eREADY_LCD == u8InitOuts_LCD())
+	if(eTRUE == eInitOuts_LCD())
 	{
 		vfDelay_LCD(TIME_LCD_10MS);
 			
 		vfSendDataInit_LCD( &u8aInitInstructions_LCD[0] , sizeof(u8aInitInstructions_LCD));
 			
-		u8Return = eREADY_LCD;
+		eResult = eTRUE;
 		
-	}else u8Return = eNOTREADY_LCD;
+	}else eResult = eFALSE;
 	
-	return u8Return;
+	return eResult;
 }
 
 void vfClear_LCD(void)

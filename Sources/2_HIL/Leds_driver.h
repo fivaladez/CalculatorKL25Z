@@ -11,11 +11,9 @@
 #include "derivative.h"
 #include "GPIO_driver.h"
 
-typedef enum
-{
-	eNOTREADY_LED,
-	eREADY_LED
-}eStates_LED_t;
+typedef eStatus_GPIO_t eStates_LED_t;
+typedef ePORTx_GPIO_t ePORTx_LED_t;
+typedef ePINx_GPIO_t ePINx_LED_t;
 
 typedef enum
 {
@@ -24,10 +22,10 @@ typedef enum
 	eBLUE
 }eColors_LED_t;
 
-uint8_t u8fInit_LED   (eColors_LED_t eColor);
-uint8_t u8fTurnOn_LED (eColors_LED_t eColor);
-uint8_t u8fTurnOff_LED(eColors_LED_t eColor);
-uint8_t u8fToggle_LED (eColors_LED_t eColor);
-uint8_t u8fRead_LED   (eColors_LED_t eColor);
+eStates_LED_t efInit_LED   (eColors_LED_t eColor);
+void vfTurnOn_LED  (eColors_LED_t eColor);
+void vfTurnOff_LED(eColors_LED_t eColor);
+void vfToggle_LED (eColors_LED_t eColor);
+eStates_LED_t efRead_LED   (eColors_LED_t eColor);
  
 #endif /* LEDS_DRIVER_H_ */

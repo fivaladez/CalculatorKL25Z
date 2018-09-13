@@ -8,6 +8,8 @@
 #ifndef PIT_DRIVER_H_
 #define PIT_DRIVER_H_
 
+#include "derivative.h"
+
 #define LDVAL_1S	0X1406F3F
 #define LDVAL_500MS	0xA0379F
 #define LDVAL_250MS	0x501BCF

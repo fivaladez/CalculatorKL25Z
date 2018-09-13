@@ -4,9 +4,7 @@
  *  Created on: Sep 4, 2018
  *      Author: ivan_
  */
-#include "derivative.h"
 #include "Buttons_driver.h"
-#include "PIT_driver.h"
 
 #define INITIAL_ID			(0x00u)
 
@@ -21,9 +19,9 @@ void vfdelay_Button(uint32_t u32Time);
 
 /*=================================================================================================================*/
 
-eStatus_Buttons_t u8fCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,ePINx_Buttons_t ePINx)
+eStatus_Buttons_t efCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,ePINx_Buttons_t ePINx)
 {
-	eStatus_Buttons_t u8Result = eFALSE;
+	eStatus_Buttons_t eResult = eFALSE;
 			
 	switch(ePORTx){
 		case ePORTA:
@@ -32,12 +30,12 @@ eStatus_Buttons_t u8fCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx
 				psButton -> u8ID     = INITIAL_ID + u8CounterID;
 				psButton -> ePort   = ePORTx;
 				psButton -> ePin    = ePINx;
-				if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 				{
-					u8Result = eTRUE;
-				}else u8Result = eFALSE;
+					eResult = eTRUE;
+				}else eResult = eFALSE;
 					
-			}else u8Result = eFALSE;
+			}else eResult = eFALSE;
 			break;
 		case ePORTB: 
 			if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_8 || ePINx == ePIN_9)
@@ -45,11 +43,11 @@ eStatus_Buttons_t u8fCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx
 				psButton -> u8ID   = INITIAL_ID + u8CounterID;
 				psButton -> ePort = ePORTx;
 				psButton -> ePin  = ePINx;
-				if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 				{
-					u8Result = eTRUE;
-				}else u8Result = eFALSE;
-			}else u8Result = eFALSE;
+					eResult = eTRUE;
+				}else eResult = eFALSE;
+			}else eResult = eFALSE;
 			break;
 		case ePORTC: 
 			if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
@@ -59,11 +57,11 @@ eStatus_Buttons_t u8fCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx
 				psButton -> u8ID   = INITIAL_ID + u8CounterID;
 				psButton -> ePort = ePORTx;
 				psButton -> ePin  = ePINx;
-				if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 				{
-					u8Result = eTRUE;
-				}else u8Result = eFALSE;
-			}else u8Result = eFALSE;  
+					eResult = eTRUE;
+				}else eResult = eFALSE;
+			}else eResult = eFALSE;  
 			break;
 		case ePORTD: 
 			if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
@@ -72,11 +70,11 @@ eStatus_Buttons_t u8fCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx
 				psButton -> u8ID   = INITIAL_ID + u8CounterID;
 				psButton -> ePort = ePORTx;
 				psButton -> ePin  = ePINx;
-				if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 				{
-					u8Result = eTRUE;
-				}else u8Result = eFALSE;
-			}else u8Result = eFALSE;
+					eResult = eTRUE;
+				}else eResult = eFALSE;
+			}else eResult = eFALSE;
 			break;
 		case ePORTE: 
 			if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
@@ -85,40 +83,40 @@ eStatus_Buttons_t u8fCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx
 				psButton -> u8ID   = INITIAL_ID + u8CounterID;
 				psButton -> ePort = ePORTx;
 				psButton -> ePin  = ePINx;
-				if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 				{
-					u8Result = eTRUE;
-				}else u8Result = eFALSE;
-			}else u8Result = eFALSE;  
+					eResult = eTRUE;
+				}else eResult = eFALSE;
+			}else eResult = eFALSE;  
 			break;
-		default:     u8Result = eFALSE;
+		default:     eResult = eFALSE;
 		break;
 	}//End switch	
 	
 	u8CounterID++;
 	
-	return u8Result;
+	return eResult;
 }
 
-eStatus_Buttons_t u8fReadButton    (sButton_t *psButton)
+eStatus_Buttons_t efReadButton    (sButton_t *psButton)
 {
-	eStatus_Buttons_t u8Result = eFALSE;
+	eStatus_Buttons_t eResult = eFALSE;
 	
-	if( eTRUE  == u8fReadPort_GPIO(psButton->ePort,psButton->ePin))
+	if( eTRUE  == efReadPort_GPIO(psButton->ePort,psButton->ePin))
 	{
-		if(eTRUE == u8fReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
 		{
 			vfdelay_Button(TIME_Button_100MS);
-			if(eTRUE == u8fReadPort_GPIO(psButton->ePort,psButton->ePin))
+			if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
 			{
-				u8Result = eTRUE;
-			}else u8Result = eFALSE;
+				eResult = eTRUE;
+			}else eResult = eFALSE;
 			
-		}else u8Result = eFALSE;
+		}else eResult = eFALSE;
 		
-	}else u8Result = eFALSE;
+	}else eResult = eFALSE;
 	
-	return u8Result;
+	return eResult;
 }
 
 void vfdelay_Button(uint32_t u32Time)
@@ -131,9 +129,9 @@ void vfdelay_Button(uint32_t u32Time)
 
 sPITx_t svsPITx;
 
-eStatus_Buttons_t u8fCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, uint8_t ePORTx,uint8_t ePINx)
+eStatus_Buttons_t efCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, uint8_t ePORTx,uint8_t ePINx)
 {
-	eStatus_Buttons_t u8Result = eFALSE;
+	eStatus_Buttons_t eResult = eFALSE;
 	
 	if( eREADY_PIT == u8fInit_PIT(LDVAL_1S, eCHANNEL_0_PIT, &svsPITx) )
 	{
@@ -146,12 +144,12 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, u
 					psButton -> ePort   = ePORTx;
 					psButton -> ePin    = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
+						eResult = eTRUE;
+					}else eResult = eFALSE;
 						
-				}else u8Result = eFALSE;
+				}else eResult = eFALSE;
 				break;
 			case ePORTB: 
 				if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_8 || ePINx == ePIN_9)
@@ -160,11 +158,11 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, u
 					psButton -> ePort = ePORTx;
 					psButton -> ePin  = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
-				}else u8Result = eFALSE;
+						eResult = eTRUE;
+					}else eResult = eFALSE;
+				}else eResult = eFALSE;
 				break;
 			case ePORTC: 
 				if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
@@ -175,11 +173,11 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, u
 					psButton -> ePort = ePORTx;
 					psButton -> ePin  = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
-				}else u8Result = eFALSE;  
+						eResult = eTRUE;
+					}else eResult = eFALSE;
+				}else eResult = eFALSE;  
 				break;
 			case ePORTD: 
 				if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
@@ -189,11 +187,11 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, u
 					psButton -> ePort = ePORTx;
 					psButton -> ePin  = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
-				}else u8Result = eFALSE;
+						eResult = eTRUE;
+					}else eResult = eFALSE;
+				}else eResult = eFALSE;
 				break;
 			case ePORTE: 
 				if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
@@ -203,27 +201,27 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, u
 					psButton -> ePort = ePORTx;
 					psButton -> ePin  = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
-				}else u8Result = eFALSE;  
+						eResult = eTRUE;
+					}else eResult = eFALSE;
+				}else eResult = eFALSE;  
 				break;
-			default:     u8Result = eFALSE;
+			default:     eResult = eFALSE;
 			break;
 		}//End switch	
 	
 	u8CounterID++;
 	
-	}else u8Result = eFALSE;//Else of if PIT state
+	}else eResult = eFALSE;//Else of if PIT state
 	
 	
-	return u8Result;
+	return eResult;
 }
 
-eStatus_Buttons_t u8fCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, uint8_t ePORTx,uint8_t ePINx)
+eStatus_Buttons_t efCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, uint8_t ePORTx,uint8_t ePINx)
 {
-	eStatus_Buttons_t u8Result = eFALSE;
+	eStatus_Buttons_t eResult = eFALSE;
 	
 	if( eREADY_PIT == u8fInit_PIT(LDVAL_1S, eCHANNEL_1_PIT, &svsPITx) )
 	{
@@ -236,12 +234,12 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, u
 					psButton -> ePort   = ePORTx;
 					psButton -> ePin    = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
+						eResult = eTRUE;
+					}else eResult = eFALSE;
 						
-				}else u8Result = eFALSE;
+				}else eResult = eFALSE;
 				break;
 			case ePORTB: 
 				if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_8 || ePINx == ePIN_9)
@@ -250,11 +248,11 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, u
 					psButton -> ePort = ePORTx;
 					psButton -> ePin  = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
-				}else u8Result = eFALSE;
+						eResult = eTRUE;
+					}else eResult = eFALSE;
+				}else eResult = eFALSE;
 				break;
 			case ePORTC: 
 				if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
@@ -265,11 +263,11 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, u
 					psButton -> ePort = ePORTx;
 					psButton -> ePin  = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
-				}else u8Result = eFALSE;  
+						eResult = eTRUE;
+					}else eResult = eFALSE;
+				}else eResult = eFALSE;  
 				break;
 			case ePORTD: 
 				if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
@@ -279,11 +277,11 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, u
 					psButton -> ePort = ePORTx;
 					psButton -> ePin  = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
-				}else u8Result = eFALSE;
+						eResult = eTRUE;
+					}else eResult = eFALSE;
+				}else eResult = eFALSE;
 				break;
 			case ePORTE: 
 				if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
@@ -293,41 +291,41 @@ eStatus_Buttons_t u8fCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, u
 					psButton -> ePort = ePORTx;
 					psButton -> ePin  = ePINx;
 					psButton -> eState  = eSTATE_READ_1;
-					if(eTRUE == u8fInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+					if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
 					{
-						u8Result = eTRUE;
-					}else u8Result = eFALSE;
-				}else u8Result = eFALSE;  
+						eResult = eTRUE;
+					}else eResult = eFALSE;
+				}else eResult = eFALSE;  
 				break;
-			default:     u8Result = eFALSE;
+			default:     eResult = eFALSE;
 			break;
 		}//End switch	
 	
 	u8CounterID++;
 	
-	}else u8Result = eFALSE;//Else of if PIT state
+	}else eResult = eFALSE;//Else of if PIT state
 	
 	
-	return u8Result;
+	return eResult;
 }
 
-eStatus_Buttons_t u8fReadButtonNonBlocking0(sButtonNonBlocking0_t *psButton)
+eStatus_Buttons_t efReadButtonNonBlocking0(sButtonNonBlocking0_t *psButton)
 {
-	eStatus_Buttons_t u8Result = eFALSE;
+	eStatus_Buttons_t eResult = eFALSE;
 	eState_Buttons_t eStateReadButton = psButton -> eState;
 	
 	switch(eStateReadButton)
 	{
 	case eSTATE_READ_1: 
-		if(eTRUE == u8fReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
 		{
-			u8Result = eFALSE;
+			eResult = eFALSE;
 			eStateReadButton = eSTATE_WAIT_2;
 			vfDisable_PIT(&svsPITx);
 			vfEnable_PIT(&svsPITx);
 		}else
 			{
-				u8Result = eFALSE;
+				eResult = eFALSE;
 				eStateReadButton = eSTATE_READ_1;
 				vfDisable_PIT(&svsPITx);
 			}
@@ -335,29 +333,29 @@ eStatus_Buttons_t u8fReadButtonNonBlocking0(sButtonNonBlocking0_t *psButton)
 	case eSTATE_WAIT_2:
 		if( eREADY_PIT == u8fRead_PIT(&svsPITx) )
 		{
-			u8Result = eFALSE;
+			eResult = eFALSE;
 			eStateReadButton = eSTATE_READ_3;
 			vfDisable_PIT(&svsPITx);
 		}else 
 			{
-				u8Result = eFALSE;
+				eResult = eFALSE;
 				eStateReadButton = eSTATE_WAIT_2;
 			}
 		
 		break;
 	case eSTATE_READ_3:
-		if(eTRUE == u8fReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
 		{
-			u8Result = eTRUE;
+			eResult = eTRUE;
 			eStateReadButton = eSTATE_READ_1;
 		}else
 			{
-				u8Result = eFALSE;
+				eResult = eFALSE;
 				eStateReadButton = eSTATE_READ_1;
 			}
 		break;
 	default: 
-		u8Result = eFALSE;
+		eResult = eFALSE;
 		eStateReadButton = eSTATE_READ_1;
 		break;
 	
@@ -365,26 +363,26 @@ eStatus_Buttons_t u8fReadButtonNonBlocking0(sButtonNonBlocking0_t *psButton)
 	
 	psButton -> eState  = eStateReadButton;
 	
-	return u8Result;
+	return eResult;
 }
 
-eStatus_Buttons_t u8fReadButtonNonBlocking1(sButtonNonBlocking1_t *psButton)
+eStatus_Buttons_t efReadButtonNonBlocking1(sButtonNonBlocking1_t *psButton)
 {
-	eStatus_Buttons_t u8Result = eFALSE;
+	eStatus_Buttons_t eResult = eFALSE;
 	eState_Buttons_t eStateReadButton = psButton -> eState;
 	
 	switch(eStateReadButton)
 	{
 	case eSTATE_READ_1: 
-		if(eTRUE == u8fReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
 		{
-			u8Result = eFALSE;
+			eResult = eFALSE;
 			eStateReadButton = eSTATE_WAIT_2;
 			vfDisable_PIT(&svsPITx);
 			vfEnable_PIT(&svsPITx);
 		}else
 			{
-				u8Result = eFALSE;
+				eResult = eFALSE;
 				eStateReadButton = eSTATE_READ_1;
 				vfDisable_PIT(&svsPITx);
 			}
@@ -392,29 +390,29 @@ eStatus_Buttons_t u8fReadButtonNonBlocking1(sButtonNonBlocking1_t *psButton)
 	case eSTATE_WAIT_2:
 		if( eREADY_PIT == u8fRead_PIT(&svsPITx) )
 		{
-			u8Result = eFALSE;
+			eResult = eFALSE;
 			eStateReadButton = eSTATE_READ_3;
 			vfDisable_PIT(&svsPITx);
 		}else 
 			{
-				u8Result = eFALSE;
+				eResult = eFALSE;
 				eStateReadButton = eSTATE_WAIT_2;
 			}
 		
 		break;
 	case eSTATE_READ_3:
-		if(eTRUE == u8fReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
 		{
-			u8Result = eTRUE;
+			eResult = eTRUE;
 			eStateReadButton = eSTATE_READ_1;
 		}else
 			{
-				u8Result = eFALSE;
+				eResult = eFALSE;
 				eStateReadButton = eSTATE_READ_1;
 			}
 		break;
 	default: 
-		u8Result = eFALSE;
+		eResult = eFALSE;
 		eStateReadButton = eSTATE_READ_1;
 		break;
 	
@@ -422,7 +420,7 @@ eStatus_Buttons_t u8fReadButtonNonBlocking1(sButtonNonBlocking1_t *psButton)
 	
 	psButton -> eState  = eStateReadButton;
 	
-	return u8Result;
+	return eResult;
 }
 
 #endif

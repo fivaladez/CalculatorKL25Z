@@ -2,6 +2,7 @@ Sources/2_HIL/LCD_driver.o: ../Sources/2_HIL/LCD_driver.c \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/lib_ewl.prefix \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/common.prefix \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/ewl_c_version.h \
+ ../Sources/2_HIL/LCD_driver.h \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Project_Headers/derivative.h \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Project_Headers/MKL25Z4.h \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/stdint.h \
@@ -12,7 +13,6 @@ Sources/2_HIL/LCD_driver.o: ../Sources/2_HIL/LCD_driver.c \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/limits_api.h \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/ewl_lib_ext1.h \
- ../Sources/2_HIL/LCD_driver.h \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/GPIO_driver.h
 
 C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/lib_ewl.prefix:
@@ -20,6 +20,8 @@ C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/lib_ewl.prefix
 C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/common.prefix:
 
 C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/ewl_c_version.h:
+
+../Sources/2_HIL/LCD_driver.h:
 
 C:/Users/ivan_/workspace/CalculatorKL25Z/Project_Headers/derivative.h:
 
@@ -40,7 +42,5 @@ C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint:
 C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/limits_api.h:
 
 C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/ewl_lib_ext1.h:
-
-../Sources/2_HIL/LCD_driver.h:
 
 C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/GPIO_driver.h:
