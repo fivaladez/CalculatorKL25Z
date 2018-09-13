@@ -18,10 +18,10 @@
 #define TIME_LCD_5US		5
 
 #define INIT_INST_LENGTH	5
-
 #define CLEAR_LCD_CODE		(0x01u)
 
 /*====================================ENUMS======================================*/
+
 typedef ePORTx_GPIO_t ePORTx_LCD_t;
 typedef ePINx_GPIO_t  ePINx_LCD_t;
 typedef enum
@@ -48,15 +48,14 @@ uint8_t u8aInitInstructions_LCD[INIT_INST_LENGTH] = {0x38, 0x38, 0x38, 0x0C, 0x0
 
 /*====================================PROTOTYPES======================================*/
 
+void vfDelay_LCD(uint16_t u16Time);
 void vfRsLow_LCD (void);
 void vfRsHigh_LCD(void);
 void vfEnLow_LCD (void);
 void vfEnHigh_LCD(void);
-void vfInitOuts_LCD(void);
 void vfDataAssign(uint8_t u8aData);
+eStatus_LCD_t efInitOuts_LCD(void);
 void vfSendDataInit_LCD( uint8_t *u8apDataLCD , uint8_t u8LenghtArray);
-void vfDelay_LCD(uint16_t u16Time);
-eStatus_LCD_t eInitOuts_LCD(void);
 
 /*====================================INTERNAL FUNCTIONS======================================*/
 
@@ -64,27 +63,22 @@ void vfDelay_LCD(uint16_t u16Time)
 {
 	while(u16Time--);
 }
-
 void vfRsLow_LCD (void)
 {
 	vfClearPort_GPIO(eRsPort,eRsPin);
 }
-
 void vfRsHigh_LCD(void)
 {
 	vfSetPort_GPIO(eRsPort,eRsPin);
 }
-
 void vfEnLow_LCD (void)
 {
 	vfClearPort_GPIO(eEnPort,eEnPin);
 }
-
 void vfEnHigh_LCD(void)
 {
 	vfSetPort_GPIO(eEnPort,eEnPin);
 }
-
 void vfDataAssign_LCD(uint8_t u8Data)
 {	
 	vfPassValToPort_GPIO(ePort_0, ePin_0, ( (u8Data &= (1 << 0) ) >> 0) );
@@ -96,8 +90,7 @@ void vfDataAssign_LCD(uint8_t u8Data)
 	vfPassValToPort_GPIO(ePort_6, ePin_6, ( (u8Data &= (1 << 6) ) >> 6) );
 	vfPassValToPort_GPIO(ePort_7, ePin_7, ( (u8Data &= (1 << 7) ) >> 7) );
 }
-
-eStatus_LCD_t eInitOuts_LCD(void)
+eStatus_LCD_t efInitOuts_LCD(void)
 {
 	eStatus_LCD_t eResult = eFALSE;
 	
@@ -227,12 +220,11 @@ eStatus_LCD_t efSendData_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray , ePO
 	
 	return eResult;
 }
-
 eStatus_LCD_t efInit_LCD( void )
 {
 	eStatus_LCD_t eResult = eFALSE;
 	
-	if(eTRUE == eInitOuts_LCD())
+	if(eTRUE == efInitOuts_LCD())
 	{
 		vfDelay_LCD(TIME_LCD_10MS);
 			
@@ -244,7 +236,6 @@ eStatus_LCD_t efInit_LCD( void )
 	
 	return eResult;
 }
-
 void vfClear_LCD(void)
 {
 	vfRsLow_LCD ();

@@ -10,7 +10,6 @@
 
 #include "derivative.h"
 
-/*RED LED -> PTB 18, GREEN LED -> PTB 19, BLUE LED -> PTD 1*/
 #define PORT_PCR_MUX_GPIO 1u
 
 #define RED_LED   PTB18

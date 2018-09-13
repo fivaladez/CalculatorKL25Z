@@ -112,7 +112,7 @@ Discarded input sections
                 0x00000000       0x20 ./Sources/2_HIL/LCD_driver.o
  .text.vfDataAssign_LCD
                 0x00000000      0x180 ./Sources/2_HIL/LCD_driver.o
- .text.eInitOuts_LCD
+ .text.efInitOuts_LCD
                 0x00000000      0x160 ./Sources/2_HIL/LCD_driver.o
  .text.vfSendDataInit_LCD
                 0x00000000       0x78 ./Sources/2_HIL/LCD_driver.o
@@ -122,11 +122,11 @@ Discarded input sections
                 0x00000000       0x4c ./Sources/2_HIL/LCD_driver.o
  .text.vfClear_LCD
                 0x00000000       0x34 ./Sources/2_HIL/LCD_driver.o
- .bss.eState.4799
+ .bss.eState.4797
                 0x00000000        0x1 ./Sources/2_HIL/LCD_driver.o
- .bss.eResult.4798
+ .bss.eResult.4796
                 0x00000000        0x1 ./Sources/2_HIL/LCD_driver.o
- .bss.u8Index.4800
+ .bss.u8Index.4798
                 0x00000000        0x1 ./Sources/2_HIL/LCD_driver.o
  .debug_info    0x00000000      0x62a ./Sources/2_HIL/LCD_driver.o
  .debug_abbrev  0x00000000       0xda ./Sources/2_HIL/LCD_driver.o
@@ -136,7 +136,7 @@ Discarded input sections
  .debug_macinfo
                 0x00000000    0x26613 ./Sources/2_HIL/LCD_driver.o
  .debug_line    0x00000000      0x352 ./Sources/2_HIL/LCD_driver.o
- .debug_str     0x00000000      0x5c8 ./Sources/2_HIL/LCD_driver.o
+ .debug_str     0x00000000      0x5c9 ./Sources/2_HIL/LCD_driver.o
  .comment       0x00000000       0x7a ./Sources/2_HIL/LCD_driver.o
  .ARM.attributes
                 0x00000000       0x31 ./Sources/2_HIL/LCD_driver.o

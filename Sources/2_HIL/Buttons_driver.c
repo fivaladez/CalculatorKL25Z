@@ -97,7 +97,6 @@ eStatus_Buttons_t efCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,
 	
 	return eResult;
 }
-
 eStatus_Buttons_t efReadButton    (sButton_t *psButton)
 {
 	eStatus_Buttons_t eResult = eFALSE;
@@ -118,12 +117,10 @@ eStatus_Buttons_t efReadButton    (sButton_t *psButton)
 	
 	return eResult;
 }
-
 void vfdelay_Button(uint32_t u32Time)
 {
 	while(u32Time--);
 }
-
 
 #ifndef NONBLOCKING
 
@@ -215,10 +212,8 @@ eStatus_Buttons_t efCreateButtonNonBlocking0(sButtonNonBlocking0_t *psButton, ui
 	
 	}else eResult = eFALSE;//Else of if PIT state
 	
-	
 	return eResult;
 }
-
 eStatus_Buttons_t efCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, uint8_t ePORTx,uint8_t ePINx)
 {
 	eStatus_Buttons_t eResult = eFALSE;
@@ -305,10 +300,8 @@ eStatus_Buttons_t efCreateButtonNonBlocking1(sButtonNonBlocking1_t *psButton, ui
 	
 	}else eResult = eFALSE;//Else of if PIT state
 	
-	
 	return eResult;
 }
-
 eStatus_Buttons_t efReadButtonNonBlocking0(sButtonNonBlocking0_t *psButton)
 {
 	eStatus_Buttons_t eResult = eFALSE;
@@ -365,7 +358,6 @@ eStatus_Buttons_t efReadButtonNonBlocking0(sButtonNonBlocking0_t *psButton)
 	
 	return eResult;
 }
-
 eStatus_Buttons_t efReadButtonNonBlocking1(sButtonNonBlocking1_t *psButton)
 {
 	eStatus_Buttons_t eResult = eFALSE;
@@ -422,5 +414,4 @@ eStatus_Buttons_t efReadButtonNonBlocking1(sButtonNonBlocking1_t *psButton)
 	
 	return eResult;
 }
-
 #endif
