@@ -68,7 +68,7 @@ eStatus_GPIO_t efInit_GPIO  (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx,eInOut_GPIO
 			break;
 		case ePORTD:
 			if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4
-			|| ePINx == ePIN_5 || ePINx == ePIN_6 || ePINx == ePIN_7)
+			|| ePINx == ePIN_5 || ePINx == ePIN_6 || ePINx == ePIN_7 || ePINx == ePIN_13)
 			{    
 				SIM_SCGC5 |= SIM_SCGC5_PORTD_MASK;				     
 				PORTD_PCR(ePINx) = PORT_PCR_MUX(PORT_PCR_MUX_GPIO); 

@@ -36,7 +36,7 @@ ePORTx_LCD_t eRsPort = ePORTB; 	ePINx_LCD_t  eRsPin  = ePIN_0;
 ePORTx_LCD_t eEnPort = ePORTB; 	ePINx_LCD_t  eEnPin  = ePIN_1;
 
 ePORTx_LCD_t ePort_0 = ePORTD; 	ePINx_LCD_t  ePin_0  = ePIN_0;
-ePORTx_LCD_t ePort_1 = ePORTD; 	ePINx_LCD_t  ePin_1  = ePIN_1;
+ePORTx_LCD_t ePort_1 = ePORTD; 	ePINx_LCD_t  ePin_1  = ePIN_1;/*===PortD and Pin1 interfere with blue led of MCU===*/
 ePORTx_LCD_t ePort_2 = ePORTD; 	ePINx_LCD_t  ePin_2  = ePIN_2;
 ePORTx_LCD_t ePort_3 = ePORTD; 	ePINx_LCD_t  ePin_3  = ePIN_3;
 ePORTx_LCD_t ePort_4 = ePORTD; 	ePINx_LCD_t  ePin_4  = ePIN_4;
