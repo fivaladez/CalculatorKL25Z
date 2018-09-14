@@ -819,12 +819,17 @@ OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
  .debug_macinfo
                 0x000a086c    0x26515 ./Sources/3_HAL/GPIO_driver.o
 
+<<<<<<< HEAD
 .debug_line     0x00000000     0x2162
+=======
+.debug_line     0x00000000     0x2146
+>>>>>>> dd4ed8be1701c0f6a656bbc1fcc6aa279264736c
  .debug_line    0x00000000      0x216 ./Project_Settings/Startup_Code/kinetis_sysinit.o
  .debug_line    0x00000216      0x299 ./Project_Settings/Startup_Code/__arm_start.o
  .debug_line    0x000004af      0x265 ./Project_Settings/Startup_Code/__arm_end.o
  .debug_line    0x00000714      0x29e ./Sources/1_App/main.o
  .debug_line    0x000009b2      0x2b3 ./Sources/2_HIL/Leds_driver.o
+<<<<<<< HEAD
  .debug_line    0x00000c65      0x2d8 ./Sources/2_HIL/Buttons_driver.o
  .debug_line    0x00000f3d      0x349 ./Sources/3_HAL/GPIO_driver.o
  .debug_line    0x00001286       0x8d C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
@@ -843,6 +848,26 @@ OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
  .debug_line    0x000020a5       0xbd C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
 
 .debug_str      0x00000000     0x1055
+=======
+ .debug_line    0x00000c65      0x2bc ./Sources/2_HIL/Buttons_driver.o
+ .debug_line    0x00000f21      0x349 ./Sources/3_HAL/GPIO_driver.o
+ .debug_line    0x0000126a       0x8d C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
+ .debug_line    0x000012f7       0x90 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
+ .debug_line    0x00001387       0xf6 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
+ .debug_line    0x0000147d      0x2c3 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
+ .debug_line    0x00001740      0x2be C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(scanformat_.o)
+ .debug_line    0x000019fe      0x1be C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
+ .debug_line    0x00001bbc      0x11e C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__strtoul.o)
+ .debug_line    0x00001cda       0x7d C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strchr.o)
+ .debug_line    0x00001d57       0x8b C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memcpy.o)
+ .debug_line    0x00001de2       0x85 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strlen.o)
+ .debug_line    0x00001e67       0x9f C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memchr.o)
+ .debug_line    0x00001f06       0x6c C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
+ .debug_line    0x00001f72      0x117 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+ .debug_line    0x00002089       0xbd C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
+
+.debug_str      0x00000000     0x1034
+>>>>>>> dd4ed8be1701c0f6a656bbc1fcc6aa279264736c
  .debug_str     0x00000000      0x297 ./Project_Settings/Startup_Code/kinetis_sysinit.o
                                 0x2be (size before relaxing)
  .debug_str     0x00000297       0x85 ./Project_Settings/Startup_Code/__arm_start.o
