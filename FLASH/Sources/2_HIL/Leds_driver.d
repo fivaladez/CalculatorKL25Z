@@ -2,7 +2,7 @@ Sources/2_HIL/Leds_driver.o: ../Sources/2_HIL/Leds_driver.c \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/lib_ewl.prefix \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/common.prefix \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/ewl_c_version.h \
- ../Sources/2_HIL/Leds_driver.h \
+ C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/Leds_driver.h \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Project_Headers/derivative.h \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Project_Headers/MKL25Z4.h \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/stdint.h \
@@ -21,7 +21,7 @@ C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/common.prefix:
 
 C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/ewl_c_version.h:
 
-../Sources/2_HIL/Leds_driver.h:
+C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/Leds_driver.h:
 
 C:/Users/ivan_/workspace/CalculatorKL25Z/Project_Headers/derivative.h:
 

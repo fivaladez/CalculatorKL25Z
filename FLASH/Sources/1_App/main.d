@@ -14,7 +14,8 @@ Sources/1_App/main.o: ../Sources/1_App/main.c \
  C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/ewl_lib_ext1.h \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/2_HIL/Buttons_driver.h \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/GPIO_driver.h \
- C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/2_HIL/Leds_driver.h
+ C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/Leds_driver.h \
+ C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/GPIO_driver.h
 
 C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/lib_ewl.prefix:
 
@@ -46,4 +47,6 @@ C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/2_HIL/Buttons_driver.h:
 
 C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/GPIO_driver.h:
 
-C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/2_HIL/Leds_driver.h:
+C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/Leds_driver.h:
+
+C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/GPIO_driver.h:

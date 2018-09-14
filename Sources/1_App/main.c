@@ -30,7 +30,7 @@ int main(void)
 	
 	for(;;) {	   
 	   	counter++;
-	   	if(eTRUE == efReadButton(&sButton1))
+	   	if(eTRUE == efReadButtonNonBlocking(&sButton1))
 	   	{
 	   		vfTurnOff_LED(eRED);
 	   		vfTurnOn_LED(eGREEN);
@@ -39,6 +39,7 @@ int main(void)
 	   		{
 	   			vfTurnOff_LED(eGREEN);
 	   			vfTurnOn_LED(eRED);
+	   			//sButton1.eState = eINCOMPLETE;/**/
 	   			//vfdelay(TIME_1S);
 	   		}
 	   	

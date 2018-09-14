@@ -13,8 +13,6 @@
 #define TIME_Button_250MS		450000
 #define TIME_Button_100MS		180000
 
-#define DEBOUNCING (250000u)/*You must adjust the count inversely proportional to the length of the code*/
-
 static uint8_t u8CounterID = 0;
 
 void vfdelay_Button(uint32_t u32Time);
@@ -29,11 +27,13 @@ eStatus_Buttons_t efCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,
 		case ePORTA:
 			if(ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_4 || ePINx == ePIN_5 || ePINx == ePIN_12 || ePINx == ePIN_13)
 			{
-				psButton -> u8ID     = INITIAL_ID + u8CounterID;
-				psButton -> ePort   = ePORTx;
-				psButton -> ePin    = ePINx;
-				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO( ePORTx, ePINx, eINPUT ) )
 				{
+					psButton -> u8ID    	= INITIAL_ID + u8CounterID;
+					psButton -> ePort   	= ePORTx;
+					psButton -> ePin    	= ePINx;
+					psButton -> u16Debounce = DEBOUNCING;
+					
 					eResult = eTRUE;
 				}else eResult = eFALSE;
 					
@@ -42,11 +42,13 @@ eStatus_Buttons_t efCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,
 		case ePORTB: 
 			if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_8 || ePINx == ePIN_9)
 			{
-				psButton -> u8ID   = INITIAL_ID + u8CounterID;
-				psButton -> ePort = ePORTx;
-				psButton -> ePin  = ePINx;
-				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO( ePORTx, ePINx, eINPUT ) )
 				{
+					psButton -> u8ID    	= INITIAL_ID + u8CounterID;
+					psButton -> ePort   	= ePORTx;
+					psButton -> ePin    	= ePINx;
+					psButton -> u16Debounce = DEBOUNCING;
+					
 					eResult = eTRUE;
 				}else eResult = eFALSE;
 			}else eResult = eFALSE;
@@ -56,11 +58,13 @@ eStatus_Buttons_t efCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,
 			|| ePINx == ePIN_6 || ePINx == ePIN_7 || ePINx == ePIN_8 || ePINx == ePIN_9 || ePINx == ePIN_10 || ePINx == ePIN_11 
 			|| ePINx == ePIN_12 || ePINx == ePIN_13 || ePINx == ePIN_16 || ePIN_17)
 			{
-				psButton -> u8ID   = INITIAL_ID + u8CounterID;
-				psButton -> ePort = ePORTx;
-				psButton -> ePin  = ePINx;
-				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO( ePORTx, ePINx, eINPUT ) )
 				{
+					psButton -> u8ID    	= INITIAL_ID + u8CounterID;
+					psButton -> ePort   	= ePORTx;
+					psButton -> ePin    	= ePINx;
+					psButton -> u16Debounce = DEBOUNCING;
+					
 					eResult = eTRUE;
 				}else eResult = eFALSE;
 			}else eResult = eFALSE;  
@@ -69,11 +73,13 @@ eStatus_Buttons_t efCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,
 			if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
 			|| ePINx == ePIN_6 || ePINx == ePIN_7)
 			{
-				psButton -> u8ID   = INITIAL_ID + u8CounterID;
-				psButton -> ePort = ePORTx;
-				psButton -> ePin  = ePINx;
-				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO( ePORTx, ePINx, eINPUT ) )
 				{
+					psButton -> u8ID    	= INITIAL_ID + u8CounterID;
+					psButton -> ePort   	= ePORTx;
+					psButton -> ePin    	= ePINx;
+					psButton -> u16Debounce = DEBOUNCING;
+					
 					eResult = eTRUE;
 				}else eResult = eFALSE;
 			}else eResult = eFALSE;
@@ -82,11 +88,13 @@ eStatus_Buttons_t efCreateButton  (sButton_t *psButton, ePORTx_Buttons_t ePORTx,
 			if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5 
 			|| ePINx == ePIN_20 || ePINx == ePIN_21 || ePINx == ePIN_22 || ePINx == ePIN_23 || ePINx == ePIN_29 || ePINx == ePIN_30)
 			{
-				psButton -> u8ID   = INITIAL_ID + u8CounterID;
-				psButton -> ePort = ePORTx;
-				psButton -> ePin  = ePINx;
-				if(eTRUE == efInit_GPIO(psButton -> ePort, psButton -> ePin, eINPUT))
+				if(eTRUE == efInit_GPIO( ePORTx, ePINx, eINPUT ) )
 				{
+					psButton -> u8ID    	= INITIAL_ID + u8CounterID;
+					psButton -> ePort   	= ePORTx;
+					psButton -> ePin    	= ePINx;
+					psButton -> u16Debounce = DEBOUNCING;
+					
 					eResult = eTRUE;
 				}else eResult = eFALSE;
 			}else eResult = eFALSE;  
@@ -126,28 +134,34 @@ void vfdelay_Button(uint32_t u32Time)
 eStatus_Buttons_t efReadButtonNonBlocking(sButton_t *psButton)
 {
 	eStatus_Buttons_t eResult = eFALSE;
-	static uint16_t u16Delay = DEBOUNCING;
 	
-	if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+	if( eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin) )
 	{
-		if( 0 < u16Delay )
+		if( eCOMPLETE != psButton->eState )
 		{
-			eResult = eFALSE;
-			u16Delay--;
-			
+			if( 0 < (psButton -> u16Debounce) )
+			{
+				eResult = eFALSE;
+				(psButton -> u16Debounce)--;
+				psButton->eState = eINCOMPLETE;/*eINCOMPLETE means that the function continues*/
+				
+			}else 
+				{
+					(psButton -> u16Debounce) = DEBOUNCING;
+					eResult = eTRUE;
+					psButton->eState = eCOMPLETE;	
+				}
 		}else 
 			{
-				u16Delay = DEBOUNCING;
-				
-				if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
-				{
-					eResult = eTRUE;
-					
-				}else eResult = eFALSE;
-			
+				psButton->eState = eCOMPLETE;
+				eResult = eTRUE;
 			}
 		
-	}else eResult = eFALSE;
+	}else 
+		{
+			eResult = eFALSE;
+			psButton->eState = eINCOMPLETE;
+		}
 	
 	return eResult;
 }

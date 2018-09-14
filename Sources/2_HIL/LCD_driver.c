@@ -246,7 +246,7 @@ void vfClear_LCD(void)
 	vfRsLow_LCD ();
 	vfEnHigh_LCD();
 			
-	vfDelay_LCD(TIME_LCD_5MS);/*Time to let execute LCD clear*/
+	vfDelay_LCD( TIME_LCD_5MS );/*Time to let execute LCD clear*/
 			
 	vfRsLow_LCD ();
 	vfEnLow_LCD ();	

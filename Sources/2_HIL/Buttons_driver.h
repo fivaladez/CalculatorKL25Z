@@ -13,16 +13,26 @@
 
 #define NONBLOCKING	(0)
 
+#define DEBOUNCING (25000u)/*You must adjust the count inversely proportional to the length of the code*/
+
 typedef ePINx_GPIO_t   ePINx_Buttons_t;
 typedef ePORTx_GPIO_t  ePORTx_Buttons_t;
 typedef eStatus_GPIO_t eStatus_Buttons_t;
 typedef eInOut_GPIO_t  eInOut_Buttons_t;
+typedef enum 
+{
+	eCOMPLETE,
+	eINCOMPLETE
+	
+}eState_Buttons_t;
 
 typedef struct 
 {
 	uint8_t 		 u8ID;
 	ePORTx_Buttons_t ePort;
 	ePINx_Buttons_t  ePin;
+	eState_Buttons_t eState;
+	uint16_t 		 u16Debounce;
 	
 }sButton_t;
 
