@@ -800,7 +800,7 @@ OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
  .debug_aranges
                 0x000003b0       0x30 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
 
-.debug_macinfo  0x00000000    0xc6d9a
+.debug_macinfo  0x00000000    0xc6d96
  .debug_macinfo
                 0x00000000    0x264f0 ./Project_Settings/Startup_Code/kinetis_sysinit.o
  .debug_macinfo
@@ -808,13 +808,13 @@ OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
  .debug_macinfo
                 0x0002a35d     0x3456 ./Project_Settings/Startup_Code/__arm_end.o
  .debug_macinfo
-                0x0002d7b3    0x265c2 ./Sources/1_App/main.o
+                0x0002d7b3    0x265be ./Sources/1_App/main.o
  .debug_macinfo
-                0x00053d75    0x26533 ./Sources/2_HIL/Leds_driver.o
+                0x00053d71    0x26533 ./Sources/2_HIL/Leds_driver.o
  .debug_macinfo
-                0x0007a2a8    0x265dd ./Sources/2_HIL/Buttons_driver.o
+                0x0007a2a4    0x265dd ./Sources/2_HIL/Buttons_driver.o
  .debug_macinfo
-                0x000a0885    0x26515 ./Sources/3_HAL/GPIO_driver.o
+                0x000a0881    0x26515 ./Sources/3_HAL/GPIO_driver.o
 
 .debug_line     0x00000000     0x2185
  .debug_line    0x00000000      0x216 ./Project_Settings/Startup_Code/kinetis_sysinit.o

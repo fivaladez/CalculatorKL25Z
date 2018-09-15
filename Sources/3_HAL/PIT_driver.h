@@ -43,5 +43,4 @@ uint8_t u8fRead_PIT(sPITx_t *sPitx);
 void vfEnable_PIT (sPITx_t *sPitx);
 void vfDisable_PIT(sPITx_t *sPitx);
 
-
 #endif /* PIT_DRIVER_H_ */

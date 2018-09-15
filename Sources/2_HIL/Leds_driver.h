@@ -1,7 +1,7 @@
 /*
  * Leds_driver.h
  *
- *  Created on: Sep 12, 2018
+ *  Created on: Sep 14, 2018
  *      Author: ivan_
  */
 
@@ -27,5 +27,5 @@ void vfTurnOn_LED  (eColors_LED_t eColor);
 void vfTurnOff_LED(eColors_LED_t eColor);
 void vfToggle_LED (eColors_LED_t eColor);
 eStates_LED_t efRead_LED   (eColors_LED_t eColor);
- 
+
 #endif /* LEDS_DRIVER_H_ */

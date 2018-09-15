@@ -7,7 +7,6 @@
 
 #include "PIT_driver.h"
 
-
 uint8_t u8fInit_PIT(uint32_t u32Time, uint8_t u8PitChannel, sPITx_t *sPitx)
 {
 	uint8_t u8Return = eNOTREADY_PIT;
@@ -99,4 +98,3 @@ void vfDisable_PIT(sPITx_t *sPitx)
 			PIT_TCTRL0 &= ~PIT_TCTRL_TEN_MASK;	
 		}
 }
-
