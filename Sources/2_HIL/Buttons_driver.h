@@ -13,8 +13,6 @@
 
 #define NONBLOCKING	(0)
 
-#define DEBOUNCING (25000u)/*You must adjust the count inversely proportional to the length of the code*/
-
 typedef ePINx_GPIO_t   ePINx_Buttons_t;
 typedef ePORTx_GPIO_t  ePORTx_Buttons_t;
 typedef eStatus_GPIO_t eStatus_Buttons_t;

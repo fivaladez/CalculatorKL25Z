@@ -12,10 +12,6 @@
 
 #define PORT_PCR_MUX_GPIO 1u
 
-#define RED_LED   PTB18
-#define GREEN_LED PTB19
-#define BLUE_LED  PTD3
-
 typedef enum 
 {
 	ePORTA,
@@ -56,7 +52,7 @@ eStatus_GPIO_t efInit_GPIO		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx,eInOut_GPIO
 void vfSetPort_GPIO        		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
 void vfClearPort_GPIO      		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
 void vfTogglePort_GPIO     		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
-eStatus_GPIO_t efReadPort_GPIO (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
+eStatus_GPIO_t efReadPort_GPIO  (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
 void vfPassValToPort_GPIO       (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data);
 
 #endif /* GPIO_DRIVER_H_ */

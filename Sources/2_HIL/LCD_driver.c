@@ -24,11 +24,6 @@
 
 typedef ePORTx_GPIO_t ePORTx_LCD_t;
 typedef ePINx_GPIO_t  ePINx_LCD_t;
-typedef enum
-{
-	eSTATE_INSTRUCTION_LCD,
-	eSTATE_DATA_LCD
-}eStates_LCD_t;
 
 /*====================================Global variables======================================*/
 
@@ -138,7 +133,7 @@ void vfSendDataInit_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray )
 		vfRsLow_LCD ();
 		vfEnHigh_LCD();
 		
-		vfDelay_LCD(TIME_LCD_5MS);/*Time to let execute LCD execute commands*/
+		vfDelay_LCD(TIME_LCD_40US);/*Time to let execute LCD execute commands*/
 		
 		vfRsLow_LCD ();
 		vfEnLow_LCD ();	
@@ -147,12 +142,50 @@ void vfSendDataInit_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray )
 
 /*====================================GLOBAL FUNCTIONS======================================*/
 
-eStatus_LCD_t efSendData_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray , ePOSSITIONS_LCD_t ePossition)
+eStatus_LCD_t efInit_LCD( void )
 {
-	static eStatus_LCD_t eResult = eFALSE;
-	static eStates_LCD_t eState  = eSTATE_INSTRUCTION_LCD;
-	static uint8_t u8Index  = 0;
+	eStatus_LCD_t eResult = eFALSE;
 	
+	if(eTRUE == efInitOuts_LCD())
+	{
+		vfDelay_LCD(TIME_LCD_10MS);/*Time to let react LCD*/
+			
+		vfSendDataInit_LCD( &u8aInitInstructions_LCD[0] , sizeof(u8aInitInstructions_LCD));
+		
+		vfClear_LCD();
+			
+		eResult = eTRUE;
+		
+	}else eResult = eFALSE;
+	
+	return eResult;
+}
+void vfInit_Msg_LCD( sMessage_LCD_t *sMessage )
+{
+	sMessage -> u8DataSize = sizeof(sMessage -> u8Data);
+	
+	uint8_t u8IndexArray = 0;
+	for(u8IndexArray = 0; u8IndexArray < (sMessage -> u8DataSize); u8IndexArray++)
+	{
+		sMessage -> u8Data[u8IndexArray] = 0;/*Clear the array*/
+	}	
+	
+	sMessage -> ePossition = eFILA_01_0;	
+	sMessage -> eState = eSTATE_INSTRUCTION_LCD;
+	sMessage -> eStatus = eFALSE;
+	sMessage -> u8Index = 0;
+	
+}
+eStatus_LCD_t efSendData_LCD( sMessage_LCD_t *sMessage )
+{
+	
+	eStatus_LCD_t eResult 		= (sMessage -> eStatus);
+	eStates_LCD_t eState  		= (sMessage -> eState);
+	uint8_t u8Index      		= (sMessage -> u8Index);
+	ePossition_LCD_t ePossition = (sMessage -> ePossition);
+	(sMessage -> u8DataSize)    = sizeof(sMessage -> u8Data);
+	
+	uint8_t u8LengthArray 		= (sMessage -> u8DataSize);
 	
 	switch(eState)
 	{
@@ -160,12 +193,12 @@ eStatus_LCD_t efSendData_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray , ePO
 		if( ((ePossition >= eFILA_01_0) && ((ePossition + u8LengthArray) <= eFILA_01_15) ) || /*Corroboarate the value of possition is in range*/
 			((ePossition >= eFILA_02_0) && ((ePossition + u8LengthArray) <= eFILA_02_15) ) )
 		{
-			/*These instructions set are for positioning the cursor in LCD -> Assign Data, RS = 0 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/
-							
+			
+			/*These instructions set are for positioning the cursor in LCD -> Assign Data, RS = 0 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/			
 			vfRsLow_LCD ();
 			vfEnLow_LCD ();
 			
-			vfDataAssign_LCD( eFILA_01_0 );
+			vfDataAssign_LCD( ePossition );
 								
 			vfRsLow_LCD ();
 			vfEnHigh_LCD();
@@ -187,14 +220,14 @@ eStatus_LCD_t efSendData_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray , ePO
 	case eSTATE_DATA_LCD:
 		if(u8Index < u8LengthArray)
 		{
-			/*These instruction sets are for write in LCD -> Assign Data, RS = 1 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/
+			/*These instruction sets are for write in LCD -> Assign Data, RS = 1 and EN = 1, wait 40 uSeconds, RS = 0 and EN = 0*/
 			vfRsLow_LCD ();
 			vfEnLow_LCD ();
 								
-			vfDataAssign_LCD( u8apDataLCD[u8Index] );
+			vfDataAssign_LCD( sMessage -> u8Data[u8Index] );
 							
 			vfRsHigh_LCD ();
-			vfEnHigh_LCD();
+			vfEnHigh_LCD ();
 							
 			vfDelay_LCD(TIME_LCD_40US);
 							
@@ -218,21 +251,10 @@ eStatus_LCD_t efSendData_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray , ePO
 		break;
 	}//End of switch
 	
-	return eResult;
-}
-eStatus_LCD_t efInit_LCD( void )
-{
-	eStatus_LCD_t eResult = eFALSE;
-	
-	if(eTRUE == efInitOuts_LCD())
-	{
-		vfDelay_LCD(TIME_LCD_10MS);
-			
-		vfSendDataInit_LCD( &u8aInitInstructions_LCD[0] , sizeof(u8aInitInstructions_LCD));
-			
-		eResult = eTRUE;
-		
-	}else eResult = eFALSE;
+	(sMessage -> eStatus)    = eResult;
+	(sMessage -> eState)     = eState;
+	(sMessage -> u8Index)    = u8Index;
+	(sMessage -> ePossition) = ePossition;
 	
 	return eResult;
 }

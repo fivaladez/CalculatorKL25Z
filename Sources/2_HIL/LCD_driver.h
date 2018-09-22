@@ -23,13 +23,33 @@ typedef enum
 	eFILA_02_8  = 0xC8u,	eFILA_02_9  = 0xC9u,	eFILA_02_10 = 0xCAu,	eFILA_02_11 = 0xCBu,
 	eFILA_02_12 = 0xCCu,	eFILA_02_13 = 0xCDu,	eFILA_02_14 = 0xCEu,	eFILA_02_15 = 0xCFu
 	
-}ePOSSITIONS_LCD_t;
+}ePossition_LCD_t;
+
+typedef enum
+{
+	eSTATE_INSTRUCTION_LCD,
+	eSTATE_DATA_LCD
+}eStates_LCD_t;
+
+typedef unsigned char u8DataArray_LCD_t;
+typedef uint8_t u8DataLength_LCD_t;
 
 typedef eStatus_GPIO_t eStatus_LCD_t;
-typedef uint8_t u8aData_LCD_t[];
+
+typedef struct 
+{
+	u8DataArray_LCD_t u8Data[16];
+	u8DataLength_LCD_t u8DataSize;
+	ePossition_LCD_t ePossition;
+	eStates_LCD_t eState;
+	eStatus_LCD_t eStatus;
+	uint8_t u8Index;
+	
+}sMessage_LCD_t;
 
 eStatus_LCD_t efInit_LCD( void );
-eStatus_LCD_t efSendData_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray , ePOSSITIONS_LCD_t ePossition);
+void vfInit_Msg_LCD( sMessage_LCD_t *sMessage );
+eStatus_LCD_t efSendData_LCD( sMessage_LCD_t *sMessage );
 void vfClear_LCD(void);
 
 #endif /* LCD_DRIVER_H_ */
