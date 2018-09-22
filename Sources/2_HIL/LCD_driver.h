@@ -25,31 +25,14 @@ typedef enum
 	
 }ePossition_LCD_t;
 
-typedef enum
-{
-	eSTATE_INSTRUCTION_LCD,
-	eSTATE_DATA_LCD
-}eStates_LCD_t;
-
-typedef unsigned char u8DataArray_LCD_t;
-typedef uint8_t u8DataLength_LCD_t;
+typedef uint8_t u8Data_LCD_t;
 
 typedef eStatus_GPIO_t eStatus_LCD_t;
 
-typedef struct 
-{
-	u8DataArray_LCD_t u8Data[16];
-	u8DataLength_LCD_t u8DataSize;
-	ePossition_LCD_t ePossition;
-	eStates_LCD_t eState;
-	eStatus_LCD_t eStatus;
-	uint8_t u8Index;
-	
-}sMessage_LCD_t;
-
 eStatus_LCD_t efInit_LCD( void );
-void vfInit_Msg_LCD( sMessage_LCD_t *sMessage );
-eStatus_LCD_t efSendData_LCD( sMessage_LCD_t *sMessage );
+eStatus_LCD_t efPossitionData_LCD( ePossition_LCD_t ePossition );
+void vfSendData_LCD( u8Data_LCD_t u8Data );
 void vfClear_LCD(void);
+
 
 #endif /* LCD_DRIVER_H_ */

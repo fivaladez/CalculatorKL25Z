@@ -31,7 +31,7 @@ ePORTx_LCD_t eRsPort = ePORTB; 	ePINx_LCD_t  eRsPin  = ePIN_0;
 ePORTx_LCD_t eEnPort = ePORTB; 	ePINx_LCD_t  eEnPin  = ePIN_1;
 
 ePORTx_LCD_t ePort_0 = ePORTD; 	ePINx_LCD_t  ePin_0  = ePIN_0;
-ePORTx_LCD_t ePort_1 = ePORTD; 	ePINx_LCD_t  ePin_1  = ePIN_1;/*===PortD and Pin1 interfere with blue led of MCU===*/
+ePORTx_LCD_t ePort_1 = ePORTC; 	ePINx_LCD_t  ePin_1  = ePIN_0;/*===PortD and Pin1 interfere with blue led of MCU===*/
 ePORTx_LCD_t ePort_2 = ePORTD; 	ePINx_LCD_t  ePin_2  = ePIN_2;
 ePORTx_LCD_t ePort_3 = ePORTD; 	ePINx_LCD_t  ePin_3  = ePIN_3;
 ePORTx_LCD_t ePort_4 = ePORTD; 	ePINx_LCD_t  ePin_4  = ePIN_4;
@@ -48,7 +48,7 @@ void vfRsLow_LCD (void);
 void vfRsHigh_LCD(void);
 void vfEnLow_LCD (void);
 void vfEnHigh_LCD(void);
-void vfDataAssign(uint8_t u8aData);
+void vfDataAssign(u8Data_LCD_t u8aData);
 eStatus_LCD_t efInitOuts_LCD(void);
 void vfSendDataInit_LCD( uint8_t *u8apDataLCD , uint8_t u8LenghtArray);
 
@@ -60,30 +60,30 @@ void vfDelay_LCD(uint16_t u16Time)
 }
 void vfRsLow_LCD (void)
 {
-	vfClearPort_GPIO(eRsPort,eRsPin);
+	vfClearPin_GPIO(eRsPort,eRsPin);
 }
 void vfRsHigh_LCD(void)
 {
-	vfSetPort_GPIO(eRsPort,eRsPin);
+	vfSetPin_GPIO(eRsPort,eRsPin);
 }
 void vfEnLow_LCD (void)
 {
-	vfClearPort_GPIO(eEnPort,eEnPin);
+	vfClearPin_GPIO(eEnPort,eEnPin);
 }
 void vfEnHigh_LCD(void)
 {
-	vfSetPort_GPIO(eEnPort,eEnPin);
+	vfSetPin_GPIO(eEnPort,eEnPin);
 }
-void vfDataAssign_LCD(uint8_t u8Data)
+void vfDataAssign_LCD(u8Data_LCD_t u8Data)
 {	
-	vfPassValToPort_GPIO(ePort_0, ePin_0, ( (u8Data &= (1 << 0) ) >> 0) );
-	vfPassValToPort_GPIO(ePort_1, ePin_1, ( (u8Data &= (1 << 1) ) >> 1) );
-	vfPassValToPort_GPIO(ePort_2, ePin_2, ( (u8Data &= (1 << 2) ) >> 2) );
-	vfPassValToPort_GPIO(ePort_3, ePin_3, ( (u8Data &= (1 << 3) ) >> 3) );
-	vfPassValToPort_GPIO(ePort_4, ePin_4, ( (u8Data &= (1 << 4) ) >> 4) );
-	vfPassValToPort_GPIO(ePort_5, ePin_5, ( (u8Data &= (1 << 5) ) >> 5) );
-	vfPassValToPort_GPIO(ePort_6, ePin_6, ( (u8Data &= (1 << 6) ) >> 6) );
-	vfPassValToPort_GPIO(ePort_7, ePin_7, ( (u8Data &= (1 << 7) ) >> 7) );
+	vfWritePin_GPIO(ePort_0, ePin_0, ( (u8Data &= (1 << 0) ) >> 0) );
+	vfWritePin_GPIO(ePort_1, ePin_1, ( (u8Data &= (1 << 1) ) >> 1) );
+	vfWritePin_GPIO(ePort_2, ePin_2, ( (u8Data &= (1 << 2) ) >> 2) );
+	vfWritePin_GPIO(ePort_3, ePin_3, ( (u8Data &= (1 << 3) ) >> 3) );
+	vfWritePin_GPIO(ePort_4, ePin_4, ( (u8Data &= (1 << 4) ) >> 4) );
+	vfWritePin_GPIO(ePort_5, ePin_5, ( (u8Data &= (1 << 5) ) >> 5) );
+	vfWritePin_GPIO(ePort_6, ePin_6, ( (u8Data &= (1 << 6) ) >> 6) );
+	vfWritePin_GPIO(ePort_7, ePin_7, ( (u8Data &= (1 << 7) ) >> 7) );
 }
 eStatus_LCD_t efInitOuts_LCD(void)
 {
@@ -160,110 +160,59 @@ eStatus_LCD_t efInit_LCD( void )
 	
 	return eResult;
 }
-void vfInit_Msg_LCD( sMessage_LCD_t *sMessage )
+
+eStatus_LCD_t efPossitionData_LCD( ePossition_LCD_t ePossition )
 {
-	sMessage -> u8DataSize = sizeof(sMessage -> u8Data);
+	eStatus_LCD_t u8Return = eFALSE;
 	
-	uint8_t u8IndexArray = 0;
-	for(u8IndexArray = 0; u8IndexArray < (sMessage -> u8DataSize); u8IndexArray++)
-	{
-		sMessage -> u8Data[u8IndexArray] = 0;/*Clear the array*/
-	}	
+	if( ( (ePossition >= eFILA_01_0) && (ePossition <= eFILA_01_15) ) || /*Corroboarate the value of possition is in range*/
+		( (ePossition >= eFILA_02_0) && (ePossition <= eFILA_02_15) ) )
+	{		
+		/*These instructions set are for positioning the cursor in LCD -> Assign Data, RS = 0 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/			
+		vfRsLow_LCD ();
+		vfEnLow_LCD ();
+			
+		vfDataAssign_LCD( ePossition );
+									
+		vfRsLow_LCD ();
+		vfEnHigh_LCD();
+										
+		vfDelay_LCD(TIME_LCD_40US);/*Time to let execute LCD write*/
+										
+		vfRsLow_LCD ();
+		vfEnLow_LCD ();
+		
+		u8Return = eTRUE;
+		
+	}else u8Return = eFALSE;
 	
-	sMessage -> ePossition = eFILA_01_0;	
-	sMessage -> eState = eSTATE_INSTRUCTION_LCD;
-	sMessage -> eStatus = eFALSE;
-	sMessage -> u8Index = 0;
-	
+	return u8Return;
 }
-eStatus_LCD_t efSendData_LCD( sMessage_LCD_t *sMessage )
+
+void vfSendData_LCD( u8Data_LCD_t u8Data )/*Sending 16 data is around 1024us = 1.024ms*/
 {
-	
-	eStatus_LCD_t eResult 		= (sMessage -> eStatus);
-	eStates_LCD_t eState  		= (sMessage -> eState);
-	uint8_t u8Index      		= (sMessage -> u8Index);
-	ePossition_LCD_t ePossition = (sMessage -> ePossition);
-	(sMessage -> u8DataSize)    = sizeof(sMessage -> u8Data);
-	
-	uint8_t u8LengthArray 		= (sMessage -> u8DataSize);
-	
-	switch(eState)
-	{
-	case eSTATE_INSTRUCTION_LCD:
-		if( ((ePossition >= eFILA_01_0) && ((ePossition + u8LengthArray) <= eFILA_01_15) ) || /*Corroboarate the value of possition is in range*/
-			((ePossition >= eFILA_02_0) && ((ePossition + u8LengthArray) <= eFILA_02_15) ) )
-		{
-			
-			/*These instructions set are for positioning the cursor in LCD -> Assign Data, RS = 0 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/			
-			vfRsLow_LCD ();
-			vfEnLow_LCD ();
-			
-			vfDataAssign_LCD( ePossition );
+	/*These instruction sets are for write in LCD -> Assign Data, RS = 1 and EN = 1, wait 40 uSeconds, RS = 0 and EN = 0*/
+	vfRsLow_LCD ();				/*around 4us*/
+	vfEnLow_LCD ();				/*around 4us*/
 								
-			vfRsLow_LCD ();
-			vfEnHigh_LCD();
-									
-			vfDelay_LCD(TIME_LCD_40US);/*Time to let execute LCD write*/
-									
-			vfRsLow_LCD ();
-			vfEnLow_LCD ();
-			
-			eState  = eSTATE_DATA_LCD;
-			eResult = eFALSE;
-				
-		}else 
-			{
-				eState  = eSTATE_INSTRUCTION_LCD;
-				eResult = eFALSE;
-			}	
-		break;
-	case eSTATE_DATA_LCD:
-		if(u8Index < u8LengthArray)
-		{
-			/*These instruction sets are for write in LCD -> Assign Data, RS = 1 and EN = 1, wait 40 uSeconds, RS = 0 and EN = 0*/
-			vfRsLow_LCD ();
-			vfEnLow_LCD ();
+	vfDataAssign_LCD( u8Data );	/*around 40us*/
 								
-			vfDataAssign_LCD( sMessage -> u8Data[u8Index] );
-							
-			vfRsHigh_LCD ();
-			vfEnHigh_LCD ();
-							
-			vfDelay_LCD(TIME_LCD_40US);
-							
-			vfRsLow_LCD ();
-			vfEnLow_LCD ();	
-			
-			u8Index++;
-			eState  = eSTATE_DATA_LCD;
-			eResult = eFALSE;
-		}else 
-			{
-				u8Index = 0;
-				eState  = eSTATE_INSTRUCTION_LCD;
-				eResult = eTRUE;
-			}
-		break;
-	default:
-		u8Index = 0;
-		eState  = eSTATE_INSTRUCTION_LCD;
-		eResult = eFALSE;
-		break;
-	}//End of switch
-	
-	(sMessage -> eStatus)    = eResult;
-	(sMessage -> eState)     = eState;
-	(sMessage -> u8Index)    = u8Index;
-	(sMessage -> ePossition) = ePossition;
-	
-	return eResult;
+	vfRsHigh_LCD ();			/*around 4us*/
+	vfEnHigh_LCD ();			/*around 4us*/
+								
+	vfDelay_LCD(TIME_LCD_40US);	/*around 40us*/
+								
+	vfRsLow_LCD ();				/*around 4us*/
+	vfEnLow_LCD ();				/*around 4us*/	
+								/*Total around 64us*/
 }
+	
 void vfClear_LCD(void)
 {
 	vfRsLow_LCD ();
 	vfEnLow_LCD ();
 			
-	vfDataAssign( CLEAR_LCD_CODE );
+	vfDataAssign_LCD( CLEAR_LCD_CODE );
 			
 	vfRsLow_LCD ();
 	vfEnHigh_LCD();

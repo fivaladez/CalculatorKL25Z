@@ -44,13 +44,13 @@ void vfTurnOn_LED (eColors_LED_t eColor)
 	switch(eColor)
 	{
 	case eRED:
-		vfClearPort_GPIO(ePortRed_LED ,ePinRed_LED);
+		vfClearPin_GPIO(ePortRed_LED ,ePinRed_LED);
 		break;
 	case eGREEN:
-		vfClearPort_GPIO(ePortGreen_LED ,ePinGreen_LED);
+		vfClearPin_GPIO(ePortGreen_LED ,ePinGreen_LED);
 		break;
 	case eBLUE:
-		vfClearPort_GPIO(ePortBlue_LED ,ePinBlue_LED);
+		vfClearPin_GPIO(ePortBlue_LED ,ePinBlue_LED);
 		break;
 	default: 
 		break;
@@ -61,13 +61,13 @@ void vfTurnOff_LED(eColors_LED_t eColor)
 	switch(eColor)
 	{
 	case eRED:
-		vfSetPort_GPIO(ePortRed_LED ,ePinRed_LED);
+		vfSetPin_GPIO(ePortRed_LED ,ePinRed_LED);
 		break;
 	case eGREEN:
-		vfSetPort_GPIO(ePortGreen_LED ,ePinGreen_LED);
+		vfSetPin_GPIO(ePortGreen_LED ,ePinGreen_LED);
 		break;
 	case eBLUE:
-		vfSetPort_GPIO(ePortBlue_LED ,ePinBlue_LED);
+		vfSetPin_GPIO(ePortBlue_LED ,ePinBlue_LED);
 		break;
 	default:
 		break;
@@ -78,13 +78,13 @@ void vfToggle_LED (eColors_LED_t eColor)
 	switch(eColor)
 	{
 	case eRED:
-		vfTogglePort_GPIO(ePortRed_LED ,ePinRed_LED);
+		vfTogglePin_GPIO(ePortRed_LED ,ePinRed_LED);
 		break;
 	case eGREEN:
-		vfTogglePort_GPIO(ePortGreen_LED ,ePinGreen_LED);
+		vfTogglePin_GPIO(ePortGreen_LED ,ePinGreen_LED);
 		break;
 	case eBLUE:
-		vfTogglePort_GPIO(ePortBlue_LED ,ePinBlue_LED);
+		vfTogglePin_GPIO(ePortBlue_LED ,ePinBlue_LED);
 		break;
 	default: 
 		break;
@@ -97,19 +97,19 @@ eStates_LED_t efRead_LED   (eColors_LED_t eColor)
 		switch(eColor)
 		{
 		case eRED:
-			if( eTRUE == efReadPort_GPIO(ePortRed_LED ,ePinRed_LED))
+			if( eTRUE == efReadPin_GPIO(ePortRed_LED ,ePinRed_LED))
 			{
 				eReturn = eTRUE;
 			}else eReturn = eFALSE;
 			break;
 		case eGREEN:
-			if( eTRUE == efReadPort_GPIO(ePortGreen_LED ,ePinGreen_LED))
+			if( eTRUE == efReadPin_GPIO(ePortGreen_LED ,ePinGreen_LED))
 			{
 				eReturn = eTRUE;
 			}else eReturn = eFALSE;
 			break;
 		case eBLUE:
-			if( eTRUE == efReadPort_GPIO(ePortBlue_LED ,ePinBlue_LED))
+			if( eTRUE == efReadPin_GPIO(ePortBlue_LED ,ePinBlue_LED))
 			{
 				eReturn = eTRUE;
 			}else eReturn = eFALSE;

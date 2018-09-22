@@ -18,7 +18,6 @@ int main(void)
 {
 	int counter = 0;
 	sButton_t sButton1;
-	sMessage_LCD_t sMessage_LCD;
 	
 	if( eTRUE == efInit_LED(eRED)  &&  eTRUE ==  efInit_LED(eGREEN)  &&  eTRUE ==  efInit_LED(eBLUE) )
 	{
@@ -37,14 +36,6 @@ int main(void)
 		{
 			vfTurnOn_LED(eBLUE);
 			
-			vfInit_Msg_LCD( &sMessage_LCD );
-			sMessage_LCD.u8Data[0] = 'H';
-			sMessage_LCD.u8Data[1] = 'O';
-			sMessage_LCD.u8Data[2] = 'L';
-			sMessage_LCD.u8Data[3] = 'A';
-			
-			sMessage_LCD.ePossition = eFILA_01_4;
-			
 		}else 
 			{
 				vfTurnOff_LED(eGREEN);
@@ -56,19 +47,27 @@ int main(void)
 	   	if(eTRUE == efReadButtonNonBlocking(&sButton1))
 	   	{
 	   		vfTurnOn_LED(eBLUE);
+	   		if( eTRUE == efPossitionData_LCD(eFILA_01_4) )
+	   		{
+	   			vfSendData_LCD('H');
+	   			vfSendData_LCD('E');
+	   			vfSendData_LCD('L');
+	   			vfSendData_LCD('L');
+	   			vfSendData_LCD('O');
+	   			   	
+	   			vfTurnOn_LED(eGREEN);
+	   		}else 
+	   			{
+	   				vfTurnOff_LED(eGREEN);
+	   			}
 	   	}else 
 	   		{
 	   			vfTurnOff_LED(eBLUE);
+	   			vfTurnOff_LED(eGREEN);
+	   			vfClear_LCD();
 	   		}
 	   	
-	   	if( eTRUE == efSendData_LCD( &sMessage_LCD ) )
-	    {
-	   		vfTurnOn_LED(eGREEN);
-	   		vfdelay(TIME_1S);
-	   	}else 
-	   		{
-	   			vfTurnOff_LED(eGREEN);
-	   		}
+	   	
 	   	
 	}//End of infinity for
 	

@@ -49,10 +49,10 @@ typedef enum
 }eStatus_GPIO_t;
 
 eStatus_GPIO_t efInit_GPIO		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx,eInOut_GPIO_t eInOut);
-void vfSetPort_GPIO        		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
-void vfClearPort_GPIO      		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
-void vfTogglePort_GPIO     		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
-eStatus_GPIO_t efReadPort_GPIO  (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
-void vfPassValToPort_GPIO       (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data);
+void vfSetPin_GPIO        		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
+void vfClearPin_GPIO      		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
+void vfTogglePin_GPIO     		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
+eStatus_GPIO_t efReadPin_GPIO   (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
+void vfWritePin_GPIO            (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data);
 
 #endif /* GPIO_DRIVER_H_ */

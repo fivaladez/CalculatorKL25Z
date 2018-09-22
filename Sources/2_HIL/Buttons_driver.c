@@ -118,12 +118,12 @@ eStatus_Buttons_t efReadButton    (sButton_t *psButton)
 {
 	eStatus_Buttons_t eResult = eFALSE;
 	
-	if( eTRUE  == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+	if( eTRUE  == efReadPin_GPIO(psButton->ePort,psButton->ePin))
 	{
-		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPin_GPIO(psButton->ePort,psButton->ePin))
 		{
 			vfdelay_Button(TIME_Button_100MS);
-			if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+			if(eTRUE == efReadPin_GPIO(psButton->ePort,psButton->ePin))
 			{
 				eResult = eTRUE;
 			}else eResult = eFALSE;
@@ -142,7 +142,7 @@ eStatus_Buttons_t efReadButtonNonBlocking(sButton_t *psButton)
 {
 	eStatus_Buttons_t eResult = eFALSE;
 	
-	if( eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin) )
+	if( eTRUE == efReadPin_GPIO(psButton->ePort,psButton->ePin) )
 	{
 		if( eCOMPLETE != psButton->eState )
 		{
@@ -362,7 +362,7 @@ eStatus_Buttons_t efReadButtonNonBlocking0(sButtonNonBlocking0_t *psButton)
 	switch(eStateReadButton)
 	{
 	case eSTATE_READ_1: 
-		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPin_GPIO(psButton->ePort,psButton->ePin))
 		{
 			eResult = eFALSE;
 			eStateReadButton = eSTATE_WAIT_2;
@@ -389,7 +389,7 @@ eStatus_Buttons_t efReadButtonNonBlocking0(sButtonNonBlocking0_t *psButton)
 		
 		break;
 	case eSTATE_READ_3:
-		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPin_GPIO(psButton->ePort,psButton->ePin))
 		{
 			eResult = eTRUE;
 			eStateReadButton = eSTATE_READ_1;
@@ -418,7 +418,7 @@ eStatus_Buttons_t efReadButtonNonBlocking1(sButtonNonBlocking1_t *psButton)
 	switch(eStateReadButton)
 	{
 	case eSTATE_READ_1: 
-		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPin_GPIO(psButton->ePort,psButton->ePin))
 		{
 			eResult = eFALSE;
 			eStateReadButton = eSTATE_WAIT_2;
@@ -445,7 +445,7 @@ eStatus_Buttons_t efReadButtonNonBlocking1(sButtonNonBlocking1_t *psButton)
 		
 		break;
 	case eSTATE_READ_3:
-		if(eTRUE == efReadPort_GPIO(psButton->ePort,psButton->ePin))
+		if(eTRUE == efReadPin_GPIO(psButton->ePort,psButton->ePin))
 		{
 			eResult = eTRUE;
 			eStateReadButton = eSTATE_READ_1;

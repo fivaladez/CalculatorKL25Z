@@ -110,7 +110,7 @@ eStatus_GPIO_t efInit_GPIO  (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx,eInOut_GPIO
 	return eResult;
 	
 }//End function
-void vfSetPort_GPIO   (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx) /*Write a 1*/
+void vfSetPin_GPIO   (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx) /*Write a 1*/
 {
 	switch(ePORTx){
 		case ePORTA: GPIOA_PDOR |= (1<<ePINx);
@@ -127,7 +127,7 @@ void vfSetPort_GPIO   (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx) /*Write a 1*/
 			break;
 	}//End switch
 }
-void vfClearPort_GPIO (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)/*Write a 0*/
+void vfClearPin_GPIO (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)/*Write a 0*/
 {
 	switch(ePORTx){
 		case ePORTA: GPIOA_PDOR &= ~(1<<ePINx);
@@ -144,7 +144,7 @@ void vfClearPort_GPIO (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)/*Write a 0*/
 			break;
 	}//End switch
 }
-void vfTogglePort_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
+void vfTogglePin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
 {
 	switch(ePORTx){
 		case ePORTA: GPIOA_PDOR ^= (1<<ePINx);
@@ -161,7 +161,7 @@ void vfTogglePort_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
 			break;
 	}//End switch
 }
-eStatus_GPIO_t efReadPort_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
+eStatus_GPIO_t efReadPin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
 {
 	eStatus_GPIO_t eStatus = eFALSE;
 	
@@ -190,7 +190,7 @@ eStatus_GPIO_t efReadPort_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
 	
 	return eStatus;
 }
-void vfPassValToPort_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data) 
+void vfWritePin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data) 
 {
 	switch(ePORTx){
 		case ePORTA: 
