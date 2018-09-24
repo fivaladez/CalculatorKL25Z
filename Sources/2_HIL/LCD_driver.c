@@ -76,6 +76,7 @@ void vfEnHigh_LCD(void)
 }
 void vfDataAssign_LCD(u8Data_LCD_t u8Data)
 {	
+	
 	vfWritePin_GPIO(ePort_0, ePin_0, ( (u8Data &= (1 << 0) ) >> 0) );
 	vfWritePin_GPIO(ePort_1, ePin_1, ( (u8Data &= (1 << 1) ) >> 1) );
 	vfWritePin_GPIO(ePort_2, ePin_2, ( (u8Data &= (1 << 2) ) >> 2) );
@@ -84,6 +85,7 @@ void vfDataAssign_LCD(u8Data_LCD_t u8Data)
 	vfWritePin_GPIO(ePort_5, ePin_5, ( (u8Data &= (1 << 5) ) >> 5) );
 	vfWritePin_GPIO(ePort_6, ePin_6, ( (u8Data &= (1 << 6) ) >> 6) );
 	vfWritePin_GPIO(ePort_7, ePin_7, ( (u8Data &= (1 << 7) ) >> 7) );
+	
 }
 eStatus_LCD_t efInitOuts_LCD(void)
 {
@@ -123,19 +125,20 @@ void vfSendDataInit_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray )
 {
 	uint8_t u8Index  = 0;
 	
+	vfRsLow_LCD ();
+	vfEnLow_LCD ();
+	
 	for(u8Index = 0; u8Index < u8LengthArray ; u8Index++)
 	{		
-		vfRsLow_LCD ();
-		vfEnLow_LCD ();
 		
 		vfDataAssign_LCD( u8apDataLCD[u8Index] );
 		
-		vfRsLow_LCD ();
+		//vfRsLow_LCD (); /* May be omitted */
 		vfEnHigh_LCD();
 		
 		vfDelay_LCD(TIME_LCD_40US);/*Time to let execute LCD execute commands*/
 		
-		vfRsLow_LCD ();
+		//vfRsLow_LCD (); /* May be omitted */
 		vfEnLow_LCD ();	
 	}
 }
@@ -161,50 +164,53 @@ eStatus_LCD_t efInit_LCD( void )
 	return eResult;
 }
 
-eStatus_LCD_t efPossitionData_LCD( ePossition_LCD_t ePossition )
+void vfSendPosition_LCD( ePosition_LCD_t ePosition )
 {
-	eStatus_LCD_t u8Return = eFALSE;
-	
-	if( ( (ePossition >= eFILA_01_0) && (ePossition <= eFILA_01_15) ) || /*Corroboarate the value of possition is in range*/
-		( (ePossition >= eFILA_02_0) && (ePossition <= eFILA_02_15) ) )
-	{		
-		/*These instructions set are for positioning the cursor in LCD -> Assign Data, RS = 0 and EN = 1, wait 5 uSeconds, RS = 0 and EN = 0*/			
-		vfRsLow_LCD ();
-		vfEnLow_LCD ();
+	/* Send Position == RS=0; EN=1; 40us EN=0; RS=0; */
+		
+	/*Corroborate position is in a valid range*/ 	
+	if( ( (ePosition >= eFILA_01_0) && (ePosition <= eFILA_01_15) ) || 
+	    ( (ePosition >= eFILA_02_0) && (ePosition <= eFILA_02_15) ) )
+	{
 			
-		vfDataAssign_LCD( ePossition );
-									
-		vfRsLow_LCD ();
-		vfEnHigh_LCD();
-										
-		vfDelay_LCD(TIME_LCD_40US);/*Time to let execute LCD write*/
-										
+		/*Initialize the communication clearing RS and Enable*/
 		vfRsLow_LCD ();
 		vfEnLow_LCD ();
 		
-		u8Return = eTRUE;
+		vfDataAssign_LCD( ePosition );				
+			
+		//vfRsLow_LCD (); /* May be omitted */								
+		vfEnHigh_LCD();								
+				
+		vfDelay_LCD(TIME_LCD_40US);	
 		
-	}else u8Return = eFALSE;
-	
-	return u8Return;
+		//vfRsLow_LCD (); /* May be omitted */										
+		vfEnLow_LCD ();	
+				
+	}else 
+		{
+			/*Do nothing*/
+		}											
+					
 }
-
 void vfSendData_LCD( u8Data_LCD_t u8Data )/*Sending 16 data is around 1024us = 1.024ms*/
 {
-	/*These instruction sets are for write in LCD -> Assign Data, RS = 1 and EN = 1, wait 40 uSeconds, RS = 0 and EN = 0*/
-	vfRsLow_LCD ();				/*around 4us*/
-	vfEnLow_LCD ();				/*around 4us*/
-								
-	vfDataAssign_LCD( u8Data );	/*around 40us*/
-								
-	vfRsHigh_LCD ();			/*around 4us*/
-	vfEnHigh_LCD ();			/*around 4us*/
-								
-	vfDelay_LCD(TIME_LCD_40US);	/*around 40us*/
-								
-	vfRsLow_LCD ();				/*around 4us*/
-	vfEnLow_LCD ();				/*around 4us*/	
-								/*Total around 64us*/
+	/* Send Data	==	RS=1; EN=1; 40us EN=0; RS=0; */
+	
+	/*Initialize the communication clearing RS and Enable*/
+	vfRsLow_LCD ();
+	vfEnLow_LCD ();
+	
+	vfDataAssign_LCD( u8Data );						
+			
+	vfRsHigh_LCD ();								
+	vfEnHigh_LCD ();								
+			
+	vfDelay_LCD(TIME_LCD_40US);						
+		
+	vfRsLow_LCD ();										
+	vfEnLow_LCD ();											
+							
 }
 	
 void vfClear_LCD(void)
@@ -214,11 +220,12 @@ void vfClear_LCD(void)
 			
 	vfDataAssign_LCD( CLEAR_LCD_CODE );
 			
-	vfRsLow_LCD ();
+	//vfRsLow_LCD (); /* May be omitted */	
 	vfEnHigh_LCD();
+	
+	/*Time to let execute LCD clear. It is a different time for write*/		
+	vfDelay_LCD( TIME_LCD_5MS );
 			
-	vfDelay_LCD( TIME_LCD_5MS );/*Time to let execute LCD clear*/
-			
-	vfRsLow_LCD ();
+	//vfRsLow_LCD (); /* May be omitted */	
 	vfEnLow_LCD ();	
 }

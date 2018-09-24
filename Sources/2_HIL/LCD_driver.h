@@ -21,17 +21,25 @@ typedef enum
 	eFILA_02_0  = 0xC0u,	eFILA_02_1  = 0xC1u,	eFILA_02_2  = 0xC2u,	eFILA_02_3  = 0xC3u,
 	eFILA_02_4  = 0xC4u,	eFILA_02_5  = 0xC5u,	eFILA_02_6  = 0xC6u,	eFILA_02_7  = 0xC7u,
 	eFILA_02_8  = 0xC8u,	eFILA_02_9  = 0xC9u,	eFILA_02_10 = 0xCAu,	eFILA_02_11 = 0xCBu,
-	eFILA_02_12 = 0xCCu,	eFILA_02_13 = 0xCDu,	eFILA_02_14 = 0xCEu,	eFILA_02_15 = 0xCFu
+	eFILA_02_12 = 0xCCu,	eFILA_02_13 = 0xCDu,	eFILA_02_14 = 0xCEu,	eFILA_02_15 = 0xCFu,
 	
-}ePossition_LCD_t;
+	eFILA_NULL = 0x00u
+	
+}ePosition_LCD_t;
+
+typedef enum
+{
+	eDATA,
+	eCOMMAND,
+}eInstruction_LCD_t;
 
 typedef uint8_t u8Data_LCD_t;
 
 typedef eStatus_GPIO_t eStatus_LCD_t;
 
 eStatus_LCD_t efInit_LCD( void );
-eStatus_LCD_t efPossitionData_LCD( ePossition_LCD_t ePossition );
-void vfSendData_LCD( u8Data_LCD_t u8Data );
+void vfSendPosition_LCD( ePosition_LCD_t ePosition );
+void vfSendData_LCD( u8Data_LCD_t u8Data);
 void vfClear_LCD(void);
 
 

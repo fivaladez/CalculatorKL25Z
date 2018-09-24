@@ -22,6 +22,8 @@ int main(void)
 	if( eTRUE == efInit_LED(eRED)  &&  eTRUE ==  efInit_LED(eGREEN)  &&  eTRUE ==  efInit_LED(eBLUE) )
 	{
 		vfTurnOff_LED(eRED);
+		vfTurnOff_LED(eGREEN);
+		vfTurnOff_LED(eBLUE);
 		
 		if(eTRUE == efCreateButton(&sButton1, ePORTA, ePIN_1))
 		{
@@ -34,7 +36,7 @@ int main(void)
 		
 		if( eTRUE == efInit_LCD())
 		{
-			vfTurnOn_LED(eBLUE);
+			vfTurnOn_LED(eGREEN);
 			
 		}else 
 			{
@@ -42,32 +44,28 @@ int main(void)
 			}
 	}
 	
+	vfTurnOff_LED(eRED);
+	vfTurnOff_LED(eGREEN);
+	vfTurnOff_LED(eBLUE);
+	
 	for(;;) {	   
 	   	counter++;
 	   	if(eTRUE == efReadButtonNonBlocking(&sButton1))
 	   	{
-	   		vfTurnOn_LED(eBLUE);
-	   		if( eTRUE == efPossitionData_LCD(eFILA_01_4) )
-	   		{
-	   			vfSendData_LCD('H');
-	   			vfSendData_LCD('E');
-	   			vfSendData_LCD('L');
-	   			vfSendData_LCD('L');
-	   			vfSendData_LCD('O');
-	   			   	
-	   			vfTurnOn_LED(eGREEN);
-	   		}else 
-	   			{
-	   				vfTurnOff_LED(eGREEN);
-	   			}
+	   		vfTurnOn_LED(eRED);
+	   		
+	   		vfSendPosition_LCD(eFILA_01_0);
+	   		vfSendData_LCD('H');
+	   		vfSendData_LCD('E');
+	   		vfSendData_LCD('L');
+	   		vfSendData_LCD('L');
+	   		vfSendData_LCD('O');
+	   		
 	   	}else 
 	   		{
-	   			vfTurnOff_LED(eBLUE);
-	   			vfTurnOff_LED(eGREEN);
-	   			vfClear_LCD();
+	   			vfTurnOff_LED(eRED);
+	   			//vfClear_LCD();
 	   		}
-	   	
-	   	
 	   	
 	}//End of infinity for
 	
