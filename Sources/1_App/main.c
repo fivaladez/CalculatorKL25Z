@@ -16,7 +16,6 @@ void vfdelay(uint32_t u32Time);
 
 int main(void)
 {
-	int counter = 0;
 	sButton_t sButton1;
 	
 	if( eTRUE == efInit_LED(eRED)  &&  eTRUE ==  efInit_LED(eGREEN)  &&  eTRUE ==  efInit_LED(eBLUE) )
@@ -49,12 +48,11 @@ int main(void)
 	vfTurnOff_LED(eBLUE);
 	
 	for(;;) {	   
-	   	counter++;
+		
 	   	if(eTRUE == efReadButtonNonBlocking(&sButton1))
 	   	{
-	   		vfTurnOn_LED(eRED);
-	   		
-	   		vfSendPosition_LCD(eFILA_01_0);
+	   		vfTurnOn_LED( eRED );
+	   		vfSendPosition_LCD(eFILA_02_0);
 	   		vfSendData_LCD('H');
 	   		vfSendData_LCD('E');
 	   		vfSendData_LCD('L');
@@ -63,9 +61,10 @@ int main(void)
 	   		
 	   	}else 
 	   		{
-	   			vfTurnOff_LED(eRED);
+	   			vfTurnOff_LED( eRED );
 	   			//vfClear_LCD();
 	   		}
+	   	
 	   	
 	}//End of infinity for
 	

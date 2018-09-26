@@ -54,5 +54,7 @@ void vfClearPin_GPIO      		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
 void vfTogglePin_GPIO     		(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
 eStatus_GPIO_t efReadPin_GPIO   (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx);
 void vfWritePin_GPIO            (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data);
+void vfWritePort_GPIO           (ePORTx_GPIO_t ePORTx,                    uint8_t u8Data);
+
 
 #endif /* GPIO_DRIVER_H_ */

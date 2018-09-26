@@ -182,10 +182,10 @@ eStatus_GPIO_t efReadPin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
 	
 	if(0 == eStatus)
 	{
-		eStatus = eFALSE;
+		eStatus = eTRUE;
 	}else if(1 == eStatus)
 		{
-			eStatus = eTRUE;
+			eStatus = eFALSE;
 		}
 	
 	return eStatus;
@@ -242,3 +242,21 @@ void vfWritePin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data)
 			break;
 	}//End switch
 }
+void vfWritePort_GPIO( ePORTx_GPIO_t ePORTx, uint8_t u8Data ) 
+{
+	switch(ePORTx){
+		case ePORTA: GPIOA_PDOR = u8Data;
+			break;
+		case ePORTB: GPIOB_PDOR = u8Data;
+			break;
+		case ePORTC: GPIOC_PDOR = u8Data;   
+			break;
+		case ePORTD: GPIOD_PDOR = u8Data;
+			break;
+		case ePORTE: GPIOE_PDOR = u8Data;
+			break;
+		default: 
+			break;
+	}
+}
+
