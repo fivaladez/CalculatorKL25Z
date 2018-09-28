@@ -11,7 +11,6 @@
 #include "derivative.h"
 #include "GPIO_driver.h"
 
-#define TEST (0)
 typedef enum 
 {
 	eFILA_01_0  = 0x80u,	eFILA_01_1  = 0x81u,	eFILA_01_2  = 0x82u,	eFILA_01_3  = 0x83u,
@@ -36,6 +35,8 @@ eStatus_LCD_t efInit_LCD( void );
 void vfSendPosition_LCD ( ePosition_LCD_t ePosition );
 void vfSendData_LCD     ( u8Data_LCD_t u8Data);
 void vfClear_LCD        (void);
+void vfSendMessage_LCD  ( uint8_t *u8Message, uint8_t u8Data,ePosition_LCD_t ePosition);
+/*Example:	vfSendMessage_LCD( "Value is: %d", x, eFILA_01_0 );*/
 
 
 #endif /* LCD_DRIVER_H_ */

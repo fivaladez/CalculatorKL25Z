@@ -9,7 +9,7 @@
 
 #define TIME_LCD_10MS		18000
 #define TIME_LCD_5MS		9000
-#define TIME_LCD_40US		40
+#define TIME_LCD_40US		840
 
 #define NO_INSTRUCTIONS		5
 #define NO_DATA_PINS		8
@@ -116,7 +116,6 @@ eStatus_LCD_t efPinsInit_LCD(void)
 	
 	return eResult;
 }
-/*NOTE: Length = number of components of array */
 void vfSendDataInit_LCD( uint8_t *u8apDataLCD , uint8_t u8LengthArray )
 {
 	uint8_t u8Index  = 0;
@@ -147,7 +146,7 @@ eStatus_LCD_t efInit_LCD( void )
 	if(eTRUE == efPinsInit_LCD())
 	{
 		vfDelay_LCD(TIME_LCD_10MS);/*Time to let react LCD*/
-			
+		
 		vfSendDataInit_LCD( &u8aInitInstructions_LCD[0] , sizeof(u8aInitInstructions_LCD) );
 		
 		vfClear_LCD();
@@ -180,8 +179,7 @@ void vfSendPosition_LCD( ePosition_LCD_t ePosition )
 		vfRsLow_LCD (); /* May be omitted */										
 		vfEnLow_LCD ();	
 				
-	}else {/*Do nothing*/}
-													
+	}else {/*Do nothing*/}											
 					
 }
 void vfSendData_LCD( u8Data_LCD_t u8Data )/*Sending 16 data is around 1024us = 1.024ms*/
@@ -218,4 +216,29 @@ void vfClear_LCD(void)
 			
 	vfRsLow_LCD (); /* May be omitted */	
 	vfEnLow_LCD ();	
+}
+void vfSendMessage_LCD ( uint8_t *u8pMessage, uint8_t u8Data,ePosition_LCD_t ePosition)
+{
+	uint8_t u8Index;
+	
+	vfSendPosition_LCD( ePosition );
+	
+	for( u8Index = 0 ; (*(u8pMessage + u8Index) != 0) && (u8Index < 16) ; u8Index++)
+	{
+		if( *(u8pMessage + u8Index) == 0x25)/* Look for "%" */
+	    {
+			if( *(u8pMessage + u8Index + 1) == 0x64)/* Look for "d" */
+	        {
+				vfSendData_LCD( u8Data );
+				u8Index++;/*For not showing next value (d)*/
+	        }else 
+	        {
+	        	vfSendData_LCD( *(u8pMessage + u8Index) );
+	        }
+	            
+	    }else 
+	    {
+	    	vfSendData_LCD( *(u8pMessage + u8Index) );
+	    }
+	}
 }

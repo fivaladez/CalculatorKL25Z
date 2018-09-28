@@ -16,7 +16,7 @@ eStatus_GPIO_t efInit_GPIO  (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx,eInOut_GPIO
 			if(ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_4 || ePINx == ePIN_5 || ePINx == ePIN_12 || ePINx == ePIN_13)
 			{
 				SIM_SCGC5 |= SIM_SCGC5_PORTA_MASK;				     //1° Enable clock for this port
-				PORTA_PCR(ePINx) = PORT_PCR_MUX(PORT_PCR_MUX_GPIO); //2° Mode 1 for working as GPIO_vfInit
+				PORTA_PCR(ePINx) = PORT_PCR_MUX(PORT_PCR_MUX_GPIO);  //2° Mode 1 for working as GPIO_vfInit
 				GPIOA_PDOR &= ~(1<<ePINx);						     //3° Make sure of initial value of the pin (write a zero)
 				if(eINPUT == eInOut)
 				{
