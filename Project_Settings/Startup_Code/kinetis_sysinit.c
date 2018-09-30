@@ -22,6 +22,8 @@ extern void __thumb_startup(void);
 }
 #endif
 
+
+extern void vfPIT_IRQHandler(void);
 /**
  **===========================================================================
  **  Default interrupt handler
@@ -127,6 +129,7 @@ void (* const InterruptVector[])() __attribute__ ((section(".vectortable"))) = {
     RTC_Alarm_IRQHandler, /* RTC Alarm interrupt */
     RTC_Seconds_IRQHandler, /* RTC Seconds interrupt */
     PIT_IRQHandler, /* PIT timer all channels interrupt */
+    //vfPIT_IRQHandler, /*======================================= My function Interrupt PIT =======================================*/
     Default_Handler, /* Reserved interrupt 39/23 */
     USBOTG_IRQHandler, /* USB interrupt */
     DAC0_IRQHandler, /* DAC0 interrupt */

@@ -198,45 +198,45 @@ void vfWritePin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data)
 			{
 				GPIOA_PDOR &= ~(1<<ePINx);
 			}else if( 1u == u8Data )
-				{
-					GPIOA_PDOR |= (1<<ePINx);
-				}
+			{
+				GPIOA_PDOR |= (1<<ePINx);
+			}
 			break;
 		case ePORTB: 
 			if( 0u == u8Data )
 			{
 				GPIOB_PDOR &= ~(1<<ePINx);
 			}else if( 1u == u8Data )
-				{
-					GPIOB_PDOR |= (1<<ePINx);
-				}
+			{
+				GPIOB_PDOR |= (1<<ePINx);
+			}
 			break;
 		case ePORTC: 
 			if( 0u == u8Data )
 			{
 				GPIOC_PDOR &= ~(1<<ePINx);
 			}else if( 1u == u8Data )
-				{
-					GPIOC_PDOR |= (1<<ePINx);
-				}   
+			{
+				GPIOC_PDOR |= (1<<ePINx);
+			}   
 			break;
 		case ePORTD: 
 			if( 0u == u8Data )
 			{
 				GPIOD_PDOR &= ~(1<<ePINx);
 			}else if( 1u == u8Data )
-				{
-					GPIOD_PDOR |= (1<<ePINx);
-				}
+			{
+				GPIOD_PDOR |= (1<<ePINx);
+			}
 			break;
 		case ePORTE: 
 			if( 0u == u8Data )
 			{
 				GPIOE_PDOR &= ~(1<<ePINx);
 			}else if( 1u == u8Data )
-				{
-					GPIOE_PDOR |= (1<<ePINx);
-				}
+			{
+				GPIOE_PDOR |= (1<<ePINx);
+			}
 			break;
 		default: /**/
 			break;

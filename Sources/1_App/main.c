@@ -52,21 +52,21 @@ int main(void)
 	   	if(eTRUE == efReadButtonNonBlocking(&sButton1))
 	   	{
 	   		vfTurnOn_LED( eRED );
-	   		vfSendPosition_LCD(eFILA_02_0);
-	   		vfSendData_LCD('H');
-	   		vfSendData_LCD('E');
-	   		vfSendData_LCD('L');
-	   		vfSendData_LCD('L');
-	   		vfSendData_LCD('O');
 	   		
 	   	}else 
-	   		{
-	   			vfTurnOff_LED( eRED );
-	   			//vfClear_LCD();
-	   		}
+	   	{
+	   		vfTurnOff_LED( eRED );
+	   		//vfClear_LCD();
+	   	}
 	   	
+	   	vfSendPosition_LCD(eFILA_02_0);
+	   	vfSendData_LCD('H');
+	   	vfSendData_LCD('E');
+	   	vfSendData_LCD('L');
+	   	vfSendData_LCD('L');
+	   	vfSendData_LCD('O');
 	   	
-	}//End of infinity for
+	}//End of infinity loop
 	
 	return 0;
 }
