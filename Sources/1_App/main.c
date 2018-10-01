@@ -52,6 +52,8 @@ int main(void)
 	   	if(eTRUE == efReadButtonNonBlocking(&sButton1))
 	   	{
 	   		vfTurnOn_LED( eRED );
+	   		vfSendPosition_LCD(eFILA_01_0);
+	   		vfSendMessage_LCD("Hello World");
 	   		
 	   	}else 
 	   	{
@@ -59,12 +61,6 @@ int main(void)
 	   		//vfClear_LCD();
 	   	}
 	   	
-	   	vfSendPosition_LCD(eFILA_02_0);
-	   	vfSendData_LCD('H');
-	   	vfSendData_LCD('E');
-	   	vfSendData_LCD('L');
-	   	vfSendData_LCD('L');
-	   	vfSendData_LCD('O');
 	   	
 	}//End of infinity loop
 	

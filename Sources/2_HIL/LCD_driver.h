@@ -28,14 +28,16 @@ typedef enum
 }ePosition_LCD_t;
 
 typedef uint8_t u8Data_LCD_t;
+typedef uint8_t u8Command_LCD_t;
 
 typedef eStatus_GPIO_t eStatus_LCD_t;
 
 eStatus_LCD_t efInit_LCD( void );
 void vfSendPosition_LCD ( ePosition_LCD_t ePosition );
+void vfSendCommand_LCD  ( u8Command_LCD_t u8Command );
 void vfSendData_LCD     ( u8Data_LCD_t u8Data);
 void vfClear_LCD        (void);
-void vfSendMessage_LCD  ( uint8_t *u8Message, uint8_t u8Data,ePosition_LCD_t ePosition);
+void vfSendMessage_LCD  ( uint8_t *u8Message );
 /*Example:	vfSendMessage_LCD( "Value is: %d", x, eFILA_01_0 );*/
 
 
