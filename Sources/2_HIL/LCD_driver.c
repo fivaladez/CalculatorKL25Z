@@ -10,9 +10,10 @@
 #define TIME_LCD_15MS		150000
 #define TIME_LCD_10MS		100000
 #define TIME_LCD_5MS		50000
+#define TIME_LCD_1_5MS		15200
 #define TIME_LCD_1MS		10000
 #define TIME_LCD_100US		1000
-#define TIME_LCD_40US		400
+#define TIME_LCD_40US		400/*Best approach to 40us*/
 
 #define NO_INSTRUCTIONS		7
 #define NO_DATA_PINS		4
@@ -22,6 +23,7 @@
 #define COMMAND_2_LCD	(0x32u)/*For 8 and 4 bits*/
 #define COMMAND_3_LCD	(0x28u)/*For 4 bits and 2 lines*/
 #define COMMAND_4_LCD	(0x0Eu)/*Display On, Cursor On*/
+/*This command can not be sent with normal function sendCommand*/
 #define COMMAND_5_LCD	(0x01u)/*Clear screen*/
 #define COMMAND_6_LCD	(0x06u)/*Increment cursor*/
 #define COMMAND_7_LCD	(0x80u)/*eFILA_01_0*/
@@ -59,7 +61,7 @@ void vfEnHigh_LCD(void);
 void vfDataAssignMSB_LCD( uint8_t u8aData );
 void vfDataAssignLSB_LCD( uint8_t u8aData );
 eStatus_LCD_t efPinsInit_LCD( void );
-void vfSendDataInit_LCD( void );
+
 
 /*====================================INTERNAL FUNCTIONS======================================*/
 
@@ -160,7 +162,8 @@ eStatus_LCD_t efInit_LCD( void )
 		vfSendCommand_LCD( COMMAND_2_LCD );
 		vfSendCommand_LCD( COMMAND_3_LCD );
 		vfSendCommand_LCD( COMMAND_4_LCD );
-		vfSendCommand_LCD( COMMAND_5_LCD );
+		vfClear_LCD();
+		//vfSendCommand_LCD( COMMAND_5_LCD );
 		vfSendCommand_LCD( COMMAND_6_LCD );
 		vfSendCommand_LCD( COMMAND_7_LCD );
 			
@@ -231,9 +234,21 @@ void vfSendData_LCD( u8Data_LCD_t u8Data )
 }	
 void vfClear_LCD(void)
 {
-	vfSendCommand_LCD( COMMAND_5_LCD );
+	/*Initialize the communication clearing RS and Enable*/
+	vfRsLow_LCD ();
+	vfEnLow_LCD ();		
+			
+	vfDataAssignMSB_LCD( COMMAND_5_LCD );/*Highest priority nibble*/
+	vfEnHigh_LCD();	
+	vfDelay_LCD( TIME_LCD_1_5MS );
+	vfEnLow_LCD();	
+			
+	vfDataAssignLSB_LCD( COMMAND_5_LCD );/*Lowest priority nibble*/
+	vfEnHigh_LCD();	
+	vfDelay_LCD( TIME_LCD_1_5MS );
+	vfEnLow_LCD();		
 }
-void vfSendMessage_LCD ( uint8_t *u8pMessage )
+void vfSendMessage_LCD ( char *u8pMessage )
 {
 	uint8_t u8Index;
 	

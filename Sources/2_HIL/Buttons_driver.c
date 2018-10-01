@@ -13,7 +13,8 @@
 #define TIME_Button_250MS		450000
 #define TIME_Button_100MS		180000
 
-#define DEBOUNCING (2500u)/*You must adjust the count inversely proportional to the length of the code*/
+/*Original 2500*/
+#define DEBOUNCING (5u)/*You must adjust the count inversely proportional to the length of the code*/
 
 static uint8_t u8CounterID = 0;
 

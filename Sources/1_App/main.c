@@ -58,7 +58,7 @@ int main(void)
 	   	}else 
 	   	{
 	   		vfTurnOff_LED( eRED );
-	   		//vfClear_LCD();
+	   		vfClear_LCD();
 	   	}
 	   	
 	   	

@@ -37,7 +37,7 @@ void vfSendPosition_LCD ( ePosition_LCD_t ePosition );
 void vfSendCommand_LCD  ( u8Command_LCD_t u8Command );
 void vfSendData_LCD     ( u8Data_LCD_t u8Data);
 void vfClear_LCD        (void);
-void vfSendMessage_LCD  ( uint8_t *u8Message );
+void vfSendMessage_LCD  ( char *u8Message );
 /*Example:	vfSendMessage_LCD( "Value is: %d", x, eFILA_01_0 );*/
 
 

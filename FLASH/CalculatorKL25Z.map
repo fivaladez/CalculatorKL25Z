@@ -78,8 +78,6 @@ Discarded input sections
  .text          0x00000000        0x0 ./Sources/2_HIL/LCD_driver.o
  .data          0x00000000        0x0 ./Sources/2_HIL/LCD_driver.o
  .bss           0x00000000        0x0 ./Sources/2_HIL/LCD_driver.o
- .text.vfClear_LCD
-                0x00000000       0x10 ./Sources/2_HIL/LCD_driver.o
  .text          0x00000000        0x0 ./Sources/2_HIL/Buttons_driver.o
  .data          0x00000000        0x0 ./Sources/2_HIL/Buttons_driver.o
  .bss           0x00000000        0x0 ./Sources/2_HIL/Buttons_driver.o
@@ -228,8 +226,8 @@ LOAD ./Sources/2_HIL/LCD_driver.o
 LOAD ./Sources/2_HIL/Buttons_driver.o
 LOAD ./Sources/3_HAL/PIT_driver.o
 LOAD ./Sources/3_HAL/GPIO_driver.o
-                0x00001e90                __pformatter = __pformatter_
-                [0x000022b8]                __sformatter = __sformatter
+                0x00001ec8                __pformatter = __pformatter_
+                [0x000022f0]                __sformatter = __sformatter
 START GROUP
 LOAD C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a
 LOAD C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libm.a
@@ -255,7 +253,7 @@ END GROUP
  *(.cfmconfig)
                 0x00000400                . = ALIGN (0x4)
 
-.text           0x00000800     0x2678
+.text           0x00000800     0x26b0
                 0x00000800                . = ALIGN (0x4)
  *(.text)
  .text          0x00000800       0x14 c:/freescale/cw mcu v11.0/cross_tools/arm-none-eabi-gcc-4_7_3/bin/../lib/gcc/arm-none-eabi/4.7.3/armv6-m\libgcc.a(_thumb1_case_sqi.o)
@@ -319,44 +317,44 @@ END GROUP
  .text._ExitProcess
                 0x00000954        0xc ./Project_Settings/Startup_Code/__arm_end.o
                 0x00000954                _ExitProcess
- .text.main     0x00000960       0xb8 ./Sources/1_App/main.o
+ .text.main     0x00000960       0xbc ./Sources/1_App/main.o
                 0x00000960                main
  .text.efInit_LED
-                0x00000a18       0xd0 ./Sources/2_HIL/Leds_driver.o
-                0x00000a18                efInit_LED
+                0x00000a1c       0xd0 ./Sources/2_HIL/Leds_driver.o
+                0x00000a1c                efInit_LED
  .text.vfTurnOn_LED
-                0x00000ae8       0x74 ./Sources/2_HIL/Leds_driver.o
-                0x00000ae8                vfTurnOn_LED
+                0x00000aec       0x74 ./Sources/2_HIL/Leds_driver.o
+                0x00000aec                vfTurnOn_LED
  .text.vfTurnOff_LED
-                0x00000b5c       0x74 ./Sources/2_HIL/Leds_driver.o
-                0x00000b5c                vfTurnOff_LED
+                0x00000b60       0x74 ./Sources/2_HIL/Leds_driver.o
+                0x00000b60                vfTurnOff_LED
  .text.vfDelay_LCD
-                0x00000bd0       0x24 ./Sources/2_HIL/LCD_driver.o
-                0x00000bd0                vfDelay_LCD
+                0x00000bd4       0x24 ./Sources/2_HIL/LCD_driver.o
+                0x00000bd4                vfDelay_LCD
  .text.vfRsLow_LCD
-                0x00000bf4       0x20 ./Sources/2_HIL/LCD_driver.o
-                0x00000bf4                vfRsLow_LCD
+                0x00000bf8       0x20 ./Sources/2_HIL/LCD_driver.o
+                0x00000bf8                vfRsLow_LCD
  .text.vfRsHigh_LCD
-                0x00000c14       0x20 ./Sources/2_HIL/LCD_driver.o
-                0x00000c14                vfRsHigh_LCD
+                0x00000c18       0x20 ./Sources/2_HIL/LCD_driver.o
+                0x00000c18                vfRsHigh_LCD
  .text.vfEnLow_LCD
-                0x00000c34       0x20 ./Sources/2_HIL/LCD_driver.o
-                0x00000c34                vfEnLow_LCD
+                0x00000c38       0x20 ./Sources/2_HIL/LCD_driver.o
+                0x00000c38                vfEnLow_LCD
  .text.vfEnHigh_LCD
-                0x00000c54       0x20 ./Sources/2_HIL/LCD_driver.o
-                0x00000c54                vfEnHigh_LCD
+                0x00000c58       0x20 ./Sources/2_HIL/LCD_driver.o
+                0x00000c58                vfEnHigh_LCD
  .text.vfDataAssignMSB_LCD
-                0x00000c74       0xa8 ./Sources/2_HIL/LCD_driver.o
-                0x00000c74                vfDataAssignMSB_LCD
+                0x00000c78       0xa8 ./Sources/2_HIL/LCD_driver.o
+                0x00000c78                vfDataAssignMSB_LCD
  .text.vfDataAssignLSB_LCD
-                0x00000d1c       0xa4 ./Sources/2_HIL/LCD_driver.o
-                0x00000d1c                vfDataAssignLSB_LCD
+                0x00000d20       0xa4 ./Sources/2_HIL/LCD_driver.o
+                0x00000d20                vfDataAssignLSB_LCD
  .text.efPinsInit_LCD
-                0x00000dc0       0xcc ./Sources/2_HIL/LCD_driver.o
-                0x00000dc0                efPinsInit_LCD
+                0x00000dc4       0xcc ./Sources/2_HIL/LCD_driver.o
+                0x00000dc4                efPinsInit_LCD
  .text.efInit_LCD
-                0x00000e8c       0x68 ./Sources/2_HIL/LCD_driver.o
-                0x00000e8c                efInit_LCD
+                0x00000e90       0x64 ./Sources/2_HIL/LCD_driver.o
+                0x00000e90                efInit_LCD
  .text.vfSendPosition_LCD
                 0x00000ef4       0x74 ./Sources/2_HIL/LCD_driver.o
                 0x00000ef4                vfSendPosition_LCD
@@ -366,104 +364,107 @@ END GROUP
  .text.vfSendData_LCD
                 0x00000fbc       0x58 ./Sources/2_HIL/LCD_driver.o
                 0x00000fbc                vfSendData_LCD
+ .text.vfClear_LCD
+                0x00001014       0x40 ./Sources/2_HIL/LCD_driver.o
+                0x00001014                vfClear_LCD
  .text.vfSendMessage_LCD
-                0x00001014       0x54 ./Sources/2_HIL/LCD_driver.o
-                0x00001014                vfSendMessage_LCD
+                0x00001054       0x54 ./Sources/2_HIL/LCD_driver.o
+                0x00001054                vfSendMessage_LCD
  .text.efCreateButton
-                0x00001068      0x31c ./Sources/2_HIL/Buttons_driver.o
-                0x00001068                efCreateButton
+                0x000010a8      0x318 ./Sources/2_HIL/Buttons_driver.o
+                0x000010a8                efCreateButton
  .text.efReadButtonNonBlocking
-                0x00001384       0xa0 ./Sources/2_HIL/Buttons_driver.o
-                0x00001384                efReadButtonNonBlocking
+                0x000013c0       0x9c ./Sources/2_HIL/Buttons_driver.o
+                0x000013c0                efReadButtonNonBlocking
  .text.efInit_GPIO
-                0x00001424      0x53c ./Sources/3_HAL/GPIO_driver.o
-                0x00001424                efInit_GPIO
+                0x0000145c      0x53c ./Sources/3_HAL/GPIO_driver.o
+                0x0000145c                efInit_GPIO
  .text.vfSetPin_GPIO
-                0x00001960       0xbc ./Sources/3_HAL/GPIO_driver.o
-                0x00001960                vfSetPin_GPIO
+                0x00001998       0xbc ./Sources/3_HAL/GPIO_driver.o
+                0x00001998                vfSetPin_GPIO
  .text.vfClearPin_GPIO
-                0x00001a1c       0xc8 ./Sources/3_HAL/GPIO_driver.o
-                0x00001a1c                vfClearPin_GPIO
+                0x00001a54       0xc8 ./Sources/3_HAL/GPIO_driver.o
+                0x00001a54                vfClearPin_GPIO
  .text.efReadPin_GPIO
-                0x00001ae4      0x14c ./Sources/3_HAL/GPIO_driver.o
-                0x00001ae4                efReadPin_GPIO
- .text.exit     0x00001c30       0x38 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
-                0x00001c30                exit
- .text.memset   0x00001c68        0xc C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
-                0x00001c68                memset
+                0x00001b1c      0x14c ./Sources/3_HAL/GPIO_driver.o
+                0x00001b1c                efReadPin_GPIO
+ .text.exit     0x00001c68       0x38 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
+                0x00001c68                exit
+ .text.memset   0x00001ca0        0xc C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
+                0x00001ca0                memset
  .text.__fill_mem
-                0x00001c74       0x7e C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
-                0x00001c74                __fill_mem
- *fill*         0x00001cf2        0x2 00
+                0x00001cac       0x7e C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
+                0x00001cac                __fill_mem
+ *fill*         0x00001d2a        0x2 00
  .text.long2str.isra.0
-                0x00001cf4      0x19c C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
+                0x00001d2c      0x19c C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
  .text.__pformatter_
-                0x00001e90      0x428 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
-                0x00001e90                __pformatter_
+                0x00001ec8      0x428 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
+                0x00001ec8                __pformatter_
  .text.__sformatter
-                0x000022b8      0x698 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(scanformat_.o)
-                0x000022b8                __sformatter
- .text.isalpha  0x00002950       0x20 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
-                0x00002950                isalpha
- .text.isspace  0x00002970       0x20 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
-                0x00002970                isspace
- .text.toupper  0x00002990        0xe C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
-                0x00002990                toupper
+                0x000022f0      0x698 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(scanformat_.o)
+                0x000022f0                __sformatter
+ .text.isalpha  0x00002988       0x20 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
+                0x00002988                isalpha
+ .text.isspace  0x000029a8       0x20 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
+                0x000029a8                isspace
+ .text.toupper  0x000029c8        0xe C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
+                0x000029c8                toupper
  .text.__strtoul
-                0x0000299e      0x1ce C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__strtoul.o)
-                0x0000299e                __strtoul
- .text.strchr   0x00002b6c       0x1e C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strchr.o)
-                0x00002b6c                strchr
- .text.memcpy   0x00002b8a       0x12 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memcpy.o)
-                0x00002b8a                memcpy
- .text.strlen   0x00002b9c       0x10 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strlen.o)
-                0x00002b9c                strlen
- .text.memchr   0x00002bac       0x1a C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memchr.o)
-                0x00002bac                memchr
- *fill*         0x00002bc6        0x2 00
+                0x000029d6      0x1ce C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__strtoul.o)
+                0x000029d6                __strtoul
+ .text.strchr   0x00002ba4       0x1e C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strchr.o)
+                0x00002ba4                strchr
+ .text.memcpy   0x00002bc2       0x12 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memcpy.o)
+                0x00002bc2                memcpy
+ .text.strlen   0x00002bd4       0x10 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strlen.o)
+                0x00002bd4                strlen
+ .text.memchr   0x00002be4       0x1a C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memchr.o)
+                0x00002be4                memchr
+ *fill*         0x00002bfe        0x2 00
  .text.__init_cpp
-                0x00002bc8       0x48 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
-                0x00002bc8                __init_cpp
+                0x00002c00       0x48 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
+                0x00002c00                __init_cpp
  .text.__fini_cpp
-                0x00002c10       0x34 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
-                0x00002c10                __fini_cpp
+                0x00002c48       0x34 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
+                0x00002c48                __fini_cpp
  .text.__destroy_global_chain
-                0x00002c44       0x1c C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
-                0x00002c44                __destroy_global_chain
+                0x00002c7c       0x1c C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+                0x00002c7c                __destroy_global_chain
  .text.__init_registers
-                0x00002c60       0x1c C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
-                0x00002c60                __init_registers
+                0x00002c98       0x1c C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+                0x00002c98                __init_registers
  .text.__init_user
-                0x00002c7c        0x4 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
-                0x00002c7c                __init_user
+                0x00002cb4        0x4 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+                0x00002cb4                __init_user
  .text.__copy_rom_section
-                0x00002c80       0x48 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
-                0x00002c80                __copy_rom_section
+                0x00002cb8       0x48 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
+                0x00002cb8                __copy_rom_section
  .text.__copy_rom_sections_to_ram
-                0x00002cc8       0x34 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
-                0x00002cc8                __copy_rom_sections_to_ram
+                0x00002d00       0x34 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
+                0x00002d00                __copy_rom_sections_to_ram
  *(.rodata)
- .rodata        0x00002cfc        0xc ./Sources/1_App/main.o
+ .rodata        0x00002d34        0xc ./Sources/1_App/main.o
  *(.rodata*)
  .rodata.efCreateButton
-                0x00002d08       0x14 ./Sources/2_HIL/Buttons_driver.o
+                0x00002d40       0x14 ./Sources/2_HIL/Buttons_driver.o
  .rodata.efInit_GPIO
-                0x00002d1c       0x14 ./Sources/3_HAL/GPIO_driver.o
+                0x00002d54       0x14 ./Sources/3_HAL/GPIO_driver.o
  .rodata.vfSetPin_GPIO
-                0x00002d30       0x14 ./Sources/3_HAL/GPIO_driver.o
+                0x00002d68       0x14 ./Sources/3_HAL/GPIO_driver.o
  .rodata.vfClearPin_GPIO
-                0x00002d44       0x14 ./Sources/3_HAL/GPIO_driver.o
+                0x00002d7c       0x14 ./Sources/3_HAL/GPIO_driver.o
  .rodata.efReadPin_GPIO
-                0x00002d58       0x14 ./Sources/3_HAL/GPIO_driver.o
+                0x00002d90       0x14 ./Sources/3_HAL/GPIO_driver.o
  .rodata.str1.1
-                0x00002d6c        0x1 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
+                0x00002da4        0x1 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
  .rodata.CSWTCH.20
-                0x00002d6d        0x5 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
+                0x00002da5        0x5 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
  .rodata.CSWTCH.21
-                0x00002d72        0x5 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
+                0x00002daa        0x5 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
  .rodata.__aeabi_ctype_table_C
-                0x00002d77      0x101 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
-                0x00002d77                __aeabi_ctype_table_C
+                0x00002daf      0x101 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
+                0x00002daf                __aeabi_ctype_table_C
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.glue_7t)
@@ -471,62 +472,62 @@ END GROUP
  *(.eh_frame)
  *(.init)
  *(.fini)
-                0x00002e78                . = ALIGN (0x4)
-                0x00002e78                _etext = .
+                0x00002eb0                . = ALIGN (0x4)
+                0x00002eb0                _etext = .
 
-.vfp11_veneer   0x00002e78        0x0
+.vfp11_veneer   0x00002eb0        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x00002e78        0x0
+.v4_bx          0x00002eb0        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x00002e78        0x0
+.iplt           0x00002eb0        0x0
  .iplt          0x00000000        0x0 ./Project_Settings/Startup_Code/kinetis_sysinit.o
 
-.rel.dyn        0x00002e78        0x0
+.rel.dyn        0x00002eb0        0x0
  .rel.iplt      0x00000000        0x0 ./Project_Settings/Startup_Code/kinetis_sysinit.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x00002e78        0x0
-                0x00002e78                __exidx_start = .
+.ARM            0x00002eb0        0x0
+                0x00002eb0                __exidx_start = .
  *(.ARM.exidx*)
-                0x00002e78                __exidx_end = .
+                0x00002eb0                __exidx_end = .
 
-.ctors          0x00002e78        0x0
-                0x00002e78                __CTOR_LIST__ = .
+.ctors          0x00002eb0        0x0
+                0x00002eb0                __CTOR_LIST__ = .
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x00002e78                __CTOR_END__ = .
+                0x00002eb0                __CTOR_END__ = .
 
-.dtors          0x00002e78        0x0
-                0x00002e78                __DTOR_LIST__ = .
+.dtors          0x00002eb0        0x0
+                0x00002eb0                __DTOR_LIST__ = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x00002e78                __DTOR_END__ = .
+                0x00002eb0                __DTOR_END__ = .
 
-.preinit_array  0x00002e78        0x0
-                0x00002e78                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x00002eb0        0x0
+                0x00002eb0                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x00002e78                PROVIDE (__preinit_array_end, .)
+                0x00002eb0                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x00002e78        0x0
-                0x00002e78                PROVIDE (__init_array_start, .)
+.init_array     0x00002eb0        0x0
+                0x00002eb0                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
-                0x00002e78                PROVIDE (__init_array_end, .)
+                0x00002eb0                PROVIDE (__init_array_end, .)
 
-.fini_array     0x00002e78        0x0
-                0x00002e78                PROVIDE (__fini_array_start, .)
+.fini_array     0x00002eb0        0x0
+                0x00002eb0                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
-                0x00002e78                PROVIDE (__fini_array_end, .)
-                0x00002e78                ___ROM_AT = .
+                0x00002eb0                PROVIDE (__fini_array_end, .)
+                0x00002eb0                ___ROM_AT = .
 
 .mtb            0x1ffff000        0x0
                 0x1ffff000                . = ALIGN (0x8)
@@ -535,7 +536,7 @@ END GROUP
                 0x1ffff000                . = ALIGN (0x8)
                 0x1ffff000                _mtb_end = .
 
-.data           0x1ffff000       0x18 load address 0x00002e78
+.data           0x1ffff000       0x18 load address 0x00002eb0
                 0x1ffff000                . = ALIGN (0x4)
                 0x1ffff000                _sdata = .
  *(.data)
@@ -575,11 +576,11 @@ END GROUP
                 0x1ffff018                _edata = .
                 0x00000018                ___data_size = (_edata - _sdata)
 
-.igot.plt       0x1ffff018        0x0 load address 0x00002e90
+.igot.plt       0x1ffff018        0x0 load address 0x00002ec8
  .igot.plt      0x00000000        0x0 ./Project_Settings/Startup_Code/kinetis_sysinit.o
                 0x1ffff018                . = ALIGN (0x4)
 
-.bss            0x1ffff018       0x20 load address 0x00002e90
+.bss            0x1ffff018       0x20 load address 0x00002ec8
                 0x1ffff018                __START_BSS = .
                 0x1ffff018                PROVIDE (__bss_start__, __START_BSS)
  *(.bss)
@@ -602,11 +603,11 @@ END GROUP
                 0x1ffff038                . = ALIGN (0x4)
                 0x1ffff038                __END_BSS = .
                 0x1ffff038                PROVIDE (__bss_end__, __END_BSS)
-                0x00002e90                _romp_at = (___ROM_AT + SIZEOF (.data))
+                0x00002ec8                _romp_at = (___ROM_AT + SIZEOF (.data))
 
-.romp           0x1ffff038       0x18 load address 0x00002e90
-                0x00002e90                __S_romp = _romp_at
-                0x1ffff038        0x4 LONG 0x2e78 ___ROM_AT
+.romp           0x1ffff038       0x18 load address 0x00002ec8
+                0x00002ec8                __S_romp = _romp_at
+                0x1ffff038        0x4 LONG 0x2eb0 ___ROM_AT
                 0x1ffff03c        0x4 LONG 0x1ffff000 _sdata
                 0x1ffff040        0x4 LONG 0x18 ___data_size
                 0x1ffff044        0x4 LONG 0x0
@@ -614,7 +615,7 @@ END GROUP
                 0x1ffff04c        0x4 LONG 0x0
 
 ._user_heap_stack
-                0x1ffff050      0x800 load address 0x00002ea8
+                0x1ffff050      0x800 load address 0x00002ee0
                 0x1ffff050                . = ALIGN (0x4)
                 0x1ffff050                PROVIDE (end, .)
                 0x1ffff050                PROVIDE (_end, .)
@@ -682,29 +683,29 @@ END GROUP
                 0x0000047d       0x31 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
 OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x37a9
+.debug_info     0x00000000     0x37b0
  .debug_info    0x00000000      0x447 ./Project_Settings/Startup_Code/kinetis_sysinit.o
  .debug_info    0x00000447      0x12a ./Project_Settings/Startup_Code/__arm_start.o
  .debug_info    0x00000571       0x54 ./Project_Settings/Startup_Code/__arm_end.o
  .debug_info    0x000005c5      0x36a ./Sources/1_App/main.o
  .debug_info    0x0000092f      0x31e ./Sources/2_HIL/Leds_driver.o
- .debug_info    0x00000c4d      0x573 ./Sources/2_HIL/LCD_driver.o
- .debug_info    0x000011c0      0x344 ./Sources/2_HIL/Buttons_driver.o
- .debug_info    0x00001504      0x68d ./Sources/3_HAL/GPIO_driver.o
- .debug_info    0x00001b91       0xe8 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
- .debug_info    0x00001c79       0xec C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
- .debug_info    0x00001d65      0x137 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
- .debug_info    0x00001e9c      0x50d C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
- .debug_info    0x000023a9      0x568 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(scanformat_.o)
- .debug_info    0x00002911      0x313 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
- .debug_info    0x00002c24      0x1d6 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__strtoul.o)
- .debug_info    0x00002dfa      0x10b C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strchr.o)
- .debug_info    0x00002f05      0x10f C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memcpy.o)
- .debug_info    0x00003014       0xea C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strlen.o)
- .debug_info    0x000030fe      0x121 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memchr.o)
- .debug_info    0x0000321f      0x136 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
- .debug_info    0x00003355      0x2b9 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
- .debug_info    0x0000360e      0x19b C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
+ .debug_info    0x00000c4d      0x57a ./Sources/2_HIL/LCD_driver.o
+ .debug_info    0x000011c7      0x344 ./Sources/2_HIL/Buttons_driver.o
+ .debug_info    0x0000150b      0x68d ./Sources/3_HAL/GPIO_driver.o
+ .debug_info    0x00001b98       0xe8 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
+ .debug_info    0x00001c80       0xec C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
+ .debug_info    0x00001d6c      0x137 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
+ .debug_info    0x00001ea3      0x50d C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
+ .debug_info    0x000023b0      0x568 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(scanformat_.o)
+ .debug_info    0x00002918      0x313 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
+ .debug_info    0x00002c2b      0x1d6 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__strtoul.o)
+ .debug_info    0x00002e01      0x10b C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strchr.o)
+ .debug_info    0x00002f0c      0x10f C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memcpy.o)
+ .debug_info    0x0000301b       0xea C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strlen.o)
+ .debug_info    0x00003105      0x121 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memchr.o)
+ .debug_info    0x00003226      0x136 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
+ .debug_info    0x0000335c      0x2b9 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+ .debug_info    0x00003615      0x19b C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
 
 .debug_abbrev   0x00000000     0x120a
  .debug_abbrev  0x00000000       0xe7 ./Project_Settings/Startup_Code/kinetis_sysinit.o
@@ -800,7 +801,7 @@ OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
  .debug_aranges
                 0x00000440       0x30 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
 
-.debug_macinfo  0x00000000    0xed373
+.debug_macinfo  0x00000000    0xed387
  .debug_macinfo
                 0x00000000    0x264f0 ./Project_Settings/Startup_Code/kinetis_sysinit.o
  .debug_macinfo
@@ -812,35 +813,35 @@ OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
  .debug_macinfo
                 0x00053d46    0x26501 ./Sources/2_HIL/Leds_driver.o
  .debug_macinfo
-                0x0007a247    0x2669f ./Sources/2_HIL/LCD_driver.o
+                0x0007a247    0x266b6 ./Sources/2_HIL/LCD_driver.o
  .debug_macinfo
-                0x000a08e6    0x265aa ./Sources/2_HIL/Buttons_driver.o
+                0x000a08fd    0x265a7 ./Sources/2_HIL/Buttons_driver.o
  .debug_macinfo
-                0x000c6e90    0x264e3 ./Sources/3_HAL/GPIO_driver.o
+                0x000c6ea4    0x264e3 ./Sources/3_HAL/GPIO_driver.o
 
-.debug_line     0x00000000     0x2541
+.debug_line     0x00000000     0x254b
  .debug_line    0x00000000      0x216 ./Project_Settings/Startup_Code/kinetis_sysinit.o
  .debug_line    0x00000216      0x299 ./Project_Settings/Startup_Code/__arm_start.o
  .debug_line    0x000004af      0x265 ./Project_Settings/Startup_Code/__arm_end.o
- .debug_line    0x00000714      0x2b4 ./Sources/1_App/main.o
- .debug_line    0x000009c8      0x2b3 ./Sources/2_HIL/Leds_driver.o
- .debug_line    0x00000c7b      0x37d ./Sources/2_HIL/LCD_driver.o
- .debug_line    0x00000ff8      0x307 ./Sources/2_HIL/Buttons_driver.o
- .debug_line    0x000012ff      0x366 ./Sources/3_HAL/GPIO_driver.o
- .debug_line    0x00001665       0x8d C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
- .debug_line    0x000016f2       0x90 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
- .debug_line    0x00001782       0xf6 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
- .debug_line    0x00001878      0x2c3 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
- .debug_line    0x00001b3b      0x2be C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(scanformat_.o)
- .debug_line    0x00001df9      0x1be C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
- .debug_line    0x00001fb7      0x11e C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__strtoul.o)
- .debug_line    0x000020d5       0x7d C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strchr.o)
- .debug_line    0x00002152       0x8b C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memcpy.o)
- .debug_line    0x000021dd       0x85 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strlen.o)
- .debug_line    0x00002262       0x9f C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memchr.o)
- .debug_line    0x00002301       0x6c C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
- .debug_line    0x0000236d      0x117 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
- .debug_line    0x00002484       0xbd C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
+ .debug_line    0x00000714      0x2b5 ./Sources/1_App/main.o
+ .debug_line    0x000009c9      0x2b3 ./Sources/2_HIL/Leds_driver.o
+ .debug_line    0x00000c7c      0x386 ./Sources/2_HIL/LCD_driver.o
+ .debug_line    0x00001002      0x307 ./Sources/2_HIL/Buttons_driver.o
+ .debug_line    0x00001309      0x366 ./Sources/3_HAL/GPIO_driver.o
+ .debug_line    0x0000166f       0x8d C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
+ .debug_line    0x000016fc       0x90 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
+ .debug_line    0x0000178c       0xf6 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
+ .debug_line    0x00001882      0x2c3 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o)
+ .debug_line    0x00001b45      0x2be C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(scanformat_.o)
+ .debug_line    0x00001e03      0x1be C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(ctype_aeabi.o)
+ .debug_line    0x00001fc1      0x11e C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__strtoul.o)
+ .debug_line    0x000020df       0x7d C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strchr.o)
+ .debug_line    0x0000215c       0x8b C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memcpy.o)
+ .debug_line    0x000021e7       0x85 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(strlen.o)
+ .debug_line    0x0000226c       0x9f C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memchr.o)
+ .debug_line    0x0000230b       0x6c C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
+ .debug_line    0x00002377      0x117 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+ .debug_line    0x0000248e       0xbd C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
 
 .debug_str      0x00000000     0x13a0
  .debug_str     0x00000000      0x297 ./Project_Settings/Startup_Code/kinetis_sysinit.o
@@ -854,7 +855,7 @@ OUTPUT(CalculatorKL25Z.elf elf32-littlearm)
  .debug_str     0x000006ab      0x110 ./Sources/2_HIL/Leds_driver.o
                                 0x334 (size before relaxing)
  .debug_str     0x000007bb      0x1b2 ./Sources/2_HIL/LCD_driver.o
-                                0x572 (size before relaxing)
+                                0x577 (size before relaxing)
  .debug_str     0x0000096d       0x99 ./Sources/2_HIL/Buttons_driver.o
                                 0x368 (size before relaxing)
  .debug_str     0x00000a06      0x10c ./Sources/3_HAL/GPIO_driver.o
