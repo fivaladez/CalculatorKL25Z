@@ -1,13 +1,58 @@
 /*
- * GPIO_driver.c
- *
- *  Created on: Sep 4, 2018
- *      Author: ivan_
- */
+** Project: Calculator for KL25Z
+** File   : GPIO_driver.c
+** Author : Ivan Valadez
+** Date   : 10 - October - 2018
+**
+** Overview: C file containing the functions for using GPIO pins from MCU KL25K of nxp
+**
+** $Log$
+*/
+/*****************************************************************************
+**                                                                          **
+** 																	        **
+** 																	        **
+** 														                    **
+** 														                    **
+** 		   															        **
+**                                                                          **
+*****************************************************************************/
 
+/*---------------------------------------------------------------------------
+** Includes
+*/
 #include "GPIO_driver.h"
-
-eStatus_GPIO_t efInit_GPIO  (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx,eInOut_GPIO_t eInOut)
+/*---------------------------------------------------------------------------
+** Defines and Macros
+*/
+/*---------------------------------------------------------------------------
+** Typedefs
+*/
+/*---------------------------------------------------------------------------
+** Data
+*/
+/*---------------------------------------------------------------------------
+** Prototypes Functions
+*/
+/*---------------------------------------------------------------------------
+** Functions
+*/
+/*-------------------------------------------------------------------------*/
+/*! \brief    efInit_GPIO
+**
+** \note	  Initialize Clock, Port and Pin as an output or input and returns
+** 			  TRUE if the parameters are valid and the function could started
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_GPIO_t ePORTx,
+** 						 ePINx_GPIO_t ePINx,
+** 						 eInOut_GPIO_t eInOut
+**
+** \return               eStatus_GPIO_t, A confirmation (success or fail) of internal process 
+** \description			 
+*/
+eStatus_GPIO_t efInit_GPIO  ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_GPIO_t eInOut )
 {
 	eStatus_GPIO_t eResult = eFALSE;
 	
@@ -109,8 +154,20 @@ eStatus_GPIO_t efInit_GPIO  (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx,eInOut_GPIO
 	
 	return eResult;
 	
-}//End function
-void vfSetPin_GPIO   (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx) /*Write a 1*/
+}
+/*! \brief    vfSetPin_GPIO
+**
+** \note	  Writes a logic 1 in the port and pin that you pass as argument
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_GPIO_t ePORTx,
+** 						 ePINx_GPIO_t ePINx
+**
+** \return          	 NA 
+** \description	
+*/
+void vfSetPin_GPIO   ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx ) /*Write a 1*/
 {
 	switch(ePORTx){
 		case ePORTA: GPIOA_PDOR |= (1<<ePINx);
@@ -127,7 +184,19 @@ void vfSetPin_GPIO   (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx) /*Write a 1*/
 			break;
 	}//End switch
 }
-void vfClearPin_GPIO (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)/*Write a 0*/
+/*! \brief    vfClearPin_GPIO
+**
+** \note	  Writes a logic 0 in the port and pin that you pass as argument
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_GPIO_t ePORTx,
+** 						 ePINx_GPIO_t ePINx
+**
+** \return          	 NA 
+** \description	
+*/
+void vfClearPin_GPIO ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx )/*Write a 0*/
 {
 	switch(ePORTx){
 		case ePORTA: GPIOA_PDOR &= ~(1<<ePINx);
@@ -144,7 +213,19 @@ void vfClearPin_GPIO (ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)/*Write a 0*/
 			break;
 	}//End switch
 }
-void vfTogglePin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
+/*! \brief    vfTogglePin_GPIO
+**
+** \note	  Toggle the value in the port and pin that you pass as argument
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_GPIO_t ePORTx,
+** 						 ePINx_GPIO_t ePINx
+**
+** \return          	 NA 
+** \description	
+*/
+void vfTogglePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx )
 {
 	switch(ePORTx){
 		case ePORTA: GPIOA_PDOR ^= (1<<ePINx);
@@ -161,12 +242,26 @@ void vfTogglePin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
 			break;
 	}//End switch
 }
-eStatus_GPIO_t efReadPin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
+/*! \brief    efReadPin_GPIO
+**
+** \note	  Read the logic value of the required pin and return
+** 			  TRUE  = Logic 0
+** 			  FALSE = Logic 1
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_GPIO_t ePORTx,
+** 						 ePINx_GPIO_t ePINx,
+**
+** \return               eStatus_GPIO_t, A confirmation (success or fail) of internal process 
+** \description	
+*/
+eStatus_GPIO_t efReadPin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx )
 {
 	eStatus_GPIO_t eStatus = eFALSE;
 	
-	switch(ePORTx){
-		case ePORTA: eStatus = ((GPIOA_PDIR &= (1 << ePINx)) >> ePINx);//Possible results: 1 or 0
+	switch(ePORTx){/*	Possible results: 1 or 0	*/
+		case ePORTA: eStatus = ((GPIOA_PDIR &= (1 << ePINx)) >> ePINx);
 			break;
 		case ePORTB: eStatus = ((GPIOB_PDIR &= (1 << ePINx)) >> ePINx);
 				break;
@@ -190,7 +285,20 @@ eStatus_GPIO_t efReadPin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx)
 	
 	return eStatus;
 }
-void vfWritePin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data) 
+/*! \brief    vfWritePin_GPIO
+**
+** \note	  Writes a binary value (0 or 1) in the pin that you pass as argument
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_GPIO_t ePORTx,
+** 						 ePINx_GPIO_t ePINx,
+** 						 uint8_t u8Data
+**
+** \return          	 NA 
+** \description	
+*/
+void vfWritePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, uint8_t u8Data ) 
 {
 	switch(ePORTx){
 		case ePORTA: 
@@ -238,10 +346,23 @@ void vfWritePin_GPIO(ePORTx_GPIO_t ePORTx,ePINx_GPIO_t ePINx, uint8_t u8Data)
 				GPIOE_PDOR |= (1<<ePINx);
 			}
 			break;
-		default: /**/
+		default: /*Do nothing*/
 			break;
 	}//End switch
 }
+/*! \brief    vfWritePort_GPIO
+**
+** \note	  Writes the value of a byte in the port you pass as argument
+** \Attention You will affect the complete register GPIOx_PDOR, so, be careful
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_GPIO_t ePORTx,
+** 						 uint8_t u8Data
+**
+** \return          	 NA 
+** \description	
+*/
 void vfWritePort_GPIO( ePORTx_GPIO_t ePORTx, uint8_t u8Data ) 
 {
 	switch(ePORTx){
