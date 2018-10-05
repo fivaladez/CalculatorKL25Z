@@ -13,9 +13,10 @@
 #define TIME_LCD_1_5MS		15200
 #define TIME_LCD_1MS		10000
 #define TIME_LCD_100US		1000
-#define TIME_LCD_40US		400/*Best approach to 40us*/
 
 #if DATA_BITS_4 == 0u
+
+#define TIME_LCD_40US		400/*Best approach to 40us = 400*/
 
 #define NO_INSTRUCTIONS		7
 #define NO_DATA_PINS		4
@@ -39,6 +40,8 @@
 #define EN	(1u)
 
 #else
+
+#define TIME_LCD_40US		450/*Time some different from 4 bit mode*/
 
 #define NO_INSTRUCTIONS		7
 #define NO_DATA_PINS		8
@@ -77,19 +80,15 @@ typedef ePINx_GPIO_t  ePINx_LCD_t;
 /*	D4 - D7	*/
 ePORTx_LCD_t eDataPorts[NO_DATA_PINS] = {ePORTC,  ePORTC,  ePORTC,  ePORTC};/*PORTD_1 is blue led*/
 ePINx_LCD_t  eDataPins [NO_DATA_PINS] = {ePIN_4, ePIN_3, ePIN_0, ePIN_7};
-
-/*	RS and Enable	*/
-ePORTx_LCD_t eControlPorts [NO_CONTROL_PINS] = {ePORTB, ePORTB};
-ePINx_LCD_t  eControlPins  [NO_CONTROL_PINS] = {ePIN_0, ePIN_1};
 #else
 /*	D0 - D7	*/
 ePORTx_LCD_t eDataPorts[NO_DATA_PINS] = {ePORTC,  ePORTC,  ePORTC,  ePORTC, ePORTC,  ePORTC,  ePORTC,  ePORTC};
 ePINx_LCD_t  eDataPins [NO_DATA_PINS] = {ePIN_11, ePIN_10, ePIN_6, ePIN_5, ePIN_4, ePIN_3, ePIN_0, ePIN_7};
-
+#endif
 /*	RS and Enable	*/
 ePORTx_LCD_t eControlPorts [NO_CONTROL_PINS] = {ePORTB, ePORTB};
 ePINx_LCD_t  eControlPins  [NO_CONTROL_PINS] = {ePIN_0, ePIN_1};
-#endif
+
 /*====================================PROTOTYPES======================================*/
 
 void vfDelay_LCD(uint32_t u32Time);
