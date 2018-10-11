@@ -17,53 +17,53 @@ void vfdelay(uint32_t u32Time);
 int main(void)
 {
 	sButton_t sButton1;
-	
+
 	if( eTRUE == efInit_LED(eRED)  &&  eTRUE ==  efInit_LED(eGREEN)  &&  eTRUE ==  efInit_LED(eBLUE) )
 	{
 		vfTurnOff_LED(eRED);
 		vfTurnOff_LED(eGREEN);
 		vfTurnOff_LED(eBLUE);
-		
+
 		if(eTRUE == efCreateButton(&sButton1, ePORTA, ePIN_1))
 		{
 			vfTurnOn_LED(eBLUE);
-			
-		}else 
-			{
-				vfTurnOff_LED(eBLUE);
-		    }
-		
+
+		}else
+		{
+			vfTurnOff_LED(eBLUE);
+		}
+
 		if( eTRUE == efInit_LCD())
 		{
 			vfTurnOn_LED(eGREEN);
-			
-		}else 
-			{
-				vfTurnOff_LED(eGREEN);
-			}
+
+		}else
+		{
+			vfTurnOff_LED(eGREEN);
+		}
 	}
-	
+
 	vfTurnOff_LED(eRED);
 	vfTurnOff_LED(eGREEN);
 	vfTurnOff_LED(eBLUE);
-	
-	for(;;) {	   
-		
+
+	for(;;) {
+
 	   	if(eTRUE == efReadButtonNonBlocking(&sButton1))
 	   	{
 	   		vfTurnOn_LED( eRED );
 	   		vfSendPosition_LCD(eFILA_01_0);
 	   		vfSendMessage_LCD("Hello World");
-	   		
-	   	}else 
+
+	   	}else
 	   	{
 	   		vfTurnOff_LED( eRED );
 	   		vfClear_LCD();
 	   	}
-	   	
-	   	
+
+
 	}//End of infinity loop
-	
+
 	return 0;
 }
 

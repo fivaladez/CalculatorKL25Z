@@ -8,15 +8,6 @@
 **
 ** $Log$
 */
-/*****************************************************************************
-**                                                                          **
-** 																	        **
-** 																	        **
-** 														                    **
-** 														                    **
-** 		   															        **
-**                                                                          **
-*****************************************************************************/
 #ifndef GPIO_DRIVER_H_
 #define GPIO_DRIVER_H_
 
@@ -31,16 +22,16 @@
 /*---------------------------------------------------------------------------
 ** Typedefs
 */
-typedef enum 
+typedef enum
 {
 	ePORTA,
 	ePORTB,
 	ePORTC,
 	ePORTD,
 	ePORTE
-	
+
 }ePORTx_GPIO_t;
-typedef enum 
+typedef enum
 {
 	ePIN_0,  ePIN_1,  ePIN_2,  ePIN_3,
 	ePIN_4,  ePIN_5,  ePIN_6,  ePIN_7,
@@ -49,19 +40,19 @@ typedef enum
 	ePIN_16, ePIN_17, ePIN_18, ePIN_19,
 	ePIN_20, ePIN_21, ePIN_22, ePIN_23,
 	ePIN_29, ePIN_30
-	
+
 }ePINx_GPIO_t;
-typedef enum 
+typedef enum
 {
 	eINPUT,
 	eOUTPUT
-	
+
 }eInOut_GPIO_t;
-typedef enum 
+typedef enum
 {
 	eFALSE,
 	eTRUE
-	
+
 }eStatus_GPIO_t;
 /*---------------------------------------------------------------------------
 ** Data
@@ -84,7 +75,7 @@ typedef enum
 ** 						 ePINx_GPIO_t ePINx,
 ** 						 eInOut_GPIO_t eInOut
 **
-** \return               eStatus_GPIO_t, A confirmation (success or fail) of internal process 
+** \return               eStatus_GPIO_t, A confirmation (success or fail) of internal process
 */
 eStatus_GPIO_t efInit_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_GPIO_t eInOut );
 /*! \brief    vfSetPin_GPIO
@@ -96,7 +87,7 @@ eStatus_GPIO_t efInit_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_GPI
 ** \param[in]            ePORTx_GPIO_t ePORTx,
 ** 						 ePINx_GPIO_t ePINx
 **
-** \return          	 NA 
+** \return          	 NA
 */
 void vfSetPin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx );
 /*! \brief    vfClearPin_GPIO
@@ -108,7 +99,7 @@ void vfSetPin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx );
 ** \param[in]            ePORTx_GPIO_t ePORTx,
 ** 						 ePINx_GPIO_t ePINx
 **
-** \return          	 NA 
+** \return          	 NA
 */
 void vfClearPin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx );
 /*! \brief    vfTogglePin_GPIO
@@ -120,7 +111,7 @@ void vfClearPin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx );
 ** \param[in]            ePORTx_GPIO_t ePORTx,
 ** 						 ePINx_GPIO_t ePINx
 **
-** \return          	 NA 
+** \return          	 NA
 */
 void vfTogglePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx );
 /*! \brief    efReadPin_GPIO
@@ -134,7 +125,7 @@ void vfTogglePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx );
 ** \param[in]            ePORTx_GPIO_t ePORTx,
 ** 						 ePINx_GPIO_t ePINx,
 **
-** \return               eStatus_GPIO_t, A confirmation (success or fail) of internal process 
+** \return               eStatus_GPIO_t, A confirmation (success or fail) of internal process
 */
 eStatus_GPIO_t efReadPin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx );
 /*! \brief    vfWritePin_GPIO
@@ -147,7 +138,7 @@ eStatus_GPIO_t efReadPin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx );
 ** 						 ePINx_GPIO_t ePINx,
 ** 						 uint8_t u8Data
 **
-** \return          	 NA 
+** \return          	 NA
 */
 void vfWritePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, uint8_t u8Data );
 /*! \brief    vfWritePort_GPIO
@@ -159,7 +150,7 @@ void vfWritePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, uint8_t u8Data )
 ** \param[in]            ePORTx_GPIO_t ePORTx,
 ** 						 uint8_t u8Data
 **
-** \return          	 NA 
+** \return          	 NA
 */
 void vfWritePort_GPIO( ePORTx_GPIO_t ePORTx, uint8_t u8Data );
 
