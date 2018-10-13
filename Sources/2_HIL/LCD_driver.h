@@ -39,7 +39,13 @@ typedef enum
 }ePosition_LCD_t;
 typedef uint8_t u8Data_LCD_t;
 typedef uint8_t u8Command_LCD_t;
-typedef eStatus_GPIO_t eStatus_LCD_t;
+typedef enum
+{
+	eFALSE_LCD = eFALSE_GPIO,
+	eTRUE_LCD = eTRUE_GPIO
+
+}eStatus_LCD_t;
+
 /*---------------------------------------------------------------------------
 ** Data
 */

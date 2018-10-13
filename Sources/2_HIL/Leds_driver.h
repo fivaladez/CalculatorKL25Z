@@ -21,14 +21,17 @@
 /*---------------------------------------------------------------------------
 ** Typedefs
 */
-typedef eStatus_GPIO_t eStates_LED_t;
-typedef ePORTx_GPIO_t ePORTx_LED_t;
-typedef ePINx_GPIO_t ePINx_LED_t;
 typedef enum
 {
-	eRED,
-	eGREEN,
-	eBLUE
+	eFALSE_LED = eFALSE_GPIO,
+	eTRUE_LED = eTRUE_GPIO
+
+}eStatus_LED_t;
+typedef enum
+{
+	eRED_LED,
+	eGREEN_LED,
+	eBLUE_LED
 }eColors_LED_t;
 /*---------------------------------------------------------------------------
 ** Data
@@ -47,7 +50,7 @@ typedef enum
 **
 ** \return               eStatus_LCD_t, A confirmation (success or fail) of internal process
 */
-eStates_LED_t efInit_LED   (eColors_LED_t eColor);
+eStatus_LED_t efInit_LED   (eColors_LED_t eColor);
 /*! \brief    vfTurnOn_LED
 **
 ** \note	  Turn on the required led
@@ -89,8 +92,8 @@ void vfToggle_LED (eColors_LED_t eColor);
 ** \param[in,out]        NA
 ** \param[in]            eColors_LED_t eColor
 **
-** \return               eStates_LED_t, A confirmation (success or fail) if active or inactive
+** \return               eStatus_LED_t, A confirmation (success or fail) if active or inactive
 */
-eStates_LED_t efRead_LED   (eColors_LED_t eColor);
+eStatus_LED_t efRead_LED   (eColors_LED_t eColor);
 
 #endif /* LEDS_DRIVER_H_ */

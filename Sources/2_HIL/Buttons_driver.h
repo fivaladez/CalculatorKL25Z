@@ -24,12 +24,16 @@
 */
 typedef ePINx_GPIO_t   ePINx_Buttons_t;
 typedef ePORTx_GPIO_t  ePORTx_Buttons_t;
-typedef eStatus_GPIO_t eStatus_Buttons_t;
-typedef eInOut_GPIO_t  eInOut_Buttons_t;
 typedef enum
 {
-	eCOMPLETE,
-	eINCOMPLETE
+	eFALSE_BUTTONS = eFALSE_GPIO,
+	eTRUE_BUTTONS = eTRUE_GPIO
+
+}eStatus_Buttons_t;
+typedef enum
+{
+	eALREADY_PRESSED,
+	eNOT_PRESSED
 
 }eState_Buttons_t;
 typedef struct

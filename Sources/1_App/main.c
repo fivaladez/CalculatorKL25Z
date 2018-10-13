@@ -18,46 +18,46 @@ int main(void)
 {
 	sButton_t sButton1;
 
-	if( eTRUE == efInit_LED(eRED)  &&  eTRUE ==  efInit_LED(eGREEN)  &&  eTRUE ==  efInit_LED(eBLUE) )
+	if( eTRUE_LED == efInit_LED(eRED_LED)  &&  eTRUE_LED ==  efInit_LED(eGREEN_LED)  &&  eTRUE_LED ==  efInit_LED(eBLUE_LED) )
 	{
-		vfTurnOff_LED(eRED);
-		vfTurnOff_LED(eGREEN);
-		vfTurnOff_LED(eBLUE);
+		vfTurnOff_LED(eRED_LED);
+		vfTurnOff_LED(eGREEN_LED);
+		vfTurnOff_LED(eBLUE_LED);
 
-		if(eTRUE == efCreateButton(&sButton1, ePORTA, ePIN_1))
+		if(eTRUE_BUTTONS == efCreateButton(&sButton1, ePORTA_GPIO, ePIN_1_GPIO))
 		{
-			vfTurnOn_LED(eBLUE);
+			vfTurnOn_LED(eBLUE_LED);
 
 		}else
 		{
-			vfTurnOff_LED(eBLUE);
+			vfTurnOff_LED(eBLUE_LED);
 		}
 
-		if( eTRUE == efInit_LCD())
+		if( eTRUE_LCD == efInit_LCD())
 		{
-			vfTurnOn_LED(eGREEN);
+			vfTurnOn_LED(eGREEN_LED);
 
 		}else
 		{
-			vfTurnOff_LED(eGREEN);
+			vfTurnOff_LED(eGREEN_LED);
 		}
 	}
 
-	vfTurnOff_LED(eRED);
-	vfTurnOff_LED(eGREEN);
-	vfTurnOff_LED(eBLUE);
+	vfTurnOff_LED(eRED_LED);
+	vfTurnOff_LED(eGREEN_LED);
+	vfTurnOff_LED(eBLUE_LED);
 
 	for(;;) {
 
-	   	if(eTRUE == efReadButtonNonBlocking(&sButton1))
+	   	if(eTRUE_BUTTONS == efReadButtonNonBlocking(&sButton1))
 	   	{
-	   		vfTurnOn_LED( eRED );
+	   		vfTurnOn_LED( eRED_LED );
 	   		vfSendPosition_LCD(eFILA_01_0);
 	   		vfSendMessage_LCD("Hello World");
 
 	   	}else
 	   	{
-	   		vfTurnOff_LED( eRED );
+	   		vfTurnOff_LED( eRED_LED );
 	   		vfClear_LCD();
 	   	}
 

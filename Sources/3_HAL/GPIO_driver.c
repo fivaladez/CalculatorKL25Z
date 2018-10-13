@@ -44,101 +44,104 @@
 */
 eStatus_GPIO_t efInit_GPIO  ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_GPIO_t eInOut )
 {
-	eStatus_GPIO_t eResult = eFALSE;
+	eStatus_GPIO_t eResult = eFALSE_GPIO;
 
 	switch(ePORTx){
-	case ePORTA:
-		if(ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_4 || ePINx == ePIN_5 || ePINx == ePIN_12 || ePINx == ePIN_13)
+	case ePORTA_GPIO:
+		if(ePINx == ePIN_1_GPIO  || ePINx == ePIN_2_GPIO || ePINx == ePIN_4_GPIO || ePINx == ePIN_5_GPIO
+		|| ePINx == ePIN_12_GPIO || ePINx == ePIN_13_GPIO)
 		{
 			SIM_SCGC5 |= SIM_SCGC5_PORTA_MASK;				     //1 Enable clock for this port
 			PORTA_PCR(ePINx) = PORT_PCR_MUX(PORT_PCR_MUX_GPIO);  //2 Mode 1 for working as GPIO_vfInit
 			GPIOA_PDOR &= ~(1<<ePINx);						     //3 Make sure of initial value of the pin (write a zero)
-			if(eINPUT == eInOut)
+			if(eINPUT_GPIO == eInOut)
 			{
 				GPIOA_PDDR &= ~(1<<ePINx);					     //4 Define this pin as input
-				eResult = eTRUE;
-			}else if(eOUTPUT == eInOut)
+				eResult = eTRUE_GPIO;
+			}else if(eOUTPUT_GPIO == eInOut)
 				{
 					GPIOA_PDDR |= (1<<ePINx);					 //4 Define this pin as output
-					eResult = eTRUE;
-				}else eResult = eFALSE;
-		}else eResult = eFALSE;
+					eResult = eTRUE_GPIO;
+				}else eResult = eFALSE_GPIO;
+		}else eResult = eFALSE_GPIO;
 		break;
-	case ePORTB:
-		if(ePINx == ePIN_0  || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_8 || ePINx == ePIN_9
-		|| ePINx == ePIN_18 || ePINx == ePIN_19)
+	case ePORTB_GPIO:
+		if(ePINx == ePIN_0_GPIO || ePINx == ePIN_1_GPIO || ePINx == ePIN_2_GPIO  || ePINx == ePIN_3_GPIO 
+		|| ePINx == ePIN_8_GPIO || ePINx == ePIN_9_GPIO || ePINx == ePIN_18_GPIO || ePINx == ePIN_19_GPIO)
 		{
 			SIM_SCGC5 |= SIM_SCGC5_PORTB_MASK;
 			PORTB_PCR(ePINx) = PORT_PCR_MUX(PORT_PCR_MUX_GPIO);
 			GPIOB_PDOR &= ~(1<<ePINx);
-			if(eINPUT == eInOut)
+			if(eINPUT_GPIO == eInOut)
 			{
 				GPIOB_PDDR &= ~(1<<ePINx);
-				eResult = eTRUE;
-			}else if(eOUTPUT == eInOut)
+				eResult = eTRUE_GPIO;
+			}else if(eOUTPUT_GPIO == eInOut)
 				{
 					GPIOB_PDDR |= (1<<ePINx);
-					eResult = eTRUE;
-				}else eResult = eFALSE;
-		}else eResult = eFALSE;
+					eResult = eTRUE_GPIO;
+				}else eResult = eFALSE_GPIO;
+		}else eResult = eFALSE_GPIO;
 		break;
-	case ePORTC:
-		if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4 || ePINx == ePIN_5
-		|| ePINx == ePIN_6 || ePINx == ePIN_7 || ePINx == ePIN_8 || ePINx == ePIN_9 || ePINx == ePIN_10 || ePINx == ePIN_11
-		|| ePINx == ePIN_12 || ePINx == ePIN_13 || ePINx == ePIN_16 || ePINx == ePIN_17)
+	case ePORTC_GPIO:
+		if(ePINx == ePIN_0_GPIO  || ePINx == ePIN_1_GPIO  || ePINx == ePIN_2_GPIO  || ePINx == ePIN_3_GPIO 
+		|| ePINx == ePIN_4_GPIO  || ePINx == ePIN_5_GPIO  || ePINx == ePIN_6_GPIO  || ePINx == ePIN_7_GPIO 
+		|| ePINx == ePIN_8_GPIO  || ePINx == ePIN_9_GPIO  || ePINx == ePIN_10_GPIO || ePINx == ePIN_11_GPIO
+		|| ePINx == ePIN_12_GPIO || ePINx == ePIN_13_GPIO || ePINx == ePIN_16_GPIO || ePINx == ePIN_17_GPIO)
 		{
 			SIM_SCGC5 |= SIM_SCGC5_PORTC_MASK;
 			PORTC_PCR(ePINx) = PORT_PCR_MUX(PORT_PCR_MUX_GPIO);
 			GPIOC_PDOR &= ~(1<<ePINx);
-			if(eINPUT == eInOut)
+			if(eINPUT_GPIO == eInOut)
 			{
 				GPIOC_PDDR &= ~(1<<ePINx);
-				eResult = eTRUE;
-			}else if(eOUTPUT == eInOut)
+				eResult = eTRUE_GPIO;
+			}else if(eOUTPUT_GPIO == eInOut)
 				{
 					GPIOC_PDDR |= (1<<ePINx);
-					eResult = eTRUE;
-				}else eResult = eFALSE;
-		}else eResult = eFALSE;
+					eResult = eTRUE_GPIO;
+				}else eResult = eFALSE_GPIO;
+		}else eResult = eFALSE_GPIO;
 		break;
-	case ePORTD:
-		if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4
-		|| ePINx == ePIN_5 || ePINx == ePIN_6 || ePINx == ePIN_7 || ePINx == ePIN_13)
+	case ePORTD_GPIO:
+		if(ePINx == ePIN_0_GPIO || ePINx == ePIN_1_GPIO || ePINx == ePIN_2_GPIO || ePINx == ePIN_3_GPIO 
+		|| ePINx == ePIN_4_GPIO || ePINx == ePIN_5_GPIO || ePINx == ePIN_6_GPIO || ePINx == ePIN_7_GPIO 
+		|| ePINx == ePIN_13_GPIO)
 		{
 			SIM_SCGC5 |= SIM_SCGC5_PORTD_MASK;
 			PORTD_PCR(ePINx) = PORT_PCR_MUX(PORT_PCR_MUX_GPIO);
 			GPIOD_PDOR &= ~(1<<ePINx);
-			if(eINPUT == eInOut)
+			if(eINPUT_GPIO == eInOut)
 			{
 				GPIOD_PDDR &= ~(1<<ePINx);
-				eResult = eTRUE;
-			}else if(eOUTPUT == eInOut)
+				eResult = eTRUE_GPIO;
+			}else if(eOUTPUT_GPIO == eInOut)
 				{
 					GPIOD_PDDR |= (1<<ePINx);
-					eResult = eTRUE;
-				}else eResult = eFALSE;
-		}else eResult = eFALSE;
+					eResult = eTRUE_GPIO;
+				}else eResult = eFALSE_GPIO;
+		}else eResult = eFALSE_GPIO;
 		break;
-	case ePORTE:
-		if(ePINx == ePIN_0 || ePINx == ePIN_1 || ePINx == ePIN_2 || ePINx == ePIN_3 || ePINx == ePIN_4
-		|| ePINx == ePIN_5 || ePINx == ePIN_20 || ePINx == ePIN_21 || ePINx == ePIN_22 || ePINx == ePIN_23
-		|| ePINx == ePIN_29 || ePINx == ePIN_30)
+	case ePORTE_GPIO:
+		if(ePINx == ePIN_0_GPIO  || ePINx == ePIN_1_GPIO  || ePINx == ePIN_2_GPIO  || ePINx == ePIN_3_GPIO 
+		|| ePINx == ePIN_4_GPIO  || ePINx == ePIN_5_GPIO  || ePINx == ePIN_20_GPIO || ePINx == ePIN_21_GPIO 
+		|| ePINx == ePIN_22_GPIO || ePINx == ePIN_23_GPIO || ePINx == ePIN_29_GPIO || ePINx == ePIN_30_GPIO)
 		{
 			SIM_SCGC5 |= SIM_SCGC5_PORTE_MASK;
 			PORTE_PCR(ePINx) = PORT_PCR_MUX(PORT_PCR_MUX_GPIO);
 			GPIOE_PDOR &= ~(1<<ePINx);
-			if(eINPUT == eInOut)
+			if(eINPUT_GPIO == eInOut)
 			{
 				GPIOE_PDDR &= ~(1<<ePINx);
-				eResult = eTRUE;
-			}else if(eOUTPUT == eInOut)
+				eResult = eTRUE_GPIO;
+			}else if(eOUTPUT_GPIO == eInOut)
 				{
 					GPIOE_PDDR |= (1<<ePINx);
-					eResult = eTRUE;
-				}else eResult = eFALSE;
-		}else eResult = eFALSE;
+					eResult = eTRUE_GPIO;
+				}else eResult = eFALSE_GPIO;
+		}else eResult = eFALSE_GPIO;
 		break;
-	default: eResult = eFALSE;
+	default: eResult = eFALSE_GPIO;
 		break;
 	}//End switch
 
@@ -160,15 +163,15 @@ eStatus_GPIO_t efInit_GPIO  ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_G
 void vfSetPin_GPIO   ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx ) /*Write a 1*/
 {
 	switch(ePORTx){
-	case ePORTA: GPIOA_PDOR |= (1<<ePINx);
+	case ePORTA_GPIO: GPIOA_PDOR |= (1<<ePINx);
 		break;
-	case ePORTB: GPIOB_PDOR |= (1<<ePINx);
+	case ePORTB_GPIO: GPIOB_PDOR |= (1<<ePINx);
 		break;
-	case ePORTC: GPIOC_PDOR |= (1<<ePINx);
+	case ePORTC_GPIO: GPIOC_PDOR |= (1<<ePINx);
 		break;
-	case ePORTD: GPIOD_PDOR |= (1<<ePINx);
+	case ePORTD_GPIO: GPIOD_PDOR |= (1<<ePINx);
 		break;
-	case ePORTE: GPIOE_PDOR |= (1<<ePINx);
+	case ePORTE_GPIO: GPIOE_PDOR |= (1<<ePINx);
 		break;
 	default:
 		break;
@@ -189,15 +192,15 @@ void vfSetPin_GPIO   ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx ) /*Write a 1*/
 void vfClearPin_GPIO ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx )/*Write a 0*/
 {
 	switch(ePORTx){
-	case ePORTA: GPIOA_PDOR &= ~(1<<ePINx);
+	case ePORTA_GPIO: GPIOA_PDOR &= ~(1<<ePINx);
 		break;
-	case ePORTB: GPIOB_PDOR &= ~(1<<ePINx);
+	case ePORTB_GPIO: GPIOB_PDOR &= ~(1<<ePINx);
 			break;
-	case ePORTC: GPIOC_PDOR &= ~(1<<ePINx);
+	case ePORTC_GPIO: GPIOC_PDOR &= ~(1<<ePINx);
 		break;
-	case ePORTD: GPIOD_PDOR &= ~(1<<ePINx);
+	case ePORTD_GPIO: GPIOD_PDOR &= ~(1<<ePINx);
 		break;
-	case ePORTE: GPIOE_PDOR &= ~(1<<ePINx);
+	case ePORTE_GPIO: GPIOE_PDOR &= ~(1<<ePINx);
 		break;
 	default:
 		break;
@@ -218,15 +221,15 @@ void vfClearPin_GPIO ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx )/*Write a 0*/
 void vfTogglePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx )
 {
 	switch(ePORTx){
-	case ePORTA: GPIOA_PDOR ^= (1<<ePINx);
+	case ePORTA_GPIO: GPIOA_PDOR ^= (1<<ePINx);
 		break;
-	case ePORTB: GPIOB_PDOR ^= (1<<ePINx);
+	case ePORTB_GPIO: GPIOB_PDOR ^= (1<<ePINx);
 		break;
-	case ePORTC: GPIOC_PDOR ^= (1<<ePINx);
+	case ePORTC_GPIO: GPIOC_PDOR ^= (1<<ePINx);
 		break;
-	case ePORTD: GPIOD_PDOR ^= (1<<ePINx);
+	case ePORTD_GPIO: GPIOD_PDOR ^= (1<<ePINx);
 		break;
-	case ePORTE: GPIOE_PDOR ^= (1<<ePINx);
+	case ePORTE_GPIO: GPIOE_PDOR ^= (1<<ePINx);
 		break;
 	default:
 		break;
@@ -248,29 +251,29 @@ void vfTogglePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx )
 */
 eStatus_GPIO_t efReadPin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx )
 {
-	eStatus_GPIO_t eStatus = eFALSE;
+	eStatus_GPIO_t eStatus = eFALSE_GPIO;
 
 	switch(ePORTx){/*	Possible results: 1 or 0	*/
-	case ePORTA: eStatus = ((GPIOA_PDIR &= (1 << ePINx)) >> ePINx);
+	case ePORTA_GPIO: eStatus = ((GPIOA_PDIR &= (1 << ePINx)) >> ePINx);
 		break;
-	case ePORTB: eStatus = ((GPIOB_PDIR &= (1 << ePINx)) >> ePINx);
+	case ePORTB_GPIO: eStatus = ((GPIOB_PDIR &= (1 << ePINx)) >> ePINx);
 		break;
-	case ePORTC: eStatus = ((GPIOC_PDIR &= (1 << ePINx)) >> ePINx);
+	case ePORTC_GPIO: eStatus = ((GPIOC_PDIR &= (1 << ePINx)) >> ePINx);
 		break;
-	case ePORTD: eStatus = ((GPIOD_PDIR &= (1 << ePINx)) >> ePINx);
+	case ePORTD_GPIO: eStatus = ((GPIOD_PDIR &= (1 << ePINx)) >> ePINx);
 		break;
-	case ePORTE: eStatus = ((GPIOE_PDIR &= (1 << ePINx)) >> ePINx);
+	case ePORTE_GPIO: eStatus = ((GPIOE_PDIR &= (1 << ePINx)) >> ePINx);
 		break;
-	default:     eStatus = eFALSE;
+	default:     eStatus = eFALSE_GPIO;
 		break;
 	}//End switch
 
 	if(0 == eStatus)
 	{
-		eStatus = eTRUE;
+		eStatus = eTRUE_GPIO;
 	}else if(1 == eStatus)
 	{
-		eStatus = eFALSE;
+		eStatus = eFALSE_GPIO;
 	}
 
 	return eStatus;
@@ -291,7 +294,7 @@ eStatus_GPIO_t efReadPin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx )
 void vfWritePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, uint8_t u8Data )
 {
 	switch(ePORTx){
-	case ePORTA:
+	case ePORTA_GPIO:
 		if( 0u == u8Data )
 		{
 			GPIOA_PDOR &= ~(1<<ePINx);
@@ -300,7 +303,7 @@ void vfWritePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, uint8_t u8Data )
 			GPIOA_PDOR |= (1<<ePINx);
 		}
 		break;
-	case ePORTB:
+	case ePORTB_GPIO:
 		if( 0u == u8Data )
 		{
 			GPIOB_PDOR &= ~(1<<ePINx);
@@ -309,7 +312,7 @@ void vfWritePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, uint8_t u8Data )
 			GPIOB_PDOR |= (1<<ePINx);
 		}
 		break;
-	case ePORTC:
+	case ePORTC_GPIO:
 		if( 0u == u8Data )
 		{
 			GPIOC_PDOR &= ~(1<<ePINx);
@@ -318,7 +321,7 @@ void vfWritePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, uint8_t u8Data )
 			GPIOC_PDOR |= (1<<ePINx);
 		}
 		break;
-	case ePORTD:
+	case ePORTD_GPIO:
 		if( 0u == u8Data )
 		{
 			GPIOD_PDOR &= ~(1<<ePINx);
@@ -327,7 +330,7 @@ void vfWritePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, uint8_t u8Data )
 			GPIOD_PDOR |= (1<<ePINx);
 		}
 		break;
-	case ePORTE:
+	case ePORTE_GPIO:
 		if( 0u == u8Data )
 		{
 			GPIOE_PDOR &= ~(1<<ePINx);
@@ -356,15 +359,15 @@ void vfWritePin_GPIO( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, uint8_t u8Data )
 void vfWritePort_GPIO( ePORTx_GPIO_t ePORTx, uint8_t u8Data )
 {
 	switch(ePORTx){
-	case ePORTA: GPIOA_PDOR = u8Data;
+	case ePORTA_GPIO: GPIOA_PDOR = u8Data;
 		break;
-	case ePORTB: GPIOB_PDOR = u8Data;
+	case ePORTB_GPIO: GPIOB_PDOR = u8Data;
 		break;
-	case ePORTC: GPIOC_PDOR = u8Data;
+	case ePORTC_GPIO: GPIOC_PDOR = u8Data;
 		break;
-	case ePORTD: GPIOD_PDOR = u8Data;
+	case ePORTD_GPIO: GPIOD_PDOR = u8Data;
 		break;
-	case ePORTE: GPIOE_PDOR = u8Data;
+	case ePORTE_GPIO: GPIOE_PDOR = u8Data;
 		break;
 	default:
 		break;

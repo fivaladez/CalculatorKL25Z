@@ -12,7 +12,6 @@
 ** Includes
 */
 #include "LCD_driver.h"
-/*====================================DEFINES======================================*/
 /*---------------------------------------------------------------------------
 ** Defines and Macros
 */
@@ -88,16 +87,16 @@ typedef ePINx_GPIO_t  ePINx_LCD_t;
 */
 #if DATA_BITS_4 == 0u
 /*	D4 - D7	*/
-ePORTx_LCD_t eDataPorts[NO_DATA_PINS] = {ePORTC,  ePORTC,  ePORTC,  ePORTC};/*PORTD_1 is blue led*/
-ePINx_LCD_t  eDataPins [NO_DATA_PINS] = {ePIN_4,  ePIN_3,  ePIN_0,  ePIN_7};
+ePORTx_LCD_t eDataPorts[NO_DATA_PINS] = {ePORTC_GPIO,  ePORTC_GPIO,  ePORTC_GPIO,  ePORTC_GPIO};
+ePINx_LCD_t  eDataPins [NO_DATA_PINS] = {ePIN_4_GPIO,  ePIN_3_GPIO,  ePIN_0_GPIO,  ePIN_7_GPIO};
 #else
 /*	D0 - D7	*/
-ePORTx_LCD_t eDataPorts[NO_DATA_PINS] = {ePORTC,  ePORTC,  ePORTC,  ePORTC, ePORTC,  ePORTC,  ePORTC,  ePORTC};
-ePINx_LCD_t  eDataPins [NO_DATA_PINS] = {ePIN_11, ePIN_10, ePIN_6,  ePIN_5, ePIN_4,  ePIN_3,  ePIN_0,  ePIN_7};
+ePORTx_LCD_t eDataPorts[NO_DATA_PINS] = {ePORTC_GPIO,  ePORTC_GPIO,  ePORTC_GPIO,  ePORTC_GPIO, ePORTC_GPIO,  ePORTC_GPIO,  ePORTC_GPIO,  ePORTC_GPIO};
+ePINx_LCD_t  eDataPins [NO_DATA_PINS] = {ePIN_11_GPIO, ePIN_10_GPIO, ePIN_6_GPIO,  ePIN_5, ePIN_4_GPIO,  ePIN_3_GPIO,  ePIN_0_GPIO,  ePIN_7_GPIO};
 #endif
 /*	RS and Enable	*/                         /* RS  ,    EN*/
-ePORTx_LCD_t eControlPorts [NO_CONTROL_PINS] = {ePORTB, ePORTB};
-ePINx_LCD_t  eControlPins  [NO_CONTROL_PINS] = {ePIN_0, ePIN_1};
+ePORTx_LCD_t eControlPorts [NO_CONTROL_PINS] = {ePORTB_GPIO, ePORTB_GPIO};
+ePINx_LCD_t  eControlPins  [NO_CONTROL_PINS] = {ePIN_0_GPIO, ePIN_1_GPIO};
 /*---------------------------------------------------------------------------
 ** Prototypes Functions
 */
@@ -213,7 +212,7 @@ void vfDataAssignMSB_LCD( uint8_t u8Data )
 	for(u8Index = D4; u8Index <= D7; u8Index++)
 	{
 		/*  (u8Data & (1 << u8Index) ) >> u8Index ->  (Possible results = 0 o 1)*/
-		/*Read ono to one bits of the most significant nibble of u8Data*/
+		/*Read one to one bits of the most significant nibble of u8Data*/
 		if( u8Data & (1 << (4 + u8Index)) )/*Bit read equal to 1*/
 		{
 			vfSetPin_GPIO( eDataPorts[u8Index], eDataPins[u8Index] );
@@ -240,7 +239,7 @@ void vfDataAssignLSB_LCD( uint8_t u8Data )
 	for(u8Index = D4; u8Index <= D7; u8Index++)
 	{
 		/*  (u8Data & (1 << u8Index) ) >> u8Index  ->   Assign the value of the current pin to the LSB (Possible results = 0 o 1)*/
-		/*Read ono to one bits of the lowest significant nibble of u8Data*/
+		/*Read one to one bits of the lowest significant nibble of u8Data*/
 		if( u8Data & (1 << u8Index))/*Bit read equal to 1*/
 		{
 			vfSetPin_GPIO( eDataPorts[u8Index], eDataPins[u8Index] );
@@ -279,6 +278,7 @@ void vfDataAssign_LCD( uint8_t u8Data )
 /*! \brief    efPinsInit_LCD
 **
 ** \note	 Initializes pins of data and control that are going to be used
+** 			 Uses enums and functions from GPIO_driver
 **
 ** \param[out]           NA
 ** \param[in,out]        NA
@@ -289,7 +289,7 @@ void vfDataAssign_LCD( uint8_t u8Data )
 */
 eStatus_LCD_t efPinsInit_LCD(void)
 {
-	eStatus_LCD_t eResult = eFALSE;
+	eStatus_LCD_t eResult = eFALSE_LCD;
 	uint8_t u8Index;
 	uint8_t u8Count = 0;
 
@@ -297,7 +297,7 @@ eStatus_LCD_t efPinsInit_LCD(void)
 	/*Initialize 4 pins for data*/
 	for( u8Index = D4 ; u8Index <= D7 ; u8Index++ )
 	{
-		if( eTRUE == efInit_GPIO( eDataPorts[u8Index], eDataPins[u8Index], eOUTPUT ) )
+		if( (eStatus_GPIO_t)eTRUE_LCD == efInit_GPIO( eDataPorts[u8Index], eDataPins[u8Index], eOUTPUT_GPIO ) )
 		{
 			u8Count++;
 		}else {/*Do nothing*/}
@@ -306,17 +306,17 @@ eStatus_LCD_t efPinsInit_LCD(void)
 	/*Initialize 8 pins for data*/
 	for( u8Index = D0 ; u8Index <= D7 ; u8Index++ )
 	{
-		if( eTRUE == efInit_GPIO( eDataPorts[u8Index], eDataPins[u8Index], eOUTPUT ) )
+		if( (eStatus_GPIO_t)eTRUE_LCD == efInit_GPIO( eDataPorts[u8Index], eDataPins[u8Index], eOUTPUT_GPIO ) )
 		{
 			u8Count++;
 		}else {/*Do nothing*/}
 	}
 #endif
 	/*Initialize pins of control (RS and EN)*/
-	if( eTRUE == efInit_GPIO( eControlPorts[RS], eControlPins[RS], eOUTPUT ) )
+	if( (eStatus_GPIO_t)eTRUE_LCD == efInit_GPIO( eControlPorts[RS], eControlPins[RS], eOUTPUT_GPIO ) )
 	{
 		u8Count++;
-		if( eTRUE == efInit_GPIO( eControlPorts[EN], eControlPins[EN], eOUTPUT ) )
+		if( (eStatus_GPIO_t)eTRUE_LCD == efInit_GPIO( eControlPorts[EN], eControlPins[EN], eOUTPUT_GPIO ) )
 		{
 			u8Count++;
 		}else {/*Do nothing*/}
@@ -325,9 +325,9 @@ eStatus_LCD_t efPinsInit_LCD(void)
 	/*Check that all pins were initialized correctly*/
 	if( u8Count == ( NO_DATA_PINS + NO_CONTROL_PINS ) )
 	{
-		eResult = eTRUE;
+		eResult = eTRUE_LCD;
 
-	}else eResult = eFALSE;
+	}else eResult = eFALSE_LCD;
 
 	return eResult;
 }
@@ -349,9 +349,9 @@ eStatus_LCD_t efPinsInit_LCD(void)
 */
 eStatus_LCD_t efInit_LCD( void )
 {
-	eStatus_LCD_t eResult = eFALSE;
+	eStatus_LCD_t eResult = eFALSE_LCD;
 
-	if(eTRUE == efPinsInit_LCD())
+	if(eTRUE_LCD == efPinsInit_LCD())
 	{
 		/*Time to let react LCD*/
 		vfDelay_LCD( TIME_LCD_15MS );
@@ -365,9 +365,9 @@ eStatus_LCD_t efInit_LCD( void )
 		vfSendCommand_LCD( COMMAND_6_LCD );
 		vfSendCommand_LCD( COMMAND_7_LCD );
 
-		eResult = eTRUE;
+		eResult = eTRUE_LCD;
 
-	}else eResult = eFALSE;
+	}else eResult = eFALSE_LCD;
 
 	return eResult;
 }

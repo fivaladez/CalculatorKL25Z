@@ -8,6 +8,7 @@
 "./Sources/2_HIL/Buttons_driver.o"
 "./Sources/3_HAL/PIT_driver.o"
 "./Sources/3_HAL/GPIO_driver.o"
+"./Sources/3_HAL/ADC_driver.o"
 -mcpu=cortex-m0
 -mthumb
 -mfloat-abi=soft

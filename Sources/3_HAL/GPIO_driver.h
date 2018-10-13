@@ -24,34 +24,34 @@
 */
 typedef enum
 {
-	ePORTA,
-	ePORTB,
-	ePORTC,
-	ePORTD,
-	ePORTE
+	ePORTA_GPIO,
+	ePORTB_GPIO,
+	ePORTC_GPIO,
+	ePORTD_GPIO,
+	ePORTE_GPIO
 
 }ePORTx_GPIO_t;
 typedef enum
 {
-	ePIN_0,  ePIN_1,  ePIN_2,  ePIN_3,
-	ePIN_4,  ePIN_5,  ePIN_6,  ePIN_7,
-	ePIN_8,  ePIN_9,  ePIN_10, ePIN_11,
-	ePIN_12, ePIN_13, ePIN_14, ePIN_15,
-	ePIN_16, ePIN_17, ePIN_18, ePIN_19,
-	ePIN_20, ePIN_21, ePIN_22, ePIN_23,
-	ePIN_29, ePIN_30
+	ePIN_0_GPIO,  ePIN_1_GPIO,  ePIN_2_GPIO,  ePIN_3_GPIO,
+	ePIN_4_GPIO,  ePIN_5_GPIO,  ePIN_6_GPIO,  ePIN_7_GPIO,
+	ePIN_8_GPIO,  ePIN_9_GPIO,  ePIN_10_GPIO, ePIN_11_GPIO,
+	ePIN_12_GPIO, ePIN_13_GPIO, ePIN_14_GPIO, ePIN_15_GPIO,
+	ePIN_16_GPIO, ePIN_17_GPIO, ePIN_18_GPIO, ePIN_19_GPIO,
+	ePIN_20_GPIO, ePIN_21_GPIO, ePIN_22_GPIO, ePIN_23_GPIO,
+	ePIN_29_GPIO, ePIN_30_GPIO
 
 }ePINx_GPIO_t;
 typedef enum
 {
-	eINPUT,
-	eOUTPUT
+	eINPUT_GPIO,
+	eOUTPUT_GPIO
 
 }eInOut_GPIO_t;
 typedef enum
 {
-	eFALSE,
-	eTRUE
+	eFALSE_GPIO,
+	eTRUE_GPIO
 
 }eStatus_GPIO_t;
 /*---------------------------------------------------------------------------
