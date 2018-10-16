@@ -7,6 +7,7 @@
 #include "Buttons_driver.h"
 #include "Leds_driver.h"
 #include "LCD_driver.h"
+#include "ADC_driver.h"
 
 #define TIME_1S			1800000
 #define TIME_500MS		900000
@@ -17,6 +18,7 @@ void vfdelay(uint32_t u32Time);
 int main(void)
 {
 	sButton_t sButton1;
+	sDATA_ADC_t sData_ADC;
 
 	if( eTRUE_LED == efInit_LED(eRED_LED)  &&  eTRUE_LED ==  efInit_LED(eGREEN_LED)  &&  eTRUE_LED ==  efInit_LED(eBLUE_LED) )
 	{
@@ -41,6 +43,15 @@ int main(void)
 		{
 			vfTurnOff_LED(eGREEN_LED);
 		}
+		
+		if( eTRUE_ADC == efInit_ADC( ePORTE_ADC, ePIN_20_ADC, &sData_ADC) )
+		{
+			vfTurnOn_LED(eRED_LED);
+		}
+		else
+		{
+			vfTurnOff_LED(eRED_LED);
+		}
 	}
 
 	vfTurnOff_LED(eRED_LED);
@@ -52,10 +63,19 @@ int main(void)
 	   	if(eTRUE_BUTTONS == efReadButtonNonBlocking(&sButton1))
 	   	{
 	   		vfTurnOn_LED( eRED_LED );
-	   		vfSendPosition_LCD(eFILA_01_0);
-	   		vfSendMessage_LCD("Hello World");
+	   		//vfSendPosition_LCD(eFILA_01_0);
+	   		//vfSendMessage_LCD("Hello World");
 
-	   	}else
+	   	}else if(eTRUE_ADC == efRead_ADC( &sData_ADC ) )
+	   	{
+	   		vfClear_LCD();
+	   		vfSendPosition_LCD(eFILA_01_3);
+	   		vfSendData_LCD( 0x30 + sData_ADC.u8Hundreds );
+	   		vfSendData_LCD( 0x30 + sData_ADC.u8Dozens );
+	   		vfSendData_LCD( 0x30 + sData_ADC.u8Units );
+
+	   	}
+	   	else
 	   	{
 	   		vfTurnOff_LED( eRED_LED );
 	   		vfClear_LCD();

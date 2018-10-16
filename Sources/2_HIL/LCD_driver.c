@@ -20,6 +20,7 @@
 #define TIME_LCD_5MS		(50000u)
 #define TIME_LCD_1_5MS		(15200u)
 #define TIME_LCD_1MS		(10000u)
+#define TIME_LCD_500US		(5000u)
 #define TIME_LCD_100US		(1000u)
 
 #if DATA_BITS_4 == 0u
@@ -521,6 +522,7 @@ void vfClear_LCD(void)
 	vfDelay_LCD( TIME_LCD_1_5MS );
 	vfEnLow_LCD();
 #endif
+	vfDelay_LCD( TIME_LCD_500US );
 }
 /*! \brief    vfSendMessage_LCD
 **

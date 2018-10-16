@@ -44,7 +44,7 @@ OBJS_OS_FORMAT += \
 # Each subdirectory must supply rules for building sources it contributes
 Sources/2_HIL/Buttons_driver.o: ../Sources/2_HIL/Buttons_driver.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #4 $<'
+	@echo 'Executing target #5 $<'
 	@echo 'Invoking: ARM Ltd Windows GCC C Compiler'
 	"$(ARMSourceryDirEnv)/arm-none-eabi-gcc" "$<" @"Sources/2_HIL/Buttons_driver.args" -MMD -MP -MF"$(@:%.o=%.d)" -o"Sources/2_HIL/Buttons_driver.o"
 	@echo 'Finished building: $<'
@@ -52,7 +52,7 @@ Sources/2_HIL/Buttons_driver.o: ../Sources/2_HIL/Buttons_driver.c
 
 Sources/2_HIL/LCD_driver.o: ../Sources/2_HIL/LCD_driver.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #5 $<'
+	@echo 'Executing target #6 $<'
 	@echo 'Invoking: ARM Ltd Windows GCC C Compiler'
 	"$(ARMSourceryDirEnv)/arm-none-eabi-gcc" "$<" @"Sources/2_HIL/LCD_driver.args" -MMD -MP -MF"$(@:%.o=%.d)" -o"Sources/2_HIL/LCD_driver.o"
 	@echo 'Finished building: $<'
@@ -60,7 +60,7 @@ Sources/2_HIL/LCD_driver.o: ../Sources/2_HIL/LCD_driver.c
 
 Sources/2_HIL/Leds_driver.o: ../Sources/2_HIL/Leds_driver.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #6 $<'
+	@echo 'Executing target #7 $<'
 	@echo 'Invoking: ARM Ltd Windows GCC C Compiler'
 	"$(ARMSourceryDirEnv)/arm-none-eabi-gcc" "$<" @"Sources/2_HIL/Leds_driver.args" -MMD -MP -MF"$(@:%.o=%.d)" -o"Sources/2_HIL/Leds_driver.o"
 	@echo 'Finished building: $<'
