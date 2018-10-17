@@ -44,7 +44,7 @@ int main(void)
 			vfTurnOff_LED(eGREEN_LED);
 		}
 		
-		if( eTRUE_ADC == efInit_ADC( ePORTC_ADC, ePIN_0_ADC, &sData_ADC) )
+		if( eTRUE_ADC == efInit_ADC( ePORTD_ADC, ePIN_6_ADC, &sData_ADC) )
 		{
 			vfTurnOn_LED(eRED_LED);
 		}

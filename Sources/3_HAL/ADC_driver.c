@@ -146,7 +146,53 @@ eStatus_ADC_t vfReadPinsPortC_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC)
 		
 	return eReturn;
 }
-
+eStatus_ADC_t vfReadPinsPortD_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC)
+{
+	eStatus_ADC_t eReturn = eFALSE_ADC;
+		
+	switch(ePINx)
+	{
+	case ePIN_5_ADC:
+		//Activate clock for PortE
+		SIM_SCGC5 |= SIM_SCGC5_PORTD_MASK;
+		//Select mode zero in port B to use it as ADC -   ADC0_SE6b 
+		PORTD_PCR5 = PORT_PCR_MUX(0);
+		//NOTE: You MUST assign the mask to assure you write a 0
+		/*Configure Registers from ADC*/
+		/*Channel a configured by default*/
+		vfConfigReg_ADC();
+		/*Change deafult configuration to use channel b*/
+		ADC0_CFG2 |= ADC_CFG2_MUXSEL_MASK;//ADxxb channels are selected
+		/*Assign channel of ADC*/
+		ADC0_SC1A |= ADC_SC1_ADCH(6);
+		/*Assign values to ADC struct*/
+		(*spDataADC) -> ePortADC = ePORTD_ADC;
+		(*spDataADC) -> ePinADC  = ePIN_5_ADC;
+			
+		eReturn = eTRUE_ADC;
+		break;
+	case ePIN_6_ADC:
+		SIM_SCGC5 |= SIM_SCGC5_PORTD_MASK;
+		//Select mode zero in port B to use it as ADC -     ADC0_SE7b 
+		PORTD_PCR6 = PORT_PCR_MUX(0);
+		/*Channel a configured by default*/
+		vfConfigReg_ADC();
+		/*Change deafult configuration to use channel b*/
+		ADC0_CFG2 |= ADC_CFG2_MUXSEL_MASK;//ADxxb channels are selected
+			
+		ADC0_SC1A |= ADC_SC1_ADCH(7);
+		
+		(*spDataADC) -> ePortADC = ePORTD_ADC;
+		(*spDataADC) -> ePinADC  = ePIN_5_ADC;
+			
+		eReturn = eTRUE_ADC;
+		break;
+	default: eReturn = eFALSE_ADC;
+		break;
+	}
+		
+	return eReturn;
+}
 eStatus_ADC_t vfReadPinsPortE_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC)
 {
 	eStatus_ADC_t eReturn = eFALSE_ADC;
@@ -243,11 +289,8 @@ void vfConfigReg_ADC(void)
 	ADC0_CFG1 &= ~ADC_CFG1_MODE_MASK;// It is single-ended 8-bit conversion
 	ADC0_CFG1 &= ~ADC_CFG1_ADICLK_MASK;//Select the bus clock
 
-#if ADC_CHANNEL == a
 	ADC0_CFG2 &= ~ADC_CFG2_MUXSEL_MASK;//ADxxa channels are selected
-#elif ADC_CHANNEL == b
-	ADC0_CFG2 |= ADC_CFG2_MUXSEL_MASK;//ADxxb channels are selected
-#endif
+
 	ADC0_CFG2 &= ~ADC_CFG2_ADACKEN_MASK;//Asynchronous clock output disable
 	ADC0_CFG2 &= ~ADC_CFG2_ADHSC_MASK;// Normal conversion sequence selected
 	ADC0_CFG2 &= ~ADC_CFG2_ADLSTS_MASK;//Default longest sample time
@@ -277,7 +320,7 @@ eStatus_ADC_t efInit_ADC( ePORTx_ADC_t ePORTx, ePINx_ADC_t ePINx, sDATA_ADC_t* s
 		break;
 	case ePORTC_ADC: eReturn =  vfReadPinsPortC_ADC( ePINx, (&spDataADC) );
 		break;
-	case ePORTD_ADC: //eReturn =  vfReadPinsPortD_ADC( ePINx, (&spDataADC) );
+	case ePORTD_ADC: eReturn =  vfReadPinsPortD_ADC( ePINx, (&spDataADC) );
 		break;
 	case ePORTE_ADC: eReturn =  vfReadPinsPortE_ADC( ePINx, (&spDataADC) );
 		break;

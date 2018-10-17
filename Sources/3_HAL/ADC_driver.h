@@ -24,10 +24,11 @@ typedef enum
 }ePORTx_ADC_t;
 typedef enum
 {
-	ePIN_0_ADC,	ePIN_1_ADC,
-	ePIN_2_ADC,	ePIN_3_ADC,
-	ePIN_20_ADC,	ePIN_21_ADC,
-	ePIN_22_ADC,	ePIN_23_ADC
+	ePIN_0_ADC,	 ePIN_1_ADC,
+	ePIN_2_ADC,	 ePIN_3_ADC,
+	ePIN_5_ADC,	 ePIN_6_ADC,
+	ePIN_20_ADC, ePIN_21_ADC,
+	ePIN_22_ADC, ePIN_23_ADC
 
 }ePINx_ADC_t;
 typedef enum
