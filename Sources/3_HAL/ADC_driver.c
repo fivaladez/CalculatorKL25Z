@@ -8,7 +8,7 @@
 #include "ADC_driver.h"
 
 void vfConfigReg_ADC(void);
-eStatus_ADC_t vfReadPinsPortA_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC);
+
 eStatus_ADC_t vfReadPinsPortB_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC);
 eStatus_ADC_t vfReadPinsPortC_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC);
 eStatus_ADC_t vfReadPinsPortD_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC);
@@ -16,6 +16,136 @@ eStatus_ADC_t vfReadPinsPortE_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC);
 
 void vfConvert_ADC(sDATA_ADC_t** spDataADC);
 
+eStatus_ADC_t vfReadPinsPortB_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC)
+{
+	eStatus_ADC_t eReturn = eFALSE_ADC;
+		
+	switch(ePINx)
+	{
+	case ePIN_0_ADC:
+		//Activate clock for PortE
+		SIM_SCGC5 |= SIM_SCGC5_PORTB_MASK;
+		//Select mode zero in port B to use it as ADC -  ADC0_SE8/TSI0_CH0 
+		PORTB_PCR0 = PORT_PCR_MUX(0);
+		//NOTE: You MUST assign the mask to assure you write a 0
+		/*Configure Registers from ADC*/
+		vfConfigReg_ADC();
+		/*Assign channel of ADC*/
+		ADC0_SC1A |= ADC_SC1_ADCH(8);
+		/*Assign values to ADC struct*/
+		(*spDataADC) -> ePortADC = ePORTB_ADC;
+		(*spDataADC) -> ePinADC  = ePIN_0_ADC;
+			
+		eReturn = eTRUE_ADC;
+		break;
+	case ePIN_1_ADC:
+		SIM_SCGC5 |= SIM_SCGC5_PORTB_MASK;
+		//Select mode zero in port B to use it as ADC -    ADC0_SE9/TSI0_CH6 
+		PORTB_PCR1 = PORT_PCR_MUX(0);
+			
+		vfConfigReg_ADC();
+			
+		ADC0_SC1A |= ADC_SC1_ADCH(9);
+		
+		(*spDataADC) -> ePortADC = ePORTB_ADC;
+		(*spDataADC) -> ePinADC  = ePIN_1_ADC;
+			
+		eReturn = eTRUE_ADC;
+		break;
+	case ePIN_2_ADC:
+		
+		SIM_SCGC5 |= SIM_SCGC5_PORTB_MASK;
+		//Select mode zero in port B to use it as ADC -    ADC0_SE12/TSI0_CH7  
+		PORTB_PCR2 = PORT_PCR_MUX(0);
+		
+		vfConfigReg_ADC();
+			
+		ADC0_SC1A |= ADC_SC1_ADCH(12);
+			
+		(*spDataADC) -> ePortADC = ePORTB_ADC;
+		(*spDataADC) -> ePinADC  = ePIN_2_ADC;
+			
+		eReturn = eTRUE_ADC;
+		break;
+	case ePIN_3_ADC:
+			
+		SIM_SCGC5 |= SIM_SCGC5_PORTB_MASK;
+		//Select mode zero in port B to use it as ADC -   ADC0_SE13/TSI0_CH8 
+		PORTB_PCR3 = PORT_PCR_MUX(0);
+		
+		vfConfigReg_ADC();
+			
+		ADC0_SC1A |= ADC_SC1_ADCH(13);
+		
+		(*spDataADC) -> ePortADC = ePORTB_ADC;
+		(*spDataADC) -> ePinADC  = ePIN_3_ADC;
+			
+		eReturn = eTRUE_ADC;
+		break;
+	default: eReturn = eFALSE_ADC;
+		break;
+	}
+		
+	return eReturn;
+}
+eStatus_ADC_t vfReadPinsPortC_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC)
+{
+	eStatus_ADC_t eReturn = eFALSE_ADC;
+		
+	switch(ePINx)
+	{
+	case ePIN_0_ADC:
+		//Activate clock for PortE
+		SIM_SCGC5 |= SIM_SCGC5_PORTC_MASK;
+		//Select mode zero in port C to use it as ADC -   ADC0_SE14/TSI0_CH13 
+		PORTC_PCR0 = PORT_PCR_MUX(0);
+		//NOTE: You MUST assign the mask to assure you write a 0
+		/*Configure Registers from ADC*/
+		vfConfigReg_ADC();
+		/*Assign channel of ADC*/
+		ADC0_SC1A |= ADC_SC1_ADCH(14);
+		/*Assign values to ADC struct*/
+		(*spDataADC) -> ePortADC = ePORTC_ADC;
+		(*spDataADC) -> ePinADC  = ePIN_0_ADC;
+			
+		eReturn = eTRUE_ADC;
+		break;
+	case ePIN_1_ADC:
+		SIM_SCGC5 |= SIM_SCGC5_PORTC_MASK;
+		//Select mode zero in port E to use it as ADC -   ADC0_SE15/TSI0_CH14 
+		PORTC_PCR1 = PORT_PCR_MUX(0);
+			
+		vfConfigReg_ADC();
+			
+		ADC0_SC1A |= ADC_SC1_ADCH(15);
+		
+		(*spDataADC) -> ePortADC = ePORTC_ADC;
+		(*spDataADC) -> ePinADC  = ePIN_1_ADC;
+			
+		eReturn = eTRUE_ADC;
+		break;
+	case ePIN_2_ADC:
+		
+		SIM_SCGC5 |= SIM_SCGC5_PORTC_MASK;
+		//Select mode zero in port E to use it as ADC -    ADC0_SE11/TSI0_CH15  
+		PORTC_PCR2 = PORT_PCR_MUX(0);
+		
+		vfConfigReg_ADC();
+			
+		ADC0_SC1A |= ADC_SC1_ADCH(11);
+			
+		(*spDataADC) -> ePortADC = ePORTC_ADC;
+		(*spDataADC) -> ePinADC  = ePIN_2_ADC;
+			
+		eReturn = eTRUE_ADC;
+		break;
+		
+	default: eReturn = eFALSE_ADC;
+		break;
+	}
+		
+	return eReturn;
+}
 
 eStatus_ADC_t vfReadPinsPortE_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC)
 {
@@ -143,11 +273,9 @@ eStatus_ADC_t efInit_ADC( ePORTx_ADC_t ePORTx, ePINx_ADC_t ePINx, sDATA_ADC_t* s
 	
 	switch( ePORTx )
 	{
-	case ePORTA_ADC: //eReturn =  vfReadPinsPortA_ADC( ePINx, (&spDataADC) );
+	case ePORTB_ADC: eReturn =  vfReadPinsPortB_ADC( ePINx, (&spDataADC) );
 		break;
-	case ePORTB_ADC: //eReturn =  vfReadPinsPortB_ADC( ePINx, (&spDataADC) );
-		break;
-	case ePORTC_ADC: //eReturn =  vfReadPinsPortC_ADC( ePINx, (&spDataADC) );
+	case ePORTC_ADC: eReturn =  vfReadPinsPortC_ADC( ePINx, (&spDataADC) );
 		break;
 	case ePORTD_ADC: //eReturn =  vfReadPinsPortD_ADC( ePINx, (&spDataADC) );
 		break;

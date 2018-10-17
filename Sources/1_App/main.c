@@ -44,7 +44,7 @@ int main(void)
 			vfTurnOff_LED(eGREEN_LED);
 		}
 		
-		if( eTRUE_ADC == efInit_ADC( ePORTE_ADC, ePIN_20_ADC, &sData_ADC) )
+		if( eTRUE_ADC == efInit_ADC( ePORTC_ADC, ePIN_0_ADC, &sData_ADC) )
 		{
 			vfTurnOn_LED(eRED_LED);
 		}
@@ -63,16 +63,18 @@ int main(void)
 	   	if(eTRUE_BUTTONS == efReadButtonNonBlocking(&sButton1))
 	   	{
 	   		vfTurnOn_LED( eRED_LED );
-	   		//vfSendPosition_LCD(eFILA_01_0);
-	   		//vfSendMessage_LCD("Hello World");
+	   		vfSendPosition_LCD(eFILA_01_0);
+	   		vfSendMessage_LCD("Hello World");
 
 	   	}else if(eTRUE_ADC == efRead_ADC( &sData_ADC ) )
 	   	{
 	   		vfClear_LCD();
 	   		vfSendPosition_LCD(eFILA_01_3);
+	   		/*0x30 is equal to a number 0 in ASCII*/
 	   		vfSendData_LCD( 0x30 + sData_ADC.u8Hundreds );
 	   		vfSendData_LCD( 0x30 + sData_ADC.u8Dozens );
 	   		vfSendData_LCD( 0x30 + sData_ADC.u8Units );
+	   		vfSendData_LCD( '%' );
 
 	   	}
 	   	else

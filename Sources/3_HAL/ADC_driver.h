@@ -16,7 +16,6 @@
 /*This driver also works only with pins in port E from MCU KL25Z*/
 typedef enum
 {
-	ePORTA_ADC,
 	ePORTB_ADC,
 	ePORTC_ADC,
 	ePORTD_ADC,
@@ -25,6 +24,8 @@ typedef enum
 }ePORTx_ADC_t;
 typedef enum
 {
+	ePIN_0_ADC,	ePIN_1_ADC,
+	ePIN_2_ADC,	ePIN_3_ADC,
 	ePIN_20_ADC,	ePIN_21_ADC,
 	ePIN_22_ADC,	ePIN_23_ADC
 
