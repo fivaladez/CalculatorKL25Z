@@ -40,10 +40,29 @@ typedef enum
 }eStatus_PWM_t;
 typedef enum 
 {
-	eTPM0,
-	eTPM1,
-	eTPM2
+	eCH0_PWM,
+	eCH1_PWM,
+	eCH2_PWM,
+	eCH3_PWM,
+	eCH4_PWM,
+	eCH5_PWM
 	
 }eChannel_PWM_t;
+typedef uint16_t u16Period_t;
+typedef uint8_t u8Percent_t;
+typedef uint16_t u16PeriodConst_t;
+
+typedef struct
+{
+	eChannel_PWM_t   eChannel;
+	ePORTx_PWM_t     ePort;
+	ePINx_PWM_t      ePin;
+	eStatus_PWM_t    eSatus;
+	u16Period_t      u16Period;
+	u16PeriodConst_t u16PeriodConst;
+	u8Percent_t      u8Percent;
+	
+	
+}sDATA_PWM_t;
 
 #endif /* PWM_DRIVER_H_ */

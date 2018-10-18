@@ -27,7 +27,7 @@ c:/freescale/cw mcu v11.0/cross_tools/arm-none-eabi-gcc-4_7_3/bin/../lib/gcc/arm
 c:/freescale/cw mcu v11.0/cross_tools/arm-none-eabi-gcc-4_7_3/bin/../lib/gcc/arm-none-eabi/4.7.3/armv6-m\libgcc.a(_thumb1_case_uqi.o)
                               C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(scanformat_.o) (__gnu_thumb1_case_uqi)
 c:/freescale/cw mcu v11.0/cross_tools/arm-none-eabi-gcc-4_7_3/bin/../lib/gcc/arm-none-eabi/4.7.3/armv6-m\libgcc.a(_udivsi3.o)
-                              C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(printformat_.o) (__aeabi_uidiv)
+                              ./Sources/3_HAL/PWM_driver.o (__aeabi_uidiv)
 c:/freescale/cw mcu v11.0/cross_tools/arm-none-eabi-gcc-4_7_3/bin/../lib/gcc/arm-none-eabi/4.7.3/armv6-m\libgcc.a(_dvmd_tls.o)
                               c:/freescale/cw mcu v11.0/cross_tools/arm-none-eabi-gcc-4_7_3/bin/../lib/gcc/arm-none-eabi/4.7.3/armv6-m\libgcc.a(_udivsi3.o) (__aeabi_idiv0)
 C:/Freescale/CW MCU v11.0/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
@@ -89,20 +89,22 @@ Discarded input sections
  .data          0x00000000        0x0 ./Sources/3_HAL/PWM_driver.o
  .bss           0x00000000        0x0 ./Sources/3_HAL/PWM_driver.o
  .text.vfConfigReg_TPM2_PWM
-                0x00000000       0x84 ./Sources/3_HAL/PWM_driver.o
+                0x00000000      0x188 ./Sources/3_HAL/PWM_driver.o
  .text.efInit_PWM
-                0x00000000      0x108 ./Sources/3_HAL/PWM_driver.o
- .text.vfPercentage_TPM2_PWM
-                0x00000000       0x24 ./Sources/3_HAL/PWM_driver.o
- .debug_info    0x00000000      0x5dc ./Sources/3_HAL/PWM_driver.o
- .debug_abbrev  0x00000000      0x11a ./Sources/3_HAL/PWM_driver.o
+                0x00000000      0x1c4 ./Sources/3_HAL/PWM_driver.o
+ .text.vfPercentage_PWM
+                0x00000000       0xec ./Sources/3_HAL/PWM_driver.o
+ .rodata.vfPercentage_PWM
+                0x00000000       0x14 ./Sources/3_HAL/PWM_driver.o
+ .debug_info    0x00000000      0x68f ./Sources/3_HAL/PWM_driver.o
+ .debug_abbrev  0x00000000      0x14b ./Sources/3_HAL/PWM_driver.o
  .debug_loc     0x00000000       0xa8 ./Sources/3_HAL/PWM_driver.o
  .debug_aranges
                 0x00000000       0x30 ./Sources/3_HAL/PWM_driver.o
  .debug_macinfo
                 0x00000000    0x26512 ./Sources/3_HAL/PWM_driver.o
- .debug_line    0x00000000      0x237 ./Sources/3_HAL/PWM_driver.o
- .debug_str     0x00000000      0x431 ./Sources/3_HAL/PWM_driver.o
+ .debug_line    0x00000000      0x29e ./Sources/3_HAL/PWM_driver.o
+ .debug_str     0x00000000      0x4bc ./Sources/3_HAL/PWM_driver.o
  .comment       0x00000000       0x7a ./Sources/3_HAL/PWM_driver.o
  .ARM.attributes
                 0x00000000       0x31 ./Sources/3_HAL/PWM_driver.o
