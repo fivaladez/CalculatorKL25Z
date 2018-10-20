@@ -27,9 +27,9 @@ typedef enum
 {
 	ePIN_0_PWM  = 0,  ePIN_1_PWM  = 1,  ePIN_2_PWM  = 2,  ePIN_3_PWM  = 3,
 	ePIN_4_PWM  = 4,  ePIN_5_PWM  = 5,  ePIN_8_PWM  = 8,  ePIN_9_PWM  = 9,
-	ePIN_12_PWM = 12, ePIN_13_PWM = 13, ePIN_20_PWM = 20, ePIN_21_PWM = 21,
-	ePIN_22_PWM = 22, ePIN_23_PWM = 23, ePIN_29_PWM = 29, ePIN_30_PWM = 30,
-	ePIN_31_PWM = 31
+	ePIN_12_PWM = 12, ePIN_13_PWM = 13, ePIN_18_PWM = 18, ePIN_19_PWM = 19,
+	ePIN_20_PWM = 20, ePIN_21_PWM = 21, ePIN_22_PWM = 22, ePIN_23_PWM = 23,
+	ePIN_29_PWM = 29, ePIN_30_PWM = 30, ePIN_31_PWM = 31
 	    
 }ePINx_PWM_t;
 

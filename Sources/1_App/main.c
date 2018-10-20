@@ -55,7 +55,7 @@ int main(void)
 			vfTurnOff_LED(eRED_LED);
 		}
 		
-		if( eTRUE_PWM == efInit_PWM( &sData_PWM, ePORTE_PWM, ePIN_31_PWM, PWM_PERIOD_16ms) )
+		if( eTRUE_PWM == efInit_PWM( &sData_PWM, ePORTD_PWM, ePIN_2_PWM, PWM_PERIOD_16ms) )
 		{
 			vfTurnOff_LED(eRED_LED);vfTurnOff_LED(eGREEN_LED);vfTurnOff_LED(eBLUE_LED);
 		}
@@ -71,7 +71,7 @@ int main(void)
 
 	   	if(eTRUE_BUTTONS == efReadButtonNonBlocking(&sButton1))
 	   	{
-	   		vfTurnOn_LED( eRED_LED );
+	   		//vfTurnOn_LED( eRED_LED );
 	   		vfSendPosition_LCD(eFILA_01_0);
 	   		vfSendMessage_LCD("Hello World");
 
@@ -89,7 +89,7 @@ int main(void)
 	   	}
 	   	else
 	   	{
-	   		vfTurnOff_LED( eRED_LED );
+	   		//vfTurnOff_LED( eRED_LED );
 	   		vfClear_LCD();
 	   	}
 
