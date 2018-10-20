@@ -16,7 +16,8 @@ Sources/1_App/main.o: ../Sources/1_App/main.c \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/GPIO_driver.h \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/2_HIL/Leds_driver.h \
  C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/2_HIL/LCD_driver.h \
- C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/ADC_driver.h
+ C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/ADC_driver.h \
+ C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/PWM_driver.h
 
 C:/Freescale/CW\ MCU\ v11.0/MCU/ARM_GCC_Support/ewl/EWL_C/include/lib_ewl.prefix:
 
@@ -53,3 +54,5 @@ C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/2_HIL/Leds_driver.h:
 C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/2_HIL/LCD_driver.h:
 
 C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/ADC_driver.h:
+
+C:/Users/ivan_/workspace/CalculatorKL25Z/Sources/3_HAL/PWM_driver.h:

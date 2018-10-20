@@ -8,6 +8,7 @@
 #include "Leds_driver.h"
 #include "LCD_driver.h"
 #include "ADC_driver.h"
+#include "PWM_driver.h"
 
 #define TIME_1S			1800000
 #define TIME_500MS		900000
@@ -19,6 +20,7 @@ int main(void)
 {
 	sButton_t sButton1;
 	sDATA_ADC_t sData_ADC;
+	sDATA_PWM_t sData_PWM;
 
 	if( eTRUE_LED == efInit_LED(eRED_LED)  &&  eTRUE_LED ==  efInit_LED(eGREEN_LED)  &&  eTRUE_LED ==  efInit_LED(eBLUE_LED) )
 	{
@@ -52,11 +54,18 @@ int main(void)
 		{
 			vfTurnOff_LED(eRED_LED);
 		}
+		
+		if( eTRUE_PWM == efInit_PWM( &sData_PWM, ePORTE_PWM, ePIN_31_PWM, PWM_PERIOD_16ms) )
+		{
+			vfTurnOff_LED(eRED_LED);vfTurnOff_LED(eGREEN_LED);vfTurnOff_LED(eBLUE_LED);
+		}
+		else
+		{
+			
+		}
+		
 	}
 
-	vfTurnOff_LED(eRED_LED);
-	vfTurnOff_LED(eGREEN_LED);
-	vfTurnOff_LED(eBLUE_LED);
 
 	for(;;) {
 
@@ -75,6 +84,7 @@ int main(void)
 	   		vfSendData_LCD( 0x30 + sData_ADC.u8Dozens );
 	   		vfSendData_LCD( 0x30 + sData_ADC.u8Units );
 	   		vfSendData_LCD( '%' );
+	   		vfPercentage_PWM( &sData_PWM, (uint8_t)sData_ADC.u16Percent);
 
 	   	}
 	   	else
