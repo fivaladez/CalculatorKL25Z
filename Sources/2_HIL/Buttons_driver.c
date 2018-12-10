@@ -23,7 +23,7 @@
 #define TIME_Button_100MS		(180000u)
 
 /*Original 2500*/
-#define DEBOUNCING (5u)/*You must adjust the value according to the performance of the main code*/
+#define DEBOUNCING (20u)/*You must adjust the value according to the performance of the main code*/
 /*---------------------------------------------------------------------------
 ** Typedefs
 */

@@ -344,7 +344,8 @@ eStatus_ADC_t efRead_ADC(sDATA_ADC_t* spDataADC){
 		
 		eReturn = eTRUE_ADC;
 		
-	}else
+	}
+	else
 	{
 		eReturn = eFALSE_ADC;
 	}

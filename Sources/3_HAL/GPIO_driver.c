@@ -59,10 +59,10 @@ eStatus_GPIO_t efInit_GPIO  ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_G
 				GPIOA_PDDR &= ~(1<<ePINx);					     //4 Define this pin as input
 				eResult = eTRUE_GPIO;
 			}else if(eOUTPUT_GPIO == eInOut)
-				{
-					GPIOA_PDDR |= (1<<ePINx);					 //4 Define this pin as output
-					eResult = eTRUE_GPIO;
-				}else eResult = eFALSE_GPIO;
+			{
+				GPIOA_PDDR |= (1<<ePINx);					 //4 Define this pin as output
+				eResult = eTRUE_GPIO;
+			}else eResult = eFALSE_GPIO;
 		}else eResult = eFALSE_GPIO;
 		break;
 	case ePORTB_GPIO:
@@ -77,10 +77,10 @@ eStatus_GPIO_t efInit_GPIO  ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_G
 				GPIOB_PDDR &= ~(1<<ePINx);
 				eResult = eTRUE_GPIO;
 			}else if(eOUTPUT_GPIO == eInOut)
-				{
-					GPIOB_PDDR |= (1<<ePINx);
-					eResult = eTRUE_GPIO;
-				}else eResult = eFALSE_GPIO;
+			{
+				GPIOB_PDDR |= (1<<ePINx);
+				eResult = eTRUE_GPIO;
+			}else eResult = eFALSE_GPIO;
 		}else eResult = eFALSE_GPIO;
 		break;
 	case ePORTC_GPIO:
@@ -97,10 +97,10 @@ eStatus_GPIO_t efInit_GPIO  ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_G
 				GPIOC_PDDR &= ~(1<<ePINx);
 				eResult = eTRUE_GPIO;
 			}else if(eOUTPUT_GPIO == eInOut)
-				{
-					GPIOC_PDDR |= (1<<ePINx);
-					eResult = eTRUE_GPIO;
-				}else eResult = eFALSE_GPIO;
+			{
+				GPIOC_PDDR |= (1<<ePINx);
+				eResult = eTRUE_GPIO;
+			}else eResult = eFALSE_GPIO;
 		}else eResult = eFALSE_GPIO;
 		break;
 	case ePORTD_GPIO:
@@ -116,10 +116,10 @@ eStatus_GPIO_t efInit_GPIO  ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_G
 				GPIOD_PDDR &= ~(1<<ePINx);
 				eResult = eTRUE_GPIO;
 			}else if(eOUTPUT_GPIO == eInOut)
-				{
-					GPIOD_PDDR |= (1<<ePINx);
-					eResult = eTRUE_GPIO;
-				}else eResult = eFALSE_GPIO;
+			{
+				GPIOD_PDDR |= (1<<ePINx);
+				eResult = eTRUE_GPIO;
+			}else eResult = eFALSE_GPIO;
 		}else eResult = eFALSE_GPIO;
 		break;
 	case ePORTE_GPIO:
@@ -135,10 +135,10 @@ eStatus_GPIO_t efInit_GPIO  ( ePORTx_GPIO_t ePORTx, ePINx_GPIO_t ePINx, eInOut_G
 				GPIOE_PDDR &= ~(1<<ePINx);
 				eResult = eTRUE_GPIO;
 			}else if(eOUTPUT_GPIO == eInOut)
-				{
-					GPIOE_PDDR |= (1<<ePINx);
-					eResult = eTRUE_GPIO;
-				}else eResult = eFALSE_GPIO;
+			{
+				GPIOE_PDDR |= (1<<ePINx);
+				eResult = eTRUE_GPIO;
+			}else eResult = eFALSE_GPIO;
 		}else eResult = eFALSE_GPIO;
 		break;
 	default: eResult = eFALSE_GPIO;
