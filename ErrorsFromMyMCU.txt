@@ -1,0 +1,3 @@
+PORTD 4-5   -> UART
+PORTE 29-30 -> GPIO
+PORTC 1     -> GPIO

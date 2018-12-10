@@ -69,7 +69,7 @@ int main(void)
 		}
 		/*=============================================*/
 		
-		if( eTRUE_UART == efInit_UART( ePORTE_UART, eUART_2, &sData_UART) )
+		if( eTRUE_UART == efInit_UART( ePORTE_UART, eUART_0, &sData_UART) )
 		{
 			vfTurnOn_LED(eRED_LED);vfTurnOn_LED(eGREEN_LED);vfTurnOn_LED(eBLUE_LED);
 		}

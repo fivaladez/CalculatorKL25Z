@@ -33,27 +33,121 @@ eStatus_UART_t efInit_UART( ePORTx_UART_t ePORTx, eCHANNELx_UART_t eChannelx, sD
 	
 	switch( ePORTx )
 	{
-	case ePORTA_UART: 	spDataUART -> ePortUART = ePORTx;
-						spDataUART -> eChannelUART = eChannelx;
-						//eReturn = vfInitPortAChannelx_UART( eChannelx, (&spDataUART) );
+	case ePORTA_UART: 	spDataUART -> ePortUART = ePORTA_UART;
+						eReturn = vfInitPortAChannelx_UART( eChannelx, (&spDataUART) );
 		break;
-	case ePORTC_UART: 	spDataUART -> ePortUART = ePORTx;
-						spDataUART -> eChannelUART = eChannelx;
-						//eReturn = vfInitPortCChannelx_UART( eChannelx, (&spDataUART) );
+	case ePORTC_UART: 	spDataUART -> ePortUART = ePORTC_UART;
+						eReturn = vfInitPortCChannelx_UART( eChannelx, (&spDataUART) );
 		break;
-	case ePORTD_UART:   spDataUART -> ePortUART = ePORTx;
-						spDataUART -> eChannelUART = eChannelx;
-						//eReturn = vfInitPortDChannelx_UART( eChannelx, (&spDataUART) );
+	case ePORTD_UART:   spDataUART -> ePortUART = ePORTD_UART;
+						eReturn = vfInitPortDChannelx_UART( eChannelx, (&spDataUART) );
 		break;
-	case ePORTE_UART:   spDataUART -> ePortUART = ePORTx;
-						spDataUART -> eChannelUART = eChannelx;
+	case ePORTE_UART:   spDataUART -> ePortUART = ePORTE_UART;
 						eReturn = vfInitPortEChannelx_UART( eChannelx, (&spDataUART) );
-		
 		break;
 	default: eReturn = eFALSE_UART;
 		break;
 	}
 	
+	return eReturn;
+}
+
+eStatus_UART_t vfInitPortAChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART_t** spDataUART ){
+	
+	eStatus_UART_t eReturn = eFALSE_UART;
+		
+	switch((*spDataUART) -> eChannelUART)
+	{
+	case eUART_0:
+		/*Set clock of PORTA*/
+		SIM_SCGC5 |= SIM_SCGC5_PORTA_MASK;
+		/*Set Mode for pins*/
+		PORTA_PCR2 |= PORT_PCR_MUX(2);//Tx UART	
+		PORTA_PCR1 |= PORT_PCR_MUX(2);//Rx UART
+		
+		(*spDataUART) -> ePinTxUART = ePIN_2_UART;
+		(*spDataUART) -> ePinRxUART = ePIN_1_UART;
+		(*spDataUART) -> eChannelUART = eUART_0;
+		
+		vfConfigReg_UART0();
+		
+		eReturn = eTRUE_UART;
+		break;
+	default: eReturn = eFALSE_UART;
+		break;
+	}
+		
+	return eReturn;
+}
+
+eStatus_UART_t vfInitPortCChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART_t** spDataUART ){
+	
+	eStatus_UART_t eReturn = eFALSE_UART;
+		
+	switch((*spDataUART) -> eChannelUART)
+	{
+	case eUART_1:
+		/*Set clock of PORTE*/
+		SIM_SCGC5 |= SIM_SCGC5_PORTC_MASK;
+		/*Set Mode for pins*/
+		PORTC_PCR4 |= PORT_PCR_MUX(3);//Tx UART	
+		PORTC_PCR3 |= PORT_PCR_MUX(3);//Rx UART
+				
+		(*spDataUART) -> ePinTxUART = ePIN_4_UART;
+		(*spDataUART) -> ePinRxUART = ePIN_3_UART;
+		(*spDataUART) -> eChannelUART = eUART_1;
+		
+		vfConfigReg_UART1();
+				
+		eReturn = eTRUE_UART;
+		break;
+	default: eReturn = eFALSE_UART;
+		break;
+	}
+		
+	return eReturn;
+}
+
+eStatus_UART_t vfInitPortDChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART_t** spDataUART ){
+	
+	eStatus_UART_t eReturn = eFALSE_UART;
+		
+	switch((*spDataUART) -> eChannelUART)
+	{
+	case eUART_0:
+		/*Set clock of PORTD*/
+		SIM_SCGC5 |= SIM_SCGC5_PORTD_MASK;
+		/*Set Mode for pins*/
+		PORTD_PCR7 |= PORT_PCR_MUX(3);//Tx UART	
+		PORTD_PCR6 |= PORT_PCR_MUX(3);//Rx UART
+		
+		(*spDataUART) -> ePinTxUART = ePIN_7_UART;
+		(*spDataUART) -> ePinRxUART = ePIN_6_UART;
+		(*spDataUART) -> eChannelUART = eUART_0;
+		
+		vfConfigReg_UART0();
+		
+		eReturn = eTRUE_UART;
+		break;
+	case eUART_2:
+		/*Set clock of PORTD*/
+		SIM_SCGC5 |= SIM_SCGC5_PORTD_MASK;
+		/*Set Mode for pins*/
+		PORTD_PCR5 |= PORT_PCR_MUX(3);//Tx UART	
+		PORTD_PCR4 |= PORT_PCR_MUX(3);//Rx UART
+						
+		(*spDataUART) -> ePinTxUART = ePIN_5_UART;
+		(*spDataUART) -> ePinRxUART = ePIN_4_UART;
+		(*spDataUART) -> eChannelUART = eUART_2;
+						
+		vfConfigReg_UART2();
+						
+		eReturn = eTRUE_UART;
+		break;
+	default: eReturn = eFALSE_UART;
+		break;
+	}
+		
 	return eReturn;
 }
 
@@ -72,6 +166,7 @@ eStatus_UART_t vfInitPortEChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART
 		
 		(*spDataUART) -> ePinTxUART = ePIN_20_UART;
 		(*spDataUART) -> ePinRxUART = ePIN_21_UART;
+		(*spDataUART) -> eChannelUART = eUART_0;
 		
 		vfConfigReg_UART0();
 		
@@ -86,6 +181,7 @@ eStatus_UART_t vfInitPortEChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART
 				
 		(*spDataUART) -> ePinTxUART = ePIN_0_UART;
 		(*spDataUART) -> ePinRxUART = ePIN_1_UART;
+		(*spDataUART) -> eChannelUART = eUART_1;
 				
 		vfConfigReg_UART1();
 				
@@ -100,6 +196,7 @@ eStatus_UART_t vfInitPortEChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART
 						
 		(*spDataUART) -> ePinTxUART = ePIN_22_UART;
 		(*spDataUART) -> ePinRxUART = ePIN_23_UART;
+		(*spDataUART) -> eChannelUART = eUART_2;
 						
 		vfConfigReg_UART2();
 						
@@ -292,7 +389,6 @@ void vfConfigReg_UART2(void){
 	UART2_C2 |= UART_C2_TE_MASK; //Enable transmitter
 	UART2_C2 |= UART_C2_RE_MASK; //Enable receiver
 }
-
 
 eStatus_UART_t efRead_UART  (sDATA_UART_t* spDataUART){
 	eStatus_UART_t eReturn = eFALSE_UART;
