@@ -1,12 +1,29 @@
 /*
- * ADC_driver.c
- *
- *  Created on: Oct 11, 2018
- *      Author: ivan_
+** Project: Calculator for KL25Z
+** File   : ADC_driver.c
+** Author : Ivan Valadez
+** Date   : 06 - January - 2019
+**
+** Overview: C file containing the functions for using ADC pins from MCU KL25K of nxp
+**
+** $Log$
+*/
+/*---------------------------------------------------------------------------
+** Includes
  */
-
 #include "ADC_driver.h"
-
+/*---------------------------------------------------------------------------
+** Defines and Macros
+*/
+/*---------------------------------------------------------------------------
+** Typedefs
+*/
+/*---------------------------------------------------------------------------
+** Data
+*/
+/*---------------------------------------------------------------------------
+** Prototypes Functions
+*/
 void vfConfigReg_ADC(void);
 
 eStatus_ADC_t vfReadPinsPortB_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC);
@@ -15,7 +32,24 @@ eStatus_ADC_t vfReadPinsPortD_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC);
 eStatus_ADC_t vfReadPinsPortE_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC);
 
 void vfConvert_ADC(sDATA_ADC_t** spDataADC);
-
+/*---------------------------------------------------------------------------
+** Functions
+*/
+/*-------------------------------------------------------------------------*/
+/*! \brief    vfReadPinsPortX_ADC
+**
+** \note	  Set specific registers to each pin for the corresponding port
+** 			  Also, calls a function to set registers to ADC
+** 			  returns TRUE if the parameters are valid and the function could started correctly
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePINx_ADC_t ePINx,
+** 						 sDATA_ADC_t** spDataADC
+**
+** \return               eStatus_ADC_t eReturn
+** \description
+*/
 eStatus_ADC_t vfReadPinsPortB_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC)
 {
 	eStatus_ADC_t eReturn = eFALSE_ADC;
@@ -265,7 +299,17 @@ eStatus_ADC_t vfReadPinsPortE_ADC(ePINx_ADC_t ePINx, sDATA_ADC_t** spDataADC)
 		
 	return eReturn;
 }
-
+/*! \brief    vfConfigReg_ADC
+**
+** \note	  Set registers to use ADC module
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            NA
+**
+** \return               NA
+** \description
+*/
 void vfConfigReg_ADC(void)
 {
 	//Activate clock for ADC0
@@ -308,8 +352,22 @@ void vfConfigReg_ADC(void)
 	ADC0_SC3 &= ~ADC_SC3_ADCO_MASK;// One conversion or one set of conversions 
 	ADC0_SC3 |= ADC_SC3_AVGE_MASK;//Hardware average function enabled
 	ADC0_SC3 |= ADC_SC3_AVGS_MASK;//32 samples averaged
-	
 }
+/*! \brief    efInit_ADC
+**
+** \note	 Initialization for specific port.
+** 			 It calls another function to config registers
+** 			 returns TRUE if the parameters are valid and the function could started correctly
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_ADC_t ePORTx,
+** 						 ePINx_ADC_t ePINx,
+** 						 sDATA_ADC_t* spDataADC
+**
+** \return               eStatus_ADC_t eReturn
+** \description
+*/
 eStatus_ADC_t efInit_ADC( ePORTx_ADC_t ePORTx, ePINx_ADC_t ePINx, sDATA_ADC_t* spDataADC){
 	
 	eStatus_ADC_t eReturn = eFALSE_ADC;
@@ -330,6 +388,16 @@ eStatus_ADC_t efInit_ADC( ePORTx_ADC_t ePORTx, ePINx_ADC_t ePINx, sDATA_ADC_t* s
 	
 	return eReturn;
 }
+/*! \brief    efRead_ADC
+**
+** \note	  Read the value of the ADC. Also read and clean flags if needed
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            sDATA_ADC_t* spDataADC
+**
+** \return               eStatus_ADC_t eReturn , A confirmation of data read or not
+*/
 eStatus_ADC_t efRead_ADC(sDATA_ADC_t* spDataADC){
 	
 	eStatus_ADC_t eReturn = eFALSE_ADC;
@@ -352,7 +420,18 @@ eStatus_ADC_t efRead_ADC(sDATA_ADC_t* spDataADC){
 	
 	return eReturn;
 }
-
+/*! \brief    vfConvert_ADC
+**
+** \note	  Separate Hundreds, Dozens and Units from UART read value.
+** 			  Also, it handles the ADC value received as a percent (0 - 100)%
+** 			  Most used for display ADC values on LCD
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]           sDATA_UART_t** spDataUART
+**
+** \return               NA
+*/
 void vfConvert_ADC(sDATA_ADC_t** spDataADC)
 {
 	uint8_t u8Cnt = 0;

@@ -1,12 +1,29 @@
 /*
- * UART_driver.c
- *
- *  Created on: Oct 27, 2018
- *      Author: ivan_
+** Project: Calculator for KL25Z
+** File   : UART_driver.c
+** Author : Ivan Valadez
+** Date   : 06 - January - 2019
+**
+** Overview: C file containing the functions for using UART pins from MCU KL25K of nxp
+**
+** $Log$
+*/
+/*---------------------------------------------------------------------------
+** Includes
  */
-
 #include "UART_driver.h"
-
+/*---------------------------------------------------------------------------
+** Defines and Macros
+*/
+/*---------------------------------------------------------------------------
+** Typedefs
+*/
+/*---------------------------------------------------------------------------
+** Data
+*/
+/*---------------------------------------------------------------------------
+** Prototypes Functions
+*/
 void vfConvert_UART(sDATA_UART_t** spDataUART);
 
 void vfConfigReg_UART0(void);
@@ -17,6 +34,25 @@ eStatus_UART_t vfInitPortCChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART
 eStatus_UART_t vfInitPortDChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART_t** spDataUART );
 eStatus_UART_t vfInitPortEChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART_t** spDataUART );
 
+/*---------------------------------------------------------------------------
+** Functions
+*/
+/*-------------------------------------------------------------------------*/
+
+/*! \brief    efInit_UART
+**
+** \note	  Auto-select function of initialization for specific port and channel.
+** 			  returns TRUE if the parameters are valid and the function could started correctly
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_UART_t ePORTx,
+** 						 eCHANNELx_UART_t eChannelx,
+** 						 sDATA_UART_t* spDataUART
+**
+** \return               eStatus_UART_t eReturn
+** \description
+*/
 eStatus_UART_t efInit_UART( ePORTx_UART_t ePORTx, eCHANNELx_UART_t eChannelx, sDATA_UART_t* spDataUART)
 {
 	eStatus_UART_t eReturn = eFALSE_UART;
@@ -52,6 +88,21 @@ eStatus_UART_t efInit_UART( ePORTx_UART_t ePORTx, eCHANNELx_UART_t eChannelx, sD
 	return eReturn;
 }
 
+/*! \brief    vfInitPortXChannelx_UART
+**
+** \note	  Initialization for specific channel.
+** 			  It enables specifict registers for ports and calls functions for modify UART registers.
+** 			  returns TRUE if the parameters are valid and the function could started correctly
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_UART_t ePORTx,
+** 						 eCHANNELx_UART_t eChannelx,
+** 						 sDATA_UART_t* spDataUART
+**
+** \return               eStatus_UART_t eReturn
+** \description
+*/
 eStatus_UART_t vfInitPortAChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART_t** spDataUART ){
 	
 	eStatus_UART_t eReturn = eFALSE_UART;
@@ -79,7 +130,6 @@ eStatus_UART_t vfInitPortAChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART
 		
 	return eReturn;
 }
-
 eStatus_UART_t vfInitPortCChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART_t** spDataUART ){
 	
 	eStatus_UART_t eReturn = eFALSE_UART;
@@ -107,7 +157,6 @@ eStatus_UART_t vfInitPortCChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART
 		
 	return eReturn;
 }
-
 eStatus_UART_t vfInitPortDChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART_t** spDataUART ){
 	
 	eStatus_UART_t eReturn = eFALSE_UART;
@@ -150,7 +199,6 @@ eStatus_UART_t vfInitPortDChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART
 		
 	return eReturn;
 }
-
 eStatus_UART_t vfInitPortEChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART_t** spDataUART ){
 	
 	eStatus_UART_t eReturn = eFALSE_UART;
@@ -209,6 +257,19 @@ eStatus_UART_t vfInitPortEChannelx_UART( eCHANNELx_UART_t eChannelx , sDATA_UART
 	return eReturn;
 }
 
+/*! \brief    vfConfigReg_UARTX
+**
+** \note	  Modify specific registers for the channel.
+** 			  It enables specifict registers for UART registers.
+** 			  
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            NA
+**
+** \return               NA
+** \description
+*/
 void vfConfigReg_UART0(void){
 	SIM_SCGC4 |=  SIM_SCGC4_UART0_MASK;//Set clock UART0
 	SIM_SOPT2 |=  SIM_SOPT2_UART0SRC(1);//Select clock source UART0 MCGFLLCLK
@@ -273,7 +334,6 @@ void vfConfigReg_UART0(void){
 	UART0_C2 |= UART_C2_TE_MASK; //Enable transmitter
 	UART0_C2 |= UART_C2_RE_MASK; //Enable receiver
 }
-
 void vfConfigReg_UART1(void){
 	SIM_SCGC4 |=  SIM_SCGC4_UART1_MASK;//Set clock UART1
 	SIM_SOPT2 &= ~SIM_SOPT2_PLLFLLSEL_MASK;//Default clock MCGFLLCLK clock 
@@ -331,7 +391,6 @@ void vfConfigReg_UART1(void){
 	UART1_C2 |= UART_C2_TE_MASK; //Enable transmitter
 	UART1_C2 |= UART_C2_RE_MASK; //Enable receiver
 }
-
 void vfConfigReg_UART2(void){
 	SIM_SCGC4 |=  SIM_SCGC4_UART2_MASK;//Set clock UART1
 	SIM_SOPT2 &= ~SIM_SOPT2_PLLFLLSEL_MASK;//Default clock MCGFLLCLK clock 
@@ -389,7 +448,16 @@ void vfConfigReg_UART2(void){
 	UART2_C2 |= UART_C2_TE_MASK; //Enable transmitter
 	UART2_C2 |= UART_C2_RE_MASK; //Enable receiver
 }
-
+/*! \brief    efRead_UART
+**
+** \note	  Read the value of the UART based on UART channel. Also read and clean flags if needed
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            sDATA_UART_t* spDataUART
+**
+** \return               eStatus_UART_t eReturn, A confirmation of data received or not
+*/
 eStatus_UART_t efRead_UART  (sDATA_UART_t* spDataUART){
 	eStatus_UART_t eReturn = eFALSE_UART;
 	
@@ -503,7 +571,16 @@ eStatus_UART_t efRead_UART  (sDATA_UART_t* spDataUART){
 	
 	return  eReturn;
 }
-
+/*! \brief    efSend_UART
+**
+** \note	  Send the value by UART based on UART channel
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            sDATA_UART_t* spDataUART, uint8_t u8UARTval
+**
+** \return               eStatus_UART_t eReturn, A confirmation of data sent or not
+*/
 eStatus_UART_t efSend_UART (sDATA_UART_t* spDataUART, uint8_t u8UARTval){
 	eStatus_UART_t eReturn = eFALSE_UART;
 	
@@ -536,7 +613,17 @@ eStatus_UART_t efSend_UART (sDATA_UART_t* spDataUART, uint8_t u8UARTval){
 	
 	return eReturn;
 }
-
+/*! \brief    vfConvert_UART
+**
+** \note	  Separate Hundreds, Dozens and Units from UART read value.
+** 			  Most used for display UART values on LCD
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]           sDATA_UART_t** spDataUART
+**
+** \return               NA
+*/
 void vfConvert_UART(sDATA_UART_t** spDataUART)
 {
 	uint8_t u8Cnt = 0;

@@ -1,19 +1,31 @@
 /*
- * PWM_driver.h
- *
- *  Created on: Oct 14, 2018
- *      Author: ivan_
+** Project: Calculator for KL25Z
+** File   : PWM_driver.h
+** Author : Ivan Valadez
+** Date   : 06 - January - 2019
+**
+** Overview: C file containing the functions for using PWM pins from MCU KL25K of nxp
+**
+** $Log$
+*/
+/*---------------------------------------------------------------------------
+** Includes
  */
-
 #ifndef PWM_DRIVER_H_
 #define PWM_DRIVER_H_
 
 #include "derivative.h"
+/*---------------------------------------------------------------------------
+** Defines and Macros
+*/
 /*Yo have 2 channel for each TPM channel selected*/
 #define PWM_PERIOD_52ms		52000
 #define PWM_PERIOD_16ms	    43750	//	xms/(1/(21Mhz/8))
 #define PWM_PERIOD_CONST	437		//(43750/100)
 
+/*---------------------------------------------------------------------------
+** Typedefs
+*/
 typedef enum
 {
 	ePORTA_PWM,
@@ -32,7 +44,6 @@ typedef enum
 	ePIN_29_PWM = 29, ePIN_30_PWM = 30, ePIN_31_PWM = 31
 	    
 }ePINx_PWM_t;
-
 typedef enum
 {
 	eFALSE_PWM,
@@ -52,7 +63,6 @@ typedef enum
 typedef uint16_t u16Period_t;
 typedef uint8_t u8Percent_t;
 typedef uint16_t u16PeriodConst_t;
-
 typedef struct
 {
 	eChannel_PWM_t   eChannel;
@@ -64,8 +74,42 @@ typedef struct
 	u8Percent_t      u8Percent;	
 	
 }sDATA_PWM_t;
-
+/*---------------------------------------------------------------------------
+** Data
+*/
+/*---------------------------------------------------------------------------
+** Prototypes Functions
+*/
+/*! \brief    efInit_PWM
+**
+** \note	 Initialization for specific port.
+** 			 It calls another function to config registers
+** 			 returns TRUE if the parameters are valid and the function could started correctly
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]           sDATA_PWM_t* sDATA_PWM,
+** 					    ePORTx_PWM_t ePORTx,
+** 					    ePINx_PWM_t ePINx,
+** 					     uint16_t u16Period
+**
+** \return               eStatus_PWM_t eReturn
+** \description
+*/
 eStatus_PWM_t efInit_PWM(sDATA_PWM_t* sDATA_PWM, ePORTx_PWM_t ePORTx, ePINx_PWM_t ePINx, uint16_t u16Period);
+/*! \brief    vfPercentage_PWM
+**
+** \note	 It selects between ports and pins to assign equivalent values to percent range (0-100)%
+** 			 returns TRUE if the parameters are valid and the function could started correctly
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            sDATA_PWM_t* sDATA_PWM,
+** 						 uint8_t u8pPercent
+** 
+** \return               NA
+** \description
+*/
 void vfPercentage_PWM(sDATA_PWM_t* sDATA_PWM, uint8_t u8pPercent);
 
 #endif /* PWM_DRIVER_H_ */

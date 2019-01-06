@@ -1,19 +1,29 @@
 /*
- * ADC_driver.h
- *
- *  Created on: Oct 11, 2018
- *      Author: ivan_
+** Project: Calculator for KL25Z
+** File   : ADC_driver.c
+** Author : Ivan Valadez
+** Date   : 06 - January - 2019
+**
+** Overview: C file containing the functions for using ADC pins from MCU KL25K of nxp
+**
+** $Log$
+*/
+/*---------------------------------------------------------------------------
+** Includes
  */
-
 #ifndef ADC_DRIVER_H_
 #define ADC_DRIVER_H_
 
 #include "derivative.h"
-
+/*---------------------------------------------------------------------------
+** Defines and Macros
+*/
 #define ADC_CHANNEL a
 /*#define ADC_CHANNEL b*/
 /*This Driver ONLY works for single ended ADC channel*/
-/*This driver also works only with pins in port E from MCU KL25Z*/
+/*---------------------------------------------------------------------------
+** Typedefs
+*/
 typedef enum
 {
 	ePORTB_ADC,
@@ -49,8 +59,38 @@ typedef struct
 	eStatus_ADC_t eSatusADC;
 	
 }sDATA_ADC_t;
-
+/*---------------------------------------------------------------------------
+** Data
+*/
+/*---------------------------------------------------------------------------
+** Prototypes Functions
+*/
+/*! \brief    efInit_ADC
+**
+** \note	 Initialization for specific port.
+** 			 It calls another function to config registers
+** 			 returns TRUE if the parameters are valid and the function could started correctly
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            ePORTx_ADC_t ePORTx,
+** 						 ePINx_ADC_t ePINx,
+** 						 sDATA_ADC_t* spDataADC
+**
+** \return               eStatus_ADC_t eReturn
+** \description
+*/
 eStatus_ADC_t efInit_ADC( ePORTx_ADC_t ePORTx, ePINx_ADC_t ePINx, sDATA_ADC_t* spDataADC);
+/*! \brief    efRead_ADC
+**
+** \note	  Read the value of the ADC. Also read and clean flags if needed
+**
+** \param[out]           NA
+** \param[in,out]        NA
+** \param[in]            sDATA_ADC_t* spDataADC
+**
+** \return               eStatus_ADC_t eReturn , A confirmation of data read or not
+*/
 eStatus_ADC_t efRead_ADC(sDATA_ADC_t* spDataADC);
 
 #endif /* ADC_DRIVER_H_ */
